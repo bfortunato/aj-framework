@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "container:"
+      name = "Libs">
+      <FileRef
+         location = "group:ApplicaFramework/ApplicaFramework.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "container:AJ/AJ.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:AJLibrary/AJLibrary.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:socket.io-client-swift/Socket.IO-Client-Swift.xcodeproj">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:App/App.xcodeproj">
+   </FileRef>
+</Workspace>

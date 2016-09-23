@@ -1,0 +1,1 @@
+include ':aj-core', ':aj-library', ':applica-framework', ':app'

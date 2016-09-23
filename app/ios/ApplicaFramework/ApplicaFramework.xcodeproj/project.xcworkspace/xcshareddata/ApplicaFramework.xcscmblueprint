@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "68ede69c-da9c-4b5c-abcb-4a1ded2154c9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "68ede69c-da9c-4b5c-abcb-4a1ded2154c9" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "68ede69c-da9c-4b5c-abcb-4a1ded2154c9" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B4C4C1E3-752A-4AA5-BC05-BD696390DBA9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "68ede69c-da9c-4b5c-abcb-4a1ded2154c9" : "mobile-framework\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ApplicaFramework",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "trunk\/app\/ios\/ApplicaFramework\/ApplicaFramework.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/jotaro\/svn\/mobile-framework",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "68ede69c-da9c-4b5c-abcb-4a1ded2154c9"
+    }
+  ]
+}

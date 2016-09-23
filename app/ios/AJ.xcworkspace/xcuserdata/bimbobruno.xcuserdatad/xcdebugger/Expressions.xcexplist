@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "AJManualSemaphore.wait() -&gt; ():AJSemaphore.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.isGreen = true">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "String.firstLetterUppercaseString.getter:AFStringUtils.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "newString.substringByRange(newString.startIndex...newString.startIndex)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AJPlugin.exec(String, data : AJObject) -&gt; AJObject:AJPlugin.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ret.values">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ContainerViewController.(init() -&gt; ContainerViewController).(closure #1):ContainerScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "state.get(&quot;firstRun&quot;)?.bool">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScanViewController.captureOutput(AVCaptureOutput!, didOutputMetadataObjects : [AnyObject]!, fromConnection : AVCaptureConnection!) -&gt; ():ScanScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "metadata?.stringValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AJHomeScreenViewController.(onInit(AJObject?) -&gt; ()).(closure #1):AJHomeScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data.get(&quot;logo&quot;)?.image">
+            </PersistentString>
+            <PersistentString
+               value = "self.logoImageView?.image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AJValue.bool.getter:AJObject.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "value as? Bool">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScanViewController.initCamera() -&gt; ():ScanScreen.swift">
+      </ContextState>
+      <ContextState
+         contextName = "HomeViewController.(subscribe() -&gt; ()).(closure #1):HomeScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "state.get(&quot;balance&quot;)?.float">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameInfoView.tableView(UITableView, heightForRowAtIndexPath : NSIndexPath) -&gt; CGFloat:PlayScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "_cellForComputingHeight?.computeHeight()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AFLinearLayout.layoutSubviews() -&gt; ():AFLinearLayout.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AJRequire.require(String) -&gt; JSValue:AJRequire.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "exports.toDictionary()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeViewController.(viewDidLoad() -&gt; ()).(closure #2):HomeScreen.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GameInfoView.update() -&gt; ():PlayScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "state?.get(&quot;gameOverview&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameInfoView.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:PlayScreen.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PlayViewController.(init(gameArea : String) -&gt; PlayViewController).(closure #1):PlayScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "state.get(&quot;needsOpenEnableModal&quot;)?.bool">
+            </PersistentString>
+            <PersistentString
+               value = "state.get(&quot;needsChangeUrl&quot;)?.bool">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GamePopupViewController.(init(gameData : AJObject) -&gt; GamePopupViewController).(closure #1):PlayScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "state.toJson()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AJHomeScreenViewController.(viewDidLoad() -&gt; ()).(closure #2):HomeScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.logoImageView?.image = state.get(&quot;logo&quot;)?.image&#10;            self.logoImageView?.sizeToFit()&#10;state.get(&quot;logo&quot;)?.image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AJWebSocketRuntime.dispatchAction(String, store : String, data : AJObject) -&gt; AJSemaphore:AJWebSocketRuntime.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data.toJson()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

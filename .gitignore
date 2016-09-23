@@ -1,0 +1,7 @@
+
+/.storage/
+/.work/
+/.idea/
+/node_modules/
+/gen/
+.DS_Store
