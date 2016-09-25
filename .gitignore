@@ -1,7 +1,13 @@
 
 /.storage/
 /.work/
-/.idea/
+.idea
 /node_modules/
 /gen/
 .DS_Store
+build
+/platforms/android/AJ/gradle/
+*.iml
+.gradle
+local.properties
+captures
