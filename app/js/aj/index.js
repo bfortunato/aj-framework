@@ -359,7 +359,7 @@ class Semaphore {
 
 Semaphore.counter = 1;
 
-var createRuntime = function(options) {
+function createRuntime(options) {
     __runtime = AJRuntime.create();
     __runtime.init(options);
 
@@ -422,14 +422,14 @@ function exec(plugin, fn, data) {
  * Creates a new instance of runtime. Usually used internally by devices runtimes
  * @returns singleton instance of runtime
  */
-export const createRuntime = createRuntime;
+export var createRuntime = createRuntime;
 
 /**
  * Creates a new singleton instance of store
  * @param {string} type - Name of store to create
  * @param {function} reducer - Store reducer
  */
-export const createStore = createStore;
+export var createStore = createStore;
 
 /**
  * Creates a new action for the application
@@ -437,13 +437,13 @@ export const createStore = createStore;
  * @param {function} action - Action to execute
  * @returns {function} the newly created action
  */
-export const createAction = createAction;
+export var createAction = createAction;
 
 /**
  * Dispatch action to stores, usually called by actions
  * @param {object} data - Data to pass to stores
  */
-export const dispatch = dispatch;
+export var dispatch = dispatch;
 
 /**
  * Exec a plugin action
@@ -451,7 +451,7 @@ export const dispatch = dispatch;
  * @param {action} action - The plugin action to call
  * @param {data} data - Data to pass to plugin
  */
-export const exec = exec;
+export var exec = exec;
 
 /**
  * Run specified action. This is not the common method to call actions, but it's necessary for managing actions from
@@ -459,4 +459,4 @@ export const exec = exec;
  * @param {type} type - Type of action to call
  * @param {data} type - Data to pass to action
  */
-export const run = run;
+export var run = run;
