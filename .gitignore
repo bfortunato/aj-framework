@@ -13,3 +13,4 @@ local.properties
 captures
 gradle
 gradle/wrapper
+/platforms/node/node_modules/
