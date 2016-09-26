@@ -16,6 +16,12 @@
 		7A3AF8311D990DD200F8C559 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AF82D1D990DD200F8C559 /* Constants.swift */; };
 		7A3AF8321D990DD200F8C559 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AF82E1D990DD200F8C559 /* HomeScreen.swift */; };
 		7A3AF8331D990DD200F8C559 /* Stores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AF82F1D990DD200F8C559 /* Stores.swift */; };
+		7A3AF8421D99238E00F8C559 /* AJ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8181D99080500F8C559 /* AJ.framework */; };
+		7A3AF8431D99238E00F8C559 /* AJ.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8181D99080500F8C559 /* AJ.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A3AF8471D99238E00F8C559 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8461D99238E00F8C559 /* SocketIO.framework */; };
+		7A3AF8481D99238E00F8C559 /* SocketIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8461D99238E00F8C559 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A3AF84A1D99238E00F8C559 /* ApplicaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8491D99238E00F8C559 /* ApplicaFramework.framework */; };
+		7A3AF84B1D99238E00F8C559 /* ApplicaFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8491D99238E00F8C559 /* ApplicaFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +39,30 @@
 			remoteGlobalIDString = 7A09E2E51C74871900984A5A;
 			remoteInfo = AJTests;
 		};
+		7A3AF8441D99238E00F8C559 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A3AF8101D99080400F8C559 /* AJ.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A09E2DA1C74871800984A5A;
+			remoteInfo = AJ;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7A3AF84C1D99238E00F8C559 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7A3AF8431D99238E00F8C559 /* AJ.framework in Embed Frameworks */,
+				7A3AF84B1D99238E00F8C559 /* ApplicaFramework.framework in Embed Frameworks */,
+				7A3AF8481D99238E00F8C559 /* SocketIO.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7A3AF7DB1D99060D00F8C559 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +76,8 @@
 		7A3AF82D1D990DD200F8C559 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7A3AF82E1D990DD200F8C559 /* HomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		7A3AF82F1D990DD200F8C559 /* Stores.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stores.swift; sourceTree = "<group>"; };
+		7A3AF8461D99238E00F8C559 /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A3AF8491D99238E00F8C559 /* ApplicaFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ApplicaFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +85,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A3AF8471D99238E00F8C559 /* SocketIO.framework in Frameworks */,
 				7A3AF8231D99088700F8C559 /* AJ.framework in Frameworks */,
+				7A3AF84A1D99238E00F8C559 /* ApplicaFramework.framework in Frameworks */,
+				7A3AF8421D99238E00F8C559 /* AJ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +131,8 @@
 		7A3AF7F01D99061900F8C559 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A3AF8491D99238E00F8C559 /* ApplicaFramework.framework */,
+				7A3AF8461D99238E00F8C559 /* SocketIO.framework */,
 				7A3AF8101D99080400F8C559 /* AJ.xcodeproj */,
 			);
 			name = Frameworks;
@@ -129,10 +165,12 @@
 				7A3AF7D71D99060C00F8C559 /* Sources */,
 				7A3AF7D81D99060C00F8C559 /* Frameworks */,
 				7A3AF7D91D99060C00F8C559 /* Resources */,
+				7A3AF84C1D99238E00F8C559 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7A3AF8451D99238E00F8C559 /* PBXTargetDependency */,
 			);
 			name = App;
 			productName = App;
@@ -223,6 +261,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7A3AF8451D99238E00F8C559 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AJ;
+			targetProxy = 7A3AF8441D99238E00F8C559 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7A3AF7E71D99060D00F8C559 /* LaunchScreen.storyboard */ = {
@@ -330,6 +376,7 @@
 		7A3AF7EE1D99060D00F8C559 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -342,6 +389,7 @@
 		7A3AF7EF1D99060D00F8C559 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
