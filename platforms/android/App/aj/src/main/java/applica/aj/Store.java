@@ -19,6 +19,7 @@ public class Store {
 
     private Lock lock = new ReentrantLock(true);
     private ExecutorService executorService = Executors.newFixedThreadPool(10);
+    private AJObject state;
 
     public interface Subscription {
         void handle(AJObject state);
@@ -84,6 +85,8 @@ public class Store {
     }
 
     public void trigger(final AJObject data) {
+        this.state = data;
+
         Handler handler = new Handler(runtime.getContext().getMainLooper());
         handler.post(new Runnable() {
             @Override
@@ -94,5 +97,9 @@ public class Store {
                 }
             }
         });
+    }
+
+    public AJObject getState() {
+        return state;
     }
 }

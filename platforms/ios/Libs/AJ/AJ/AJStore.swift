@@ -24,7 +24,7 @@ open class AJStore: NSObject {
     open let runtime: AJRuntime
     open let type: String
     
-    open var state:AJObject?
+    open var state: AJObject?
     
     fileprivate var subscriptions = [SubscriptionInfo]()
     fileprivate let lock = NSLock()

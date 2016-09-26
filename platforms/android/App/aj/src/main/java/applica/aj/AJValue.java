@@ -24,6 +24,11 @@ public class AJValue {
         this.value = value;
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+    }
+
     public String getKey() {
         return key;
     }
