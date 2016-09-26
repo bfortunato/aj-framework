@@ -1,6 +1,6 @@
 "use strict";
 
-const buffers = require("./assets/js/aj/buffers");
+const buffers = require("../assets/js/aj/buffers");
 
 module.exports = {
     create: function(data) {

@@ -1,5 +1,5 @@
 const requestify = require("requestify");
-const base64 = require("./assets/js/framework/base64");
+const base64 = require("../assets/js/framework/base64");
 const http = require("http");
 const https = require("https");
 const url = require("url");
