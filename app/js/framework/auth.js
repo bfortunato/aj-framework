@@ -9,6 +9,11 @@ const config = require("./config");
 
 const Promise = require("./promise");
 
+var loggedUser = null;
+
+export const TYPE_MAIL = "MAIL";
+export const TYPE_FACEBOOK = "FACEBOOK";
+
 class RestSessionService {
     constructor(runtime) {
         this.runtime = runtime;
@@ -31,62 +36,64 @@ class RestSessionService {
     }
 }
 
+export function start(mail, password) {
+    return new Promise((resolve, reject) => {
+        loggedUser = null;
 
-class Session {
-    start(mail, password) {
-        return new Promise((resolve, reject) => {
-            var sessionService = services.get("SessionService");
-            sessionService.login(mail, password)
-                .then(response => {
-                    preferences.load().then(() => {
-                        preferences.set("session.type", Session.TYPE_MAIL);
-                        preferences.set("session.mail", mail);
-                        preferences.set("session.password", password);
-                        preferences.save();
-                    });
-                })
-                .catch(() => {
-                    preferences.load().then(() => {
-                        preferences.set("session.type", false);
-                        preferences.set("session.mail", false);
-                        preferences.set("session.password", false);
-                        preferences.save();
-                    });
-                    reject("Cannot login");
-                })
-        })
-    }
+        var sessionService = services.get("SessionService");
+        sessionService.login(mail, password)
+            .then(response => {
+                preferences.load().then(() => {
+                    preferences.set("session.type", TYPE_MAIL);
+                    preferences.set("session.mail", mail);
+                    preferences.set("session.password", password);
+                    preferences.save();
+                });
 
-    resume() {
-        return new Promise((resolve, reject) => {
-            preferences.load().then((preferences) => {
-                var type = preferences.get("session.type");
-                var mail = preferences.get("session.mail");
-                var password = preferences.get("session.password");
-
-                if (type == Session.TYPE_MAIL && mail && password) {
-                    return this.start(mail, password);
-                } else {
-                    reject("Cannot resume session");
+                loggedUser = {
+                    type: TYPE_MAIL,
+                    mail: mail,
+                    data: response,
                 }
-            });
+            })
+            .catch(() => {
+                loggedUser = null;
+
+                preferences.load().then(() => {
+                    preferences.set("session.type", false);
+                    preferences.set("session.mail", false);
+                    preferences.set("session.password", false);
+                    preferences.save();
+                });
+                reject("Cannot login");
+            })
+    })
+}
+
+export function resume() {
+    return new Promise((resolve, reject) => {
+        loggedUser = null;
+
+        preferences.load().then((preferences) => {
+            var type = preferences.get("session.type");
+            var mail = preferences.get("session.mail");
+            var password = preferences.get("session.password");
+
+            if (type == Session.TYPE_MAIL && mail && password) {
+                return this.start(mail, password);
+            } else {
+                reject("Cannot resume session");
+            }
         });
-    }
+    });
 }
 
-Session.TYPE_MAIL = "mail";
-Session.TYPE_FACEBOOK = "facebook";
-
-
-class FacebookLogin {
-    login(permissions) {
-
-    }
-
-    setToken(data) {
-
-    }
+export function getLoggedUser() {
+    return loggedUser;
 }
 
-exports.RestSessionService = RestSessionService;
-exports.Session = Session;
+export function isLoggedIn() {
+    return loggedUser != null;
+}
+
+export let RestSessionService = RestSessionService;

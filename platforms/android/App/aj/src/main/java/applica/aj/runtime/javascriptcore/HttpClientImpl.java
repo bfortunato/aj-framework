@@ -47,26 +47,41 @@ public class HttpClientImpl extends JSObject implements HttpClient {
     }
 
     @Override
-    public void request(final String urlString, final String method, final JSValue data, final JSValue headers, final Boolean raw, final JSFunction cb) {
+    public void request(
+            final String urlString,
+            final String method,
+            final JSValue data,
+            final JSValue headers,
+            final JSValue accept,
+            final JSValue contentType,
+            final Boolean rawResponse,
+            final JSFunction cb) {
+
         executorService.execute(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection connection = null;
                 try {
-                    String queryString = buildQueryString(data);
-
-                    Log.i("AJ", String.format("HTTP url %s, data: %s", urlString, queryString));
+                    Log.i("AJ", String.format("HTTP url %s, data: %s", urlString, data));
 
                     String finalMethod = method.toUpperCase();
                     String finalUrlString = urlString;
 
-                    if (!(METHOD_POST.equals(method) || METHOD_PUT.equals(method))) {
-                        String separator = urlString.contains("?") ? "&" : "?";
-                        finalUrlString = urlString.concat(separator).concat(queryString);
+                    if (!data.isNull()) {
+                        if (!(METHOD_POST.equals(method) || METHOD_PUT.equals(method))) {
+                            String separator = urlString.contains("?") ? "&" : "?";
+                            finalUrlString = urlString.concat(separator).concat(data.toString());
+                        }
                     }
 
                     URL url = new URL(finalUrlString);
                     connection = ((HttpURLConnection) url.openConnection());
+                    if (!contentType.isNull()) {
+                        connection.setRequestProperty("Content-Type", contentType.toString());
+                    }
+                    if (!accept.isNull()) {
+                        connection.setRequestProperty("Accept", accept.toString());
+                    }
                     connection.setRequestMethod(finalMethod);
                     connection.setDoInput(true);
 
@@ -78,12 +93,14 @@ public class HttpClientImpl extends JSObject implements HttpClient {
 
                     addHeaders(connection, headers);
 
-                    if (METHOD_POST.equals(finalMethod) || METHOD_PUT.equals(finalMethod)) {
-                        IOUtils.write(buildQueryString(data), connection.getOutputStream());
+                    if (!data.isNull()) {
+                        if (METHOD_POST.equals(finalMethod) || METHOD_PUT.equals(finalMethod)) {
+                            IOUtils.write(data.toString(), connection.getOutputStream());
+                        }
                     }
 
                     Object output;
-                    if (raw != null && raw) {
+                    if (rawResponse != null && rawResponse) {
                         byte[] bytes = IOUtils.toByteArray(connection.getInputStream());
                         output = Buffer.create(bytes);
                     } else {

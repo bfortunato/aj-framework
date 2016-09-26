@@ -12,7 +12,16 @@ import ApplicaFramework
 
 @objc
 public protocol AJHttpClientProtocol: JSExport {
-    func request(_ url: String, _ method: String, _ data: JSValue, _ headers: JSValue, _ raw: Bool, _ cb: JSValue)
+    func request(
+        _ url: String,
+        _ method: String,
+        _ data: JSValue,
+        _ headers: JSValue,
+        _ accept: JSValue,
+        _ contentType: JSValue,
+        _ rawResponse: Bool,
+        _ cb: JSValue
+    )
 }
 
 @objc
@@ -32,28 +41,40 @@ open class AJHttpClient: NSObject, AJHttpClientProtocol {
         static let DELETE = "DELETE"
     }
     
-    open func request(_ url: String, _ method: String, _ data: JSValue, _ headers: JSValue, _ raw: Bool, _ cb: JSValue) {
+    open func request(
+        _ url: String,
+        _ method: String,
+        _ data: JSValue,
+        _ headers: JSValue,
+        _ accept: JSValue,
+        _ contentType: JSValue,
+        _ rawResponse: Bool,
+        _ cb: JSValue) {
+        
         handleQueue.async {
             var finalUrl = url
-            var requestBody: String? = nil
-            for (key, value) in data.toDictionary() {
-                let separator = requestBody == nil ? "" : "&"
-                if requestBody == nil {
-                    requestBody = ""
+            
+            NSLog("HTTP url: \(finalUrl), data: \(data)")
+            
+            if !data.isNull {
+                if Method.POST != method && Method.PUT != method {
+                    let separator = finalUrl.range(of: "?") != nil ? "&" : "?"
+                    finalUrl = "\(url)\(separator)\(data)"
                 }
-                requestBody? += "\(separator)\(key)=\(value)"
-            }
-            
-            NSLog("HTTP url: \(finalUrl), data: \(requestBody)")
-            
-            if Method.GET == method && requestBody != nil {
-                let separator = finalUrl.range(of: "?") != nil ? "&" : "?"
-                finalUrl = "\(url)\(separator)\(requestBody!)"
             }
             
             var request = URLRequest(url: URL(string: finalUrl)!)
             request.httpMethod = method
-            request.httpBody = requestBody?.data(using: String.Encoding.utf8, allowLossyConversion: true)
+            if !contentType.isNull {
+                request.addValue(contentType.toString(), forHTTPHeaderField: "Content-Type")
+            }
+            if !accept.isNull {
+                request.addValue(accept.toString(), forHTTPHeaderField: "Accept")
+            }
+            
+            if !data.isNull {
+                request.httpBody = data.toString().data(using: String.Encoding.utf8, allowLossyConversion: true)
+            }
             
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
@@ -61,7 +82,7 @@ open class AJHttpClient: NSObject, AJHttpClientProtocol {
                 runui { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
                 
                 if data != nil && error == nil {
-                    if !raw {
+                    if !rawResponse {
                         let response = String(data: data!, encoding: String.Encoding.utf8)!
                         cb.call(withArguments: [false, response])
                     } else {

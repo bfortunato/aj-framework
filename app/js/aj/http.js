@@ -3,12 +3,27 @@
 var assert = require("../framework/assert");
 var Promise = require("../framework/promise");
 
+var _ = require("../framework/underscore");
+
+function buildQueryString(obj) {
+    var q = "";
+    var first = true;
+    for (var k in obj) {
+        var sep = first ? "" : "&";
+        q += sep + k + "=" + obj[k];
+    }
+
+    return q;
+}
+
 class HttpClient {
     constructor(url, method, data) {
         this.url = url;
         this.method = method || "GET";
         this.headers = {};
         this.data = data || {};
+        this.accept = null;
+        this.contentType = null;
         this.rawResponse = false;
     }
 
@@ -18,13 +33,13 @@ class HttpClient {
                 assert.assertNotEmpty(this.url, "url is not defined");
                 assert.assertNotEmpty(this.method, "method is not defined");
 
-                let data = this.data || {};
+                let data = _.isObject(this.data) ? buildQueryString(this.data) : this.data;
                 let headers = this.headers || {};
 
-                __httpClient.request(this.url, this.method, data, headers, this.rawResponse, (error, value) => {
+                __httpClient.request(this.url, this.method, data, headers, this.accept, this.contentType, this.rawResponse, (error, value) => {
                     if (error) {
                         logger.e("error");
-                        reject("error.connection");
+                        reject(error);
                     } else {
                         resolve(value)
                     }
@@ -38,7 +53,7 @@ class HttpClient {
 }
 
 
-let request = (url, method, data, headers, rawResponse) => {
+let request = (url, method, data, headers, accept, contentType, rawResponse) => {
     var method = method || "GET";
     var data = data || {};
     var headers = headers || {};
@@ -49,6 +64,8 @@ let request = (url, method, data, headers, rawResponse) => {
     client.data = data;
     client.headers = headers;
     client.rawResponse = rawResponse;
+    client.accept = accept;
+    client.contentType = contentType;
 
     return client.request();
 };
@@ -61,29 +78,29 @@ exports.get = (url, data, headers) => {
     var data = data || {};
     var headers = headers || {};
 
-    return request(url, "GET", data, headers);
+    return request(url, "GET", data, headers, null, null, false);
 };
 
 exports.post = (url, data, headers) => {
     var data = data || {};
     var headers = headers || {};
-    return request(url, "POST", data, headers);
+    return request(url, "POST", data, headers, null, null, false);
 };
 
 exports.put = (url, data, headers) => {
     var data = data || {};
     var headers = headers || {};
-    return request(url, "PUT", data, headers);
+    return request(url, "PUT", data, headers, null, null, false);
 };
 
 exports.delete = (url, data, headers) => {
     var data = data || {};
     var headers = headers || {};
-    return request(url, "DELETE", data, headers);
+    return request(url, "DELETE", data, headers, null, null, false);
 };
 
 exports.download = (url, data, headers) => {
     var data = data || {};
     var headers = headers || {};
-    return request(url, "GET", data, headers, true);
+    return request(url, "GET", data, headers, null, null, true);
 };

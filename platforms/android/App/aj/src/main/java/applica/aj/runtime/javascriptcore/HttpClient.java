@@ -8,6 +8,13 @@ import org.liquidplayer.webkit.javascriptcore.JSValue;
  */
 public interface HttpClient {
 
-    void request(String url, String method, JSValue data, JSValue headers, Boolean raw, JSFunction cb);
-
+    void request(
+            String urlString,
+            String method,
+            JSValue data,
+            JSValue headers,
+            JSValue requestType,
+            JSValue responseType,
+            Boolean rawResponse,
+            JSFunction cb);
 }
