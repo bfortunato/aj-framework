@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import AJ
-import AJLibrary
 import ApplicaFramework
 
 class HomeViewController: UIViewController {

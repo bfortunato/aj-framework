@@ -419,42 +419,50 @@ function exec(plugin, fn, data) {
 }
 
 /**
- * Creates a new instance of runtime. Usually used internally by devices runtimes
+ * @function createRuntime
+ * @description Creates a new instance of runtime. Usually used internally by devices runtimes
  * @returns singleton instance of runtime
  */
 export var createRuntime = createRuntime;
 
 /**
- * Creates a new singleton instance of store
+ * @function createStore
+ * @description Creates a new singleton instance of store
  * @param {string} type - Name of store to create
  * @param {function} reducer - Store reducer
+ * @returns {store} - The newly created store
  */
 export var createStore = createStore;
 
 /**
- * Creates a new action for the application
+ * @function createAction
+ * @Description Creates a new action for the application
  * @param {string} type - Type of action to create
  * @param {function} action - Action to execute
- * @returns {function} the newly created action
+ * @returns {function} The newly created action
  */
 export var createAction = createAction;
 
 /**
- * Dispatch action to stores, usually called by actions
+ * @function dispatch
+ * @description Dispatch action to stores, usually called by actions
  * @param {object} data - Data to pass to stores
  */
 export var dispatch = dispatch;
 
 /**
- * Exec a plugin action
+ * @function exec
+ * @description Exec a plugin action
  * @param {string} plugin - The plugin
  * @param {action} action - The plugin action to call
  * @param {data} data - Data to pass to plugin
+ * @returns {Promise} - A promise of plugin call result
  */
 export var exec = exec;
 
 /**
- * Run specified action. This is not the common method to call actions, but it's necessary for managing actions from
+ * @function run
+ * @description Run specified action. This is not the common method to call actions, but it's necessary for managing actions from
  * devices. On JS side, call actions directly
  * @param {type} type - Type of action to call
  * @param {data} type - Data to pass to action

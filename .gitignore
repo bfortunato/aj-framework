@@ -11,3 +11,5 @@ build
 .gradle
 local.properties
 captures
+gradle
+gradle/wrapper

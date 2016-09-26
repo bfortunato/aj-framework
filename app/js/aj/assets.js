@@ -74,7 +74,8 @@ class AssetsManager {
 var instance = new AssetsManager();
 
 /**
- * Load asset from device
+ * @function load
+ * @description Load asset from device (async)
  * @param {string} path - The path of asset to load
  * @returns {Promise} - A promise of the result
  */
@@ -83,7 +84,8 @@ export const load = function(path) {
 };
 
 /**
- * Load asset from device
+ * @function exists
+ * @description Load asset from device (async)
  * @param {string} path - The path of asset to load
  * @returns {Promise} - A promise of the result
  */
@@ -91,14 +93,33 @@ export const exists = function(path) {
     return instance.exists(path);
 };
 
+/**
+ * @function save
+ * @description Save asset to device (async)
+ * @param {string} path - The path of asset to save
+ * @param {buffer} data - Buffer id that contains data
+ * @returns {Promise} - A promise of the result
+ */
 export const save = function(path, data) {
     return instance.save(path, data);
 };
 
+/**
+ * @function remove
+ * @description Remove asset from device (async)
+ * @param path - The path of asset to remove
+ * @returns {Promise} - A promise of the result
+ */
 export const remove = function(path) {
     return instance.remove(path);
 };
 
+/**
+ * @function image
+ * @description Load image asset from device, with density support
+ * @param path - The path of image to load
+ * @returns {Promise} - A promise of the result
+ */
 export const image = function(path) {
     return instance.loadImage(path);
 };
