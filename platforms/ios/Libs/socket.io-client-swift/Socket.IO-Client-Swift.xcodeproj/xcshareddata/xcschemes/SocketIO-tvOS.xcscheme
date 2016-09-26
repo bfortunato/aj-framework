@@ -14,10 +14,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AB33B321C8AF0E0002868C6"
-               BuildableName = "AJLibrary.framework"
-               BlueprintName = "AJLibrary"
-               ReferencedContainer = "container:AJLibrary.xcodeproj">
+               BlueprintIdentifier = "576349FA1BD9B46A00E19CD7"
+               BuildableName = "SocketIO.framework"
+               BlueprintName = "SocketIO-tvOS"
+               ReferencedContainer = "container:Socket.IO-Client-Swift.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "57634A181BD9B46D00E19CD7"
+               BuildableName = "SocketIO-tvOSTests.xctest"
+               BlueprintName = "SocketIO-tvOSTests"
+               ReferencedContainer = "container:Socket.IO-Client-Swift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,7 +42,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "57634A181BD9B46D00E19CD7"
+               BuildableName = "SocketIO-tvOSTests.xctest"
+               BlueprintName = "SocketIO-tvOSTests"
+               ReferencedContainer = "container:Socket.IO-Client-Swift.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "576349FA1BD9B46A00E19CD7"
+            BuildableName = "SocketIO.framework"
+            BlueprintName = "SocketIO-tvOS"
+            ReferencedContainer = "container:Socket.IO-Client-Swift.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,10 +78,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7AB33B321C8AF0E0002868C6"
-            BuildableName = "AJLibrary.framework"
-            BlueprintName = "AJLibrary"
-            ReferencedContainer = "container:AJLibrary.xcodeproj">
+            BlueprintIdentifier = "576349FA1BD9B46A00E19CD7"
+            BuildableName = "SocketIO.framework"
+            BlueprintName = "SocketIO-tvOS"
+            ReferencedContainer = "container:Socket.IO-Client-Swift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -63,10 +96,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7AB33B321C8AF0E0002868C6"
-            BuildableName = "AJLibrary.framework"
-            BlueprintName = "AJLibrary"
-            ReferencedContainer = "container:AJLibrary.xcodeproj">
+            BlueprintIdentifier = "576349FA1BD9B46A00E19CD7"
+            BuildableName = "SocketIO.framework"
+            BlueprintName = "SocketIO-tvOS"
+            ReferencedContainer = "container:Socket.IO-Client-Swift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

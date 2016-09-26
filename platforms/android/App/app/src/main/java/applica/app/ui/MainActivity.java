@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import applica.aj.AJApp;
 import applica.aj.AJObject;
 import applica.aj.Store;
-import applica.aj.library.AJApp;
 import applica.app.Actions;
 import applica.app.R;
 import applica.app.Stores;
