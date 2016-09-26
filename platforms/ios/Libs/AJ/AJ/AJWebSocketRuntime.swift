@@ -1,17 +1,19 @@
  //
-//  AJWebSocketRuntime.swift
-//  AJ
-//
-//  Created by Bruno Fortunato on 17/02/16.
-//  Copyright © 2016 Bruno Fortunato. All rights reserved.
-//
-
-import UIKit
-import SocketIO
-
-open class AJWebSocketRuntime: AJRuntime {
-
+ //  AJWebSocketRuntime.swift
+ //  AJ
+ //
+ //  Created by Bruno Fortunato on 17/02/16.
+ //  Copyright © 2016 Bruno Fortunato. All rights reserved.
+ //
+ 
+ import UIKit
+ import SocketIO
+ 
+ open class AJWebSocketRuntime: AJRuntime {
+    
     let io: SocketIOClient
+    
+    private var _connecting = false
     
     var semaphores = [AJManualSemaphore]()
     
@@ -46,7 +48,7 @@ open class AJWebSocketRuntime: AJRuntime {
                 .set("scale", Float(UIScreen.main.scale) as AnyObject?)
                 .set("height", Int(UIScreen.main.bounds.height) as AnyObject?)
                 .set("width", Int(UIScreen.main.bounds.width) as AnyObject?)
-                
+            
             
             ack.with(device.toJson())
         }
@@ -87,18 +89,19 @@ open class AJWebSocketRuntime: AJRuntime {
         
         io.on("connect") { data, ack in
             print("Connected to web socket server")
+            self._connecting = false
         }
         
+        _connecting = true
         io.connect()
     }
     
     open override func run(action: String, data: AJObject = AJObject.empty()) -> AJSemaphore {
         let json = data.toJson();
-        if io.status != .connecting {
-            while io.status == .connecting {
-                NSLog("Waiting for connection with web socket server...")
-                Thread.sleep(forTimeInterval: 0.25)
-            }
+        
+        while _connecting {
+            NSLog("Waiting for connection with web socket server...")
+            Thread.sleep(forTimeInterval: 0.25)
         }
         
         NSLog("Calling \(action) with data: \(json)")
@@ -130,13 +133,13 @@ open class AJWebSocketRuntime: AJRuntime {
             semaphores.remove(at: index)
         }
     }
-
+    
     open override func destroy() {
         super.destroy()
-
+        
         semaphores = []
         io.disconnect()
     }
-
-
-}
+    
+    
+ }

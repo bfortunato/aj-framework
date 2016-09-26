@@ -59,15 +59,15 @@ http.listen(3000, function() {
             var result = JSON.parse(json);
 
             global.device = {
-                getScale() {
+                getScale: function() {
                     return result.scale;
                 },
 
-                getHeight() {
+                getHeight: function() {
                     return result.height;
                 },
 
-                getWidth() {
+                getWidth: function() {
                     return result.width;
                 }
             };
