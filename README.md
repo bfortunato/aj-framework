@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/bfortunato/aj-framework/master/doc/images/aj.png" height="60" /> AJ Framework
+# <img src="https://raw.githubusercontent.com/bfortunato/aj-framework/master/doc/images/aj.png" height="100" align="middle" /> Framework
 
 AJ is a simple framework that allows developers to share code in different platforms, such as iOS, Android and Web browsers.
 
