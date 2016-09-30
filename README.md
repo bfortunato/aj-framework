@@ -118,8 +118,9 @@ export let hello = aj.createStore('HELLO' (state = initialState, action) => {
     }
 } 
 ```
-> Reducers are the only things that can change store states in AJ applications. Please keep state immutable using `Object.assign` or underscore `_.assign` to keep your code more maintainable.
-Returning a changed state from a reducer, will cause a store trigger event, that is handled from native side.
+If returned state is changed, this will causes an invocation of application state change event.
+
+> Reducers are the only things that can change store states in AJ applications. Please keep state immutable using `Object.assign` or underscore `_.assign` to have more readable code.
 
 
 ## Handle application state changes
