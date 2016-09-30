@@ -19,13 +19,8 @@ In simple terms, application state is managed by Javascript shareable code (Stor
 
 > As you can see, native code is pure User Interface, nothing else, super productive and **best quality**. All business logic is  completely reusable, also in web applications.
 
-# Version
 Current version: **0.1**
 
-I've decided to publish AJ as an open source framework only now, but in my company ([Applica](http://www.applica.guru)) we have used it to build a lot of applications.
-
-Version is 0.1 only on his redistributable part as npm package and command line tools, but the core is very stable.
-Version 1.0 will come out soon.
 
 # Getting Started
 AJ is distributed as an npm package, so, is very simple to install.
