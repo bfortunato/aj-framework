@@ -62,6 +62,8 @@ aj watch
 6. Open and run Applications
 
 ## Project Structure
+Here the project structure of AJ bootstrapper
+
 ```
 + myproject               (project root)
     + app                 (shared area)
@@ -88,6 +90,9 @@ Contains native prjects. Developer can open this projects with native IDE, that 
 
 
 # Usage
+AJ is an unidirectional dataflow framework that allows developers to write reusable Javascript code for build applicaation business logic and specific native code to build user interfaces.
+In this usage examples, you can take a look on basics in both js and native side.
+
 ## Creating actions
 Create an action calling `aj.createAction` with an identifier and the effective action function
 
@@ -112,7 +117,7 @@ var initialState = {
 
 export let hello = aj.createStore('HELLO' (state = initialState, action) => {
     switch (action.type) {
-    case: 'GET_MESSAGE":
+    case: 'GET_MESSAGE':
         return Object.assign({}, state, {message: action.message})
     }
 } 
@@ -125,7 +130,7 @@ Returning a changed state from a reducer, will causa a store trigger event, that
 Now is the part of the native side that in aj application architecture is used to build **only** user interfaces.
 
 ### iOS
-```swift 3
+```swift
 AJApp.runtime().subscribe(to: Stores.HOME, owner: self) { [weak self] (state) in
     self?._textView?.text = state.get("message")?.string
 }
@@ -134,11 +139,11 @@ AJApp.runtime().subscribe(to: Stores.HOME, owner: self) { [weak self] (state) in
 ### Android
 ```java
 JApp.runtime().subscribe(Stores.HOME, this, new Store.Subscription() {
-        @Override
-        public void handle(AJObject state) {
-            mTextView.setText(state.get("message").asString());
-        }
-    });
+   @Override
+   public void handle(AJObject state) {
+       mTextView.setText(state.get("message").asString());
+   }
+});
 ```
 
 ### Web
@@ -152,7 +157,7 @@ Pure javascript is used in this example, but AJ is perfect with ReactJS componen
 
 ## Calling actions
 ### iOS
-```swift 3
+```swift
 AJApp.runtime().run(action: "GET_MESSAGE")
 ```
 
