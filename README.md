@@ -26,36 +26,36 @@ Current version: **0.1**
 # Getting Started
 AJ is distributed as an npm package, so, is very simple to install.
 
-1. Type this command to install globally:
+1: Type this command to install globally:
 ```
 npm install -g aj-framework
 ```
 This command will install aj command line tools.
 
-2. Check if everything was installed correctly typing:
+2: Check if everything was installed correctly typing:
 ```
 aj --version
 ```
 
-3. Create a new aj project:
+3: Create a new aj project:
 ```
 aj init myproject
 ```
 This command will create a folder named `./myproject` that contains a bootstrapper project
 
-4. Enter on myproject directory and build
+4: Enter on myproject directory and build
 ```
 cd myproject
 aj build
 ```
 This command builds images, scripts and assets
 
-5. Watch changes to enable auto-deploy features for development (optional)
+5: Watch changes to enable auto-deploy features for development (optional)
 ```
 aj watch
 ```
 
-6. Open and run Applications
+6: Open and run Applications
 
 ## Project Structure
 Here the project structure of AJ bootstrapper
