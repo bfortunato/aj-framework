@@ -1,10 +1,10 @@
 # AJ Framework
 
-AJ is a simple framework that allows to share code in different platforms, such as iOS, Android and also Web.
+AJ is a simple framework that allows developers to share code in different platforms, such as iOS, Android and Web browsers.
 
-Applications built with AJ are hybrid, written with both JS and native code and uses an unidirectional dataflow architecture, inspired by [Flux](https://facebook.github.io/react/blog/2014/05/06/flux.html) and [Redux](http://redux.js.org). Please take a look to flux architecture to understand how AJ works.
+Applications built with AJ are hybrid, written in JS and native code following an unidirectional dataflow architecture, inspired by [Flux](https://facebook.github.io/react/blog/2014/05/06/flux.html) and [Redux](http://redux.js.org). Please take a look to Flux architecture to understand how AJ works.
 
-In simple terms, application state is managed by Javascript shareable code (Stores, Actions, Reducers, Api, ...). Only views will be developed in native code, that is the most productive place to write high-quality user interfaces
+In simple terms, application state and business logic is managed in Javascript side. Views are in native side, that is the most productive place to write high-quality user interfaces
 
 ```
      Shareable Javascript Code         Native Code (Mobile, Web)
@@ -17,7 +17,8 @@ In simple terms, application state is managed by Javascript shareable code (Stor
 └─────────────────────────────────┘  └───────────────────────────┘
 ```
 
-> As you can see, native code is pure User Interface, nothing else, super productive and **best quality**. All business logic is  completely reusable, also in web applications.
+> As you can see, native code is pure user interface, nothing else, super productive and **best quality**. All business logic is completely reusable, also in web applications.
+
 
 Current version: **0.1**
 
@@ -71,16 +72,16 @@ Here the project structure of AJ bootstrapper
         |- web
 ```
 
-#### app/assets
+`app/assets`
 Contains application assets. `aj build` command will pack assets in native bundles
 
-#### app/js
+`app/js`
 Contains ES6/ES7 application scripts. `aj build` command will compile scripts for each platform
 
-#### app/resources/images
+`app/resources/images`
 Contains image resources. Put images in 4x, `aj build` will crates resolution indipendent versions for each platforms
 
-#### platforms/*
+`platforms/*`
 Contains native prjects. Developer can open this projects with native IDE, that are XCode for ios, Android Studio for Android, and your favourite html editor for web. I use IntelliJ.
 
 
@@ -122,7 +123,7 @@ Returning a changed state from a reducer, will causa a store trigger event, that
 
 
 ## Handle application state changes
-Now is the part of the native side that in aj application architecture is used to build **only** user interfaces.
+Now is the part of the native side that in AJ application architecture is used to build **only** user interfaces.
 
 ### iOS
 ```swift
