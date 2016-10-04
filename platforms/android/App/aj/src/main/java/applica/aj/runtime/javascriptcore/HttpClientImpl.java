@@ -104,7 +104,11 @@ public class HttpClientImpl extends JSObject implements HttpClient {
                         byte[] bytes = IOUtils.toByteArray(connection.getInputStream());
                         output = Buffer.create(bytes);
                     } else {
-                        output = IOUtils.toString(connection.getInputStream());
+                        try {
+                            output = IOUtils.toString(connection.getInputStream());
+                        } catch (Exception e) {
+                            output = "";
+                        }
                     }
 
                     cb.call(null, new JSValue[]{new JSValue(jsContext, false), new JSValue(jsContext, output)});

@@ -64,16 +64,29 @@ open class AJHttpClient: NSObject, AJHttpClientProtocol {
             }
             
             var request = URLRequest(url: URL(string: finalUrl)!)
+            
             request.httpMethod = method
+            
             if !contentType.isNull {
                 request.addValue(contentType.toString(), forHTTPHeaderField: "Content-Type")
             }
+            
             if !accept.isNull {
                 request.addValue(accept.toString(), forHTTPHeaderField: "Accept")
             }
             
-            if !data.isNull {
-                request.httpBody = data.toString().data(using: String.Encoding.utf8, allowLossyConversion: true)
+            if Method.POST == method || Method.PUT == method {
+                if !data.isNull {
+                    request.httpBody = data.toString().data(using: String.Encoding.utf8, allowLossyConversion: true)
+                }
+            }
+            
+            if !headers.isNull {
+                if let dict = headers.toDictionary() {
+                    for (key, value) in dict {
+                        request.addValue("\(value)", forHTTPHeaderField: "\(key)")
+                    }
+                }
             }
             
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -89,6 +102,7 @@ open class AJHttpClient: NSObject, AJHttpClientProtocol {
                         cb.call(withArguments: [false, AJBuffer.create(with: data!)])
                     }
                 } else {
+                    NSLog("Error loading resource from \(url): \(error)")
                     cb.call(withArguments: [true])
                 }
             })

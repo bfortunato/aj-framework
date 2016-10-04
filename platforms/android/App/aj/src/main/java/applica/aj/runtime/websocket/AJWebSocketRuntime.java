@@ -199,6 +199,7 @@ public class AJWebSocketRuntime extends AJRuntime {
             }
         });
 
+        connecting = true;
         io.connect();
     }
 

@@ -11,6 +11,7 @@ function buildQueryString(obj) {
     for (var k in obj) {
         var sep = first ? "" : "&";
         q += sep + k + "=" + obj[k];
+        first = false;
     }
 
     return q;

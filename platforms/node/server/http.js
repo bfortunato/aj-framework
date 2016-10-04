@@ -6,13 +6,17 @@ const url = require("url");
 const request = require("request");
 
 module.exports = {
-    request: function(uri, method, data, headers, rawResponse, cb) {
+    request: function(uri, method, data, headers, accept, contentType, rawResponse, cb) {
         var method = method || "GET";
         var data = data || {};
         var headers = headers || {};
         var rawResponse = rawResponse || false;
 
         logger.i("Calling", uri);
+
+        headers = headers || {};
+        headers["Accept"] = accept;
+        headers["Content-Type"] = contentType;
 
         if (rawResponse) {
             request({uri: uri, encoding: null}, function(error, response, body) {
