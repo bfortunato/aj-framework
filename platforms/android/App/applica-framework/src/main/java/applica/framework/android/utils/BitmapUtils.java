@@ -131,10 +131,10 @@ public class BitmapUtils {
 
             int sample = 1;
             //Scale image to screen resolution
-            if (options.outHeight > maxBitmapSize.getHeight() || options.outWidth > maxBitmapSize.getWidth())
+            if (options.outHeight > size.getHeight() || options.outWidth > size.getWidth())
             {
-                int heightRatio = Math.round((float) options.outHeight / (float) maxBitmapSize.getHeight());
-                int widthRatio = Math.round((float) options.outWidth / (float) maxBitmapSize.getWidth());
+                int heightRatio = Math.round((float) options.outHeight / (float) size.getHeight());
+                int widthRatio = Math.round((float) options.outWidth / (float) size.getWidth());
                 sample = Math.max(heightRatio, widthRatio);
             }
 

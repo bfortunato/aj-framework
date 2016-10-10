@@ -1,11 +1,10 @@
 package applica.aj;
 
 import android.os.Handler;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -18,7 +17,6 @@ import applica.framework.android.utils.CollectionUtils;
 public class Store {
 
     private Lock lock = new ReentrantLock(true);
-    private ExecutorService executorService = Executors.newFixedThreadPool(10);
     private AJObject state;
 
     public interface Subscription {
@@ -62,6 +60,8 @@ public class Store {
     }
 
     public void unsubscribe(final Object owner) {
+        Log.i("AJ", String.format("%s unsubscribed from store %s", owner.toString(), type));
+
         lock.lock();
         try {
             subscriptions = new ArrayList<>(CollectionUtils.filter(subscriptions, new CollectionUtils.Predicate<SubscriptionInfo>() {

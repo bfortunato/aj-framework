@@ -3,11 +3,6 @@ package applica.aj;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by bimbobruno on 10/03/16.
@@ -19,16 +14,11 @@ public class Semaphore {
     }
 
     private static int COUNTER = 0;
-    private static ExecutorService EXECUTOR;
-
-    static {
-        EXECUTOR = Executors.newFixedThreadPool(10);
-    }
 
     private boolean complete = false;
     private int id = ++COUNTER;
     private Collection<Listener> listeners = Collections.synchronizedCollection(new ArrayList<Listener>());
-    private Future future;
+    private Thread thread;
 
     public Semaphore(Runnable action) {
         if (action != null) {
@@ -37,7 +27,7 @@ public class Semaphore {
     }
 
     public void runAction(final Runnable action) {
-        future = EXECUTOR.submit(new Runnable() {
+        thread = Async.run(new Runnable() {
             @Override
             public void run() {
                 action.run();
@@ -72,9 +62,9 @@ public class Semaphore {
     public void await(Double timeout) {
         try {
             if (timeout != null) {
-                future.get((long) (timeout * 1000), TimeUnit.MILLISECONDS);
+                Async.wait(thread, (int) (timeout * 1000));
             } else {
-                future.get();
+                Async.wait(thread);
             }
         } catch (Exception e) {
             e.printStackTrace();

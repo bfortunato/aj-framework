@@ -468,3 +468,16 @@ export var exec = exec;
  * @param {data} type - Data to pass to action
  */
 export var run = run;
+
+
+export function createBuffer(data) {
+    return __runtime.createBuffer(data);
+}
+
+export function readBuffer(id) {
+    return __runtime.readBuffer(id);
+}
+
+export function destroyBuffer(id) {
+    return __runtime.destroyBuffer(id);
+}

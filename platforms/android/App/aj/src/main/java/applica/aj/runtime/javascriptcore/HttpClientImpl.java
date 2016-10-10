@@ -4,14 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import org.apache.commons.io.IOUtils;
-import org.liquidplayer.webkit.javascriptcore.JSArray;
-import org.liquidplayer.webkit.javascriptcore.JSArrayBuffer;
 import org.liquidplayer.webkit.javascriptcore.JSContext;
-import org.liquidplayer.webkit.javascriptcore.JSDataView;
 import org.liquidplayer.webkit.javascriptcore.JSFunction;
-import org.liquidplayer.webkit.javascriptcore.JSInt8Array;
 import org.liquidplayer.webkit.javascriptcore.JSObject;
-import org.liquidplayer.webkit.javascriptcore.JSUint8Array;
 import org.liquidplayer.webkit.javascriptcore.JSValue;
 
 import java.io.IOException;
@@ -20,9 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+import applica.aj.Async;
 import applica.aj.runtime.Buffer;
 
 /**
@@ -32,7 +26,6 @@ public class HttpClientImpl extends JSObject implements HttpClient {
 
     private Context context;
     private JSContext jsContext;
-    private ExecutorService executorService = Executors.newFixedThreadPool(10);
 
     public static final String METHOD_GET = "GET";
     public static final String METHOD_POST = "POST";
@@ -57,7 +50,7 @@ public class HttpClientImpl extends JSObject implements HttpClient {
             final Boolean rawResponse,
             final JSFunction cb) {
 
-        executorService.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection connection = null;
@@ -82,6 +75,8 @@ public class HttpClientImpl extends JSObject implements HttpClient {
                     if (!accept.isNull()) {
                         connection.setRequestProperty("Accept", accept.toString());
                     }
+                    connection.setConnectTimeout(5000);
+                    connection.setReadTimeout(5000);
                     connection.setRequestMethod(finalMethod);
                     connection.setDoInput(true);
 
@@ -119,7 +114,9 @@ public class HttpClientImpl extends JSObject implements HttpClient {
                     e.printStackTrace();
                     cb.call(null, new JSValue[]{new JSValue(jsContext, true), new JSValue(jsContext, "error.io")});
                 } finally {
-                    if (connection != null) { connection.disconnect(); }
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
                 }
             }
         });

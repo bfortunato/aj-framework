@@ -7,9 +7,7 @@ import org.liquidplayer.webkit.javascriptcore.JSContext;
 import org.liquidplayer.webkit.javascriptcore.JSFunction;
 import org.liquidplayer.webkit.javascriptcore.JSObject;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
+import applica.aj.Async;
 import applica.aj.runtime.Buffer;
 
 /**
@@ -17,15 +15,13 @@ import applica.aj.runtime.Buffer;
  */
 public class BuffersManagerImpl extends JSObject implements BuffersManager {
 
-    private static final ExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadExecutor();
-
     public BuffersManagerImpl(Context context, JSContext jsContext) {
         super(jsContext, BuffersManager.class);
     }
 
     @Override
     public void create(final String base64, final JSFunction cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -41,7 +37,7 @@ public class BuffersManagerImpl extends JSObject implements BuffersManager {
 
     @Override
     public void read(final int id, final JSFunction cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -62,7 +58,7 @@ public class BuffersManagerImpl extends JSObject implements BuffersManager {
 
     @Override
     public void destroy(final int id, final JSFunction cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {

@@ -25,16 +25,17 @@ public class QRCodeScanner implements ZXingScannerView.ResultHandler {
 
     public static final int CAMERA_PERMISSION_REQUEST = 1001;
 
-    private final Activity context;
+    protected final Activity context;
+
+
 
     public interface Listener {
-
         void onScan(String result);
     }
-    private final ViewGroup container;
+    protected final ViewGroup container;
 
-    private List<Listener> listeners = new ArrayList<>();
-    private ZXingScannerView scannerView;
+    protected List<Listener> listeners = new ArrayList<>();
+    protected ZXingScannerView scannerView;
 
     public QRCodeScanner(Activity context, ViewGroup container) {
         this.context = context;
@@ -52,6 +53,7 @@ public class QRCodeScanner implements ZXingScannerView.ResultHandler {
             );
         } else {
             initCamera();
+            open();
         }
     }
 
@@ -73,20 +75,28 @@ public class QRCodeScanner implements ZXingScannerView.ResultHandler {
         listeners.add(listener);
     }
 
-    private void initCamera() {
+    public void initCamera() {
         scannerView = new ZXingScannerView(context);
         container.addView(scannerView);
     }
 
     public void open() {
-        Assert.notNull(scannerView);
+        if (scannerView != null) {
+            scannerView.setResultHandler(QRCodeScanner.this);
+            scannerView.startCamera();
+        }
+    }
 
-        scannerView.setResultHandler(QRCodeScanner.this);
-        scannerView.startCamera();
+    public void resume() {
+        if (scannerView != null) {
+            scannerView.resumeCameraPreview(this);
+        }
     }
 
     public void close() {
-        scannerView.stopCamera();
+        if (scannerView != null) {
+            scannerView.stopCamera();
+        }
     }
 
     @Override
@@ -96,6 +106,19 @@ public class QRCodeScanner implements ZXingScannerView.ResultHandler {
             //vibrator.vibrate(100);
 
             listener.onScan(result.getText());
+            resume();
+        }
+    }
+
+    public void enableScan() {
+        if (scannerView != null) {
+            scannerView.setEnabled(true);
+        }
+    }
+
+    public void disableScan() {
+        if (scannerView != null) {
+            scannerView.setEnabled(false);
         }
     }
 

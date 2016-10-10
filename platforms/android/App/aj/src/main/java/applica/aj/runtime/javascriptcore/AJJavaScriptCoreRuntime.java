@@ -3,14 +3,16 @@ package applica.aj.runtime.javascriptcore;
 import android.content.Context;
 import android.util.Log;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import org.liquidplayer.webkit.javascriptcore.JSContext;
+import org.liquidplayer.webkit.javascriptcore.JSException;
+import org.liquidplayer.webkit.javascriptcore.JSFunction;
+import org.liquidplayer.webkit.javascriptcore.JSObject;
+import org.liquidplayer.webkit.javascriptcore.JSValue;
 
 import applica.aj.AJObject;
+import applica.aj.Async;
 import applica.aj.Semaphore;
 import applica.aj.runtime.AJRuntime;
-
-import org.liquidplayer.webkit.javascriptcore.*;
 
 /**
  * Created by bimbobruno on 10/03/16.
@@ -41,7 +43,7 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
 
         @Override
         public void async(final JSValue action) {
-            executorService.execute(new Runnable() {
+            Async.run(new Runnable() {
                 @Override
                 public void run() {
                     action.toFunction().call(null, (Object[]) new JSValue[0]);
@@ -65,14 +67,12 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
 
     private JSContext jsContext;
     private Require require;
-    private ExecutorService executorService;
     private JSObject jsRuntime;
     private JSFunction dispatchFunction;
 
     public AJJavaScriptCoreRuntime(final Context context) {
         super(context);
 
-        executorService = Executors.newFixedThreadPool(10);
         jsContext = new JSContext();
         jsContext.setExceptionHandler(new JSContext.IJSExceptionHandler() {
             @Override

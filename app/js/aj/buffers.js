@@ -3,15 +3,15 @@
 const aj = require("./index");
 
 var create = function(data) {
-    return aj.AJRuntime.instance().createBuffer(data);
+    return aj.createBuffer(data);
 };
 
 var read = function(id) {
-    return aj.AJRuntime.instance().readBuffer(id);
+    return aj.readBuffer(id);
 };
 
 var destroy = function(id) {
-    return aj.AJRuntime.instance().destroyBuffer(id);
+    return aj.destroyBuffer(id);
 };
 
 exports.create = create;

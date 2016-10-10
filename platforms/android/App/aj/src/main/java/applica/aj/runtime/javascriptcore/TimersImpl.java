@@ -6,9 +6,8 @@ import org.liquidplayer.webkit.javascriptcore.JSValue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+import applica.aj.Async;
 import applica.framework.android.utils.CollectionUtils;
 import applica.framework.android.utils.Nulls;
 
@@ -18,7 +17,6 @@ import applica.framework.android.utils.Nulls;
 public class TimersImpl extends JSObject implements Timers {
 
     static int COUNTER = 0;
-    static final ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(10);
 
     private final JSContext jsContext;
 
@@ -32,7 +30,7 @@ public class TimersImpl extends JSObject implements Timers {
         boolean loop;
 
         void execute() {
-            EXECUTOR_SERVICE.execute(new Runnable() {
+            Async.run(new Runnable() {
                 @Override
                 public void run() {
                     while (true) {

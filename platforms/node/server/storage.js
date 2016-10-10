@@ -61,7 +61,7 @@ module.exports = {
 
     exists: function(path, cb) {
         path = "storage/" + path;
-        fs.stat("storage", (err, stat) => {
+        fs.stat(path, (err, stat) => {
             if (err) { cb(false, false); }
             else { cb(false, stat.isFile() || stat.isDirectory()); }
         });

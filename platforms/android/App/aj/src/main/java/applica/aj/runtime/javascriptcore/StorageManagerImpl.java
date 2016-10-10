@@ -3,7 +3,6 @@ package applica.aj.runtime.javascriptcore;
 import android.content.Context;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.liquidplayer.webkit.javascriptcore.JSContext;
 import org.liquidplayer.webkit.javascriptcore.JSFunction;
@@ -14,18 +13,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+import applica.aj.Async;
 import applica.aj.runtime.Buffer;
 
 /**
  * Created by bimbobruno on 14/03/16.
  */
 public class StorageManagerImpl extends JSObject implements StorageManager {
-
-    private static final ExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadExecutor();
 
     private final JSContext jsContext;
     private Context context;
@@ -38,7 +33,7 @@ public class StorageManagerImpl extends JSObject implements StorageManager {
 
     @Override
     public void readText(final String path, final JSFunction cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -61,7 +56,7 @@ public class StorageManagerImpl extends JSObject implements StorageManager {
 
     @Override
     public void read(final String path, final JSFunction cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -84,7 +79,7 @@ public class StorageManagerImpl extends JSObject implements StorageManager {
 
     @Override
     public void write(final String path, final int buffer, final JSFunction cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -108,7 +103,7 @@ public class StorageManagerImpl extends JSObject implements StorageManager {
 
     @Override
     public void writeText(final String path, final String content, final JSFunction cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -127,7 +122,7 @@ public class StorageManagerImpl extends JSObject implements StorageManager {
 
     @Override
     public void delete(final String path, final JSFunction cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -143,7 +138,7 @@ public class StorageManagerImpl extends JSObject implements StorageManager {
 
     @Override
     public void exists(final String path, final JSFunction cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {

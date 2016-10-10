@@ -25,7 +25,9 @@ public class Buffer {
         id = lastBufferId++;
         this.data = data;
 
-        buffers.add(this);
+        synchronized (buffers) {
+            buffers.add(this);
+        }
     }
 
     public int getId() {
@@ -43,31 +45,35 @@ public class Buffer {
     }
 
     public static byte[] get(final int id) {
-        Buffer buffer = CollectionUtils.first(buffers, new CollectionUtils.Predicate<Buffer>() {
-            @Override
-            public boolean evaluate(Buffer obj) {
-                return obj.getId() == id;
-            }
-        });
+        synchronized (buffers) {
+            Buffer buffer = CollectionUtils.first(buffers, new CollectionUtils.Predicate<Buffer>() {
+                @Override
+                public boolean evaluate(Buffer obj) {
+                    return obj.getId() == id;
+                }
+            });
 
-        if (buffer != null) {
-            destroy(id);
-            return buffer.getData();
-        } else {
-            return null;
+            if (buffer != null) {
+                destroy(id);
+                return buffer.getData();
+            } else {
+                return null;
+            }
         }
     }
 
     public static void destroy(final int id) {
-        Buffer buffer = CollectionUtils.first(buffers, new CollectionUtils.Predicate<Buffer>() {
-            @Override
-            public boolean evaluate(Buffer obj) {
-                return obj.getId() == id;
-            }
-        });
+        synchronized (buffers) {
+            Buffer buffer = CollectionUtils.first(buffers, new CollectionUtils.Predicate<Buffer>() {
+                @Override
+                public boolean evaluate(Buffer obj) {
+                    return obj.getId() == id;
+                }
+            });
 
-        if (buffer != null) {
-            buffers.remove(buffer);
+            if (buffer != null) {
+                buffers.remove(buffer);
+            }
         }
     }
 }

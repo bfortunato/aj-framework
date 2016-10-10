@@ -4,25 +4,20 @@ import android.content.Context;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.liquidplayer.webkit.javascriptcore.JSArray;
 import org.liquidplayer.webkit.javascriptcore.JSContext;
 import org.liquidplayer.webkit.javascriptcore.JSObject;
 import org.liquidplayer.webkit.javascriptcore.JSValue;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+import applica.aj.Async;
 import applica.aj.runtime.Buffer;
 
 /**
  * Created by bimbobruno on 14/03/16.
  */
 public class AssetsManagerImpl extends JSObject implements AssetsManager {
-
-    private static final ExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadExecutor();
 
     private final JSContext jsContext;
     private Context context;
@@ -35,7 +30,7 @@ public class AssetsManagerImpl extends JSObject implements AssetsManager {
 
     @Override
     public void load(final String path, final JSValue cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -55,7 +50,7 @@ public class AssetsManagerImpl extends JSObject implements AssetsManager {
 
     @Override
     public void exists(final String path, final JSValue cb) {
-        EXECUTOR_SERVICE.execute(new Runnable() {
+        Async.run(new Runnable() {
             @Override
             public void run() {
                 try {
