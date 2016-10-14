@@ -2,7 +2,7 @@ import * as aj from "../aj"
 import * as types from "./types"
 import * as actions from "../actions/types"
 
-import * as _ from "../framework/underscore"
+import * as _ from "../libs/underscore"
 
 const initialState = {
     message: null

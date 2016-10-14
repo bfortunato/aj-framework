@@ -8,8 +8,6 @@ const utils = require("../framework/utils");
 const path = require("../framework/path");
 const base64 = require("../framework/base64");
 
-const Promise = require("../framework/promise");
-
 class StorageManager {
     constructor() {
         if (__storageManager == undefined) {

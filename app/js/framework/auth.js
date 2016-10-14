@@ -7,8 +7,6 @@ const services = require("./services");
 const preferences = require("./preferences");
 const config = require("./config");
 
-const Promise = require("./promise");
-
 var loggedUser = null;
 
 export const TYPE_MAIL = "MAIL";

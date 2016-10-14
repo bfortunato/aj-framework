@@ -2,8 +2,6 @@
 
 const storage = require("../aj/storage");
 
-const Promise = require("./promise");
-
 class Preferences {
     static instance() {
         if (!Preferences._instance) {

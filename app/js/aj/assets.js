@@ -8,8 +8,6 @@
 import * as assert from "../framework/assert"
 import * as path from "../framework/path"
 
-import Promise from "../framework/promise"
-
 class AssetsManager {
     constructor() {
         if (__assetsManager == undefined) {

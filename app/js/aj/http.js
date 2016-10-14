@@ -1,9 +1,8 @@
 "use strict";
 
 var assert = require("../framework/assert");
-var Promise = require("../framework/promise");
 
-var _ = require("../framework/underscore");
+var _ = require("../libs/underscore");
 
 function buildQueryString(obj) {
     var q = "";
