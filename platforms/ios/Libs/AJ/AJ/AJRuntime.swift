@@ -11,11 +11,11 @@ import JavaScriptCore
 
 
 open class AJRuntime {
-   
+    
     fileprivate var stores = [String: AJStore]()
     fileprivate var plugins = [String: AJPlugin]()
     
-    open func getStore(_ type: String) -> AJStore {
+    open func get(store type: String) -> AJStore {
         let store = stores[type]
         
         if store != nil {
@@ -28,19 +28,19 @@ open class AJRuntime {
     }
     
     open func subscribe(to store: String, owner: AnyObject, subscription: @escaping Subscription) {
-        getStore(store).subscribe(owner: owner, subscription: subscription)
+        get(store: store).subscribe(owner: owner, subscription: subscription)
         
-        NSLog("Subscribed from store: \(store)")
+        NSLog("Subscribed to store: \(store)")
     }
     
     open func unsubscribe(from store: String, owner: AnyObject) {
-        getStore(store).unsubscribe(owner: owner)
+        get(store: store).unsubscribe(owner: owner)
         
         NSLog("Unsubscribed from store: \(store)")
     }
     
     open func tigger(store: String, data: AJObject) {
-        getStore(store).trigger(data)
+        get(store: store).trigger(data)
     }
     
     open func destroy() {

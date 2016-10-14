@@ -409,14 +409,31 @@ open class RB {
     
 }
 
-
-public func alertWithTitle(_ title: String, message: String, owner: UIViewController) {
+public func alert(title: String, message: String, owner: UIViewController, onCancel: (() -> Void)? = nil) {
     let alert = UIAlertController(
         title: title,
         message: message,
         preferredStyle: .alert
     )
     
-    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+        if let fn = onCancel {
+            fn()
+        }
+    }))
+    
     owner.present(alert, animated: true, completion: nil)
+}
+
+public func toast(_ text: String, in view: UIView? = nil) {
+    guard let container = view ?? UIApplication.shared.keyWindow else {
+        return
+    }
+    
+    let hud = MBProgressHUD.showAdded(to: container, animated: true)
+    hud.mode = .text
+    hud.label.text = text
+    hud.removeFromSuperViewOnHide = true
+    
+    hud.hide(animated: true, afterDelay: 3)
 }

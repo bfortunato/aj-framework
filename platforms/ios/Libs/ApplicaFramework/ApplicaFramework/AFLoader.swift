@@ -17,6 +17,12 @@ open class AFLoader {
         
     }
     
+    open class func show(title: String? = nil, message: String? = nil) -> AFLoader {
+        let loader = AFLoader()
+        loader.show(title: title, message: message)
+        return loader
+    }
+    
     open func show(title: String? = nil, message: String? = nil) {
         let window = UIApplication.shared.windows.last!
         if (hud == nil) {

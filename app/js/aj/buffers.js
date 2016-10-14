@@ -1,16 +1,16 @@
 "use strict";
 
-const aj = require("./index");
+var aj = require("./index");
 
-var create = function(data) {
+var create = function create(data) {
     return aj.createBuffer(data);
 };
 
-var read = function(id) {
+var read = function read(id) {
     return aj.readBuffer(id);
 };
 
-var destroy = function(id) {
+var destroy = function destroy(id) {
     return aj.destroyBuffer(id);
 };
 

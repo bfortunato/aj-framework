@@ -64,7 +64,7 @@ open class AJHttpClient: NSObject, AJHttpClientProtocol {
             }
             
             var request = URLRequest(url: URL(string: finalUrl)!)
-            
+            request.timeoutInterval = 5
             request.httpMethod = method
             
             if !contentType.isNull {

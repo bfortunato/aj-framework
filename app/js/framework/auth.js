@@ -15,10 +15,6 @@ export const TYPE_MAIL = "MAIL";
 export const TYPE_FACEBOOK = "FACEBOOK";
 
 class RestSessionService {
-    constructor(runtime) {
-        this.runtime = runtime;
-    }
-
     login(mail, password) {
         return new Promise((resolve, reject) => {
             http.post(config.get("login.url"), {mail, password})
@@ -96,4 +92,4 @@ export function isLoggedIn() {
     return loggedUser != null;
 }
 
-export let RestSessionService = RestSessionService;
+export { RestSessionService };

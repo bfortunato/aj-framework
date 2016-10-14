@@ -105,7 +105,8 @@ open class AJJavaScriptCoreRuntime: AJRuntime {
     open override func run(action: String, data: AJObject = AJObject.empty()) -> AJSemaphore {
         if let jr = self.jsRuntime {
             let semaphore = AJSemaphore(action: { () -> Void in
-                jr.invokeMethod("run", withArguments: [action, data.toDict()])
+                let dict = data.toDict()
+                jr.invokeMethod("run", withArguments: [action, dict])
             })
             return semaphore
         }

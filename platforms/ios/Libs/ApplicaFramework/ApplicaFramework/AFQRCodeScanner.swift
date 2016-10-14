@@ -15,10 +15,9 @@ public typealias AFQRCodeScannerCompletion = ((String) -> Void)
 open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
     open var onQRCode = AFEvent()
-    open var onPicture = AFEvent()
     
     let _cameraView: UIView
-    let _owner: UIViewController
+    weak var _owner: UIViewController?
    
     fileprivate var _captureSession: AVCaptureSession?
     
@@ -36,9 +35,12 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
                 self.checkCameraPermissionsAndInit()
             })
         } else if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.denied {
-            alertWithTitle("Authorization request",
-                           message: "Camera access is required to use di application. Please give camera access to this application using Settings",
-                           owner: _owner)
+            if let owner = _owner {
+                alert(title:"Authorization request",
+                      message: "Camera access is required to use this application. Please give camera access to this application using Settings",
+                      owner: owner
+                )
+            }
             return
         } else if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
             initCamera()
@@ -47,49 +49,51 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
     }
     
     func initCamera() {
+        self._captureSession = AVCaptureSession()
+        
+        var captureDevice: AVCaptureDevice?
+        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
+        for d in devices! {
+            if (d as AnyObject).position == AVCaptureDevicePosition.back {
+                captureDevice = d as? AVCaptureDevice
+                break
+            }
+        }
+        
+        guard let device = captureDevice else {
+            if let owner = _owner {
+                alert(title: "Camera access", message: "Camera not available", owner: owner)
+            }
+            return
+        }
+        
+        guard let deviceInput = try? AVCaptureDeviceInput(device: device) else {
+            if let owner = _owner {
+                alert(title: "Camera access", message: "Camera not available", owner: owner)
+            }
+            return
+        }
+        
+        self._captureSession?.addInput(deviceInput)
+        
+        self.enableQRCodeScanner()
+        
         runui {
-            self._captureSession = AVCaptureSession()
-            
-            var captureDevice: AVCaptureDevice?
-            let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
-            for d in devices! {
-                if (d as AnyObject).position == AVCaptureDevicePosition.back {
-                    captureDevice = d as? AVCaptureDevice
-                    break
-                }
-            }
-            
-            guard let device = captureDevice else {
-                alertWithTitle("Camera access", message: "Camera not available", owner: self._owner)
-                return
-            }
-            
-            guard let deviceInput = try? AVCaptureDeviceInput(device: device) else {
-                alertWithTitle("Camera access", message: "Camera not available", owner: self._owner)
-                return
-            }
-            
-            self._captureSession?.addInput(deviceInput)
-            
-            self.enableQRCodeScanner()
-            
             let layer = AVCaptureVideoPreviewLayer(session: self._captureSession!)
             layer?.frame = self._cameraView.bounds
             layer?.videoGravity = AVLayerVideoGravityResizeAspectFill
             self._cameraView.layer.addSublayer(layer!)
+            
+            self.open()
         }
     }
     
     open func open() {
-        runui {
-            self._captureSession?.startRunning()
-        }
+        self._captureSession?.startRunning()
     }
     
     open func close() {
-        runui {
-            self._captureSession?.stopRunning()
-        }
+        self._captureSession?.stopRunning()
     }
     
     open func enableQRCodeScanner() {

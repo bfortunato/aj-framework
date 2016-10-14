@@ -20,6 +20,7 @@
 		7A3AF80F1D9906FC00F8C559 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8031D9906DA00F8C559 /* SocketIO.framework */; };
 		7A475F871CD7A9C4000CF8F0 /* AJStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A475F861CD7A9C4000CF8F0 /* AJStorageManager.swift */; };
 		7A7208EF1C9A1D1300C0CF3A /* AJTimers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7208EE1C9A1D1300C0CF3A /* AJTimers.swift */; };
+		7A824FA71DAB8A9C00D684C4 /* AJ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A824FA61DAB8A9C00D684C4 /* AJ.swift */; };
 		7A8C06CF1C902893009327E9 /* AJAssetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8C06CE1C902893009327E9 /* AJAssetsManager.swift */; };
 		7AA852331D796342002E51CB /* AJJSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA852321D796342002E51CB /* AJJSUtils.swift */; };
 		7AA852351D7966E5002E51CB /* AJBuffersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA852341D7966E5002E51CB /* AJBuffersManager.swift */; };
@@ -106,6 +107,7 @@
 		7A3AF7F91D9906D900F8C559 /* Socket.IO-Client-Swift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Socket.IO-Client-Swift.xcodeproj"; path = "../socket.io-client-swift/Socket.IO-Client-Swift.xcodeproj"; sourceTree = "<group>"; };
 		7A475F861CD7A9C4000CF8F0 /* AJStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJStorageManager.swift; sourceTree = "<group>"; };
 		7A7208EE1C9A1D1300C0CF3A /* AJTimers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJTimers.swift; sourceTree = "<group>"; };
+		7A824FA61DAB8A9C00D684C4 /* AJ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJ.swift; sourceTree = "<group>"; };
 		7A8C06CE1C902893009327E9 /* AJAssetsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJAssetsManager.swift; sourceTree = "<group>"; };
 		7AA852321D796342002E51CB /* AJJSUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJJSUtils.swift; sourceTree = "<group>"; };
 		7AA852341D7966E5002E51CB /* AJBuffersManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJBuffersManager.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		7A09E2DD1C74871800984A5A /* AJ */ = {
 			isa = PBXGroup;
 			children = (
+				7A824FA61DAB8A9C00D684C4 /* AJ.swift */,
 				7A3AF7F11D99069F00F8C559 /* AJApp.swift */,
 				7A0B10771C9D6E3900C39B7F /* AJBuffer.swift */,
 				7A09E2FB1C748A0C00984A5A /* AJObject.swift */,
@@ -425,6 +428,7 @@
 				7AE52BF91D70A907008F805D /* AJDevice.swift in Sources */,
 				7AB33B261C8A0210002868C6 /* AJLogger.swift in Sources */,
 				7A475F871CD7A9C4000CF8F0 /* AJStorageManager.swift in Sources */,
+				7A824FA71DAB8A9C00D684C4 /* AJ.swift in Sources */,
 				7AB23B0A1C78CE1000A80387 /* AJHttpClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
