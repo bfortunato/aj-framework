@@ -1,0 +1,20 @@
+{
+  "name": "web",
+  "homepage": "https://github.com/bfortunato/aj-framework",
+  "authors": [
+    "Bruno Fortunato <bruno.fortunato@applica.guru>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}

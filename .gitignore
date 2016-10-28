@@ -14,3 +14,4 @@ captures
 gradle
 gradle/wrapper
 /platforms/node/node_modules/
+/platforms/web/bower_components/
