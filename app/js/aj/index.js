@@ -289,17 +289,27 @@ class Store extends Observable {
 
         this.type = type;
         this.reducer = reducer;
+        this.subscriptions = [];
     }
 
     init(options) {}
 
-    trigger(state) {
-        if (state == undefined) {
-            return __runtime.__trigger(this.type, this.state);
-        } else {
-            return __runtime.__trigger(this.type, state);
-        }
+    subscribe(owner, subscription) {
+        this.subscriptions.push({owner, subscription});
+    }
 
+    unsubscribe(owner) {
+        this.subscriptions = _.filter(this.subscriptions, s => s.owner != owner);
+    }
+
+    trigger(state) {
+        let newState = state || this.state;
+
+        _.each(this.subscriptions, s => {
+            s.subscription(newState);
+        });
+
+        return __runtime.__trigger(this.type, newState);
     }
 
     dispatch(action) {
@@ -374,6 +384,8 @@ function createStore(type, reducer) {
     __stores[type] = store;
 
     logger.i("Store created:", type);
+
+    return store;
 }
 
 function createAction(type, fn) {

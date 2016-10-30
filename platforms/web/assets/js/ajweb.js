@@ -1,6 +1,6 @@
 "use strict";
 
-(function(exports) {
+(function(global) {
     /**
      *
      *  Base64 encode / decode
@@ -147,7 +147,7 @@
      * async
      */
 
-    var async = exports.async = function(action) {
+    var async = global.async = function(action) {
         setTimeout(action, 0);
     };
 
@@ -338,15 +338,15 @@
             return module.exports;
         }
 
-        exports.define = define;
-        exports.require = require;
+        global.define = define;
+        global.require = require;
     })();
 
     /**
      * Buffers
      */
 
-    var Buffer = exports.Buffer = {
+    var Buffer = global.Buffer = {
         buffers: [],
         lastBufferId: 0,
 
@@ -379,7 +379,7 @@
      * Logger
      */
 
-    exports.logger = {
+    global.logger = {
         i: function(msg) {
             if (_.isArray(msg)) {
                 console.log("AJ: " + msg.join(" "));
@@ -409,7 +409,7 @@
      * Http
      */
 
-    exports.__httpClient = {
+    global.__httpClient = {
         request: function(url, method, data, headers, accept, contentType, rawResponse, cb) {
             $.ajax({
                 url: url,
@@ -431,7 +431,7 @@
      * Assets
      */
 
-    exports.__assetsManager = {
+    global.__assetsManager = {
         load: function(path, cb) {
             $.ajax({
                 url: url,
@@ -455,20 +455,104 @@
      * Storage
      */
 
-    exports.__storageManager = {
-        readText: function(path, cb) {},
-        read: function(path, cb) {},
-        writeText: function(path, content, cb) {},
-        write: function(path, buffer, cb) {},
-        delete: function(path, cb) {},
-        exists: function(path, cb) {}
-    };
+    (function() {
+
+        function checkSupport() {
+            if (!Storage) {
+                throw new Error("No support for storage manager");
+            }
+        }
+
+        global.__storageManager = {
+            readText: function(path, cb) {
+                async(function() {
+                    try {
+                        checkSupport();
+
+                        var item = localStorage.getItem(path);
+                        cb(false, item);
+                    } catch (e) {
+                        cb(true, e);
+                    }
+                });
+            },
+
+            read: function(path, cb) {
+                async(function() {
+                    try {
+                        checkSupport();
+
+                        var item = localStorage.getItem(path);
+                        cb(false, item);
+                    } catch (e) {
+                        cb(true, e);
+                    }
+                });
+            },
+
+            writeText: function(path, content, cb) {
+                async(function() {
+                    try {
+                        checkSupport();
+
+                        localStorage.setItem(path, Buffer.create(content));
+                        cb(false);
+                    } catch (e) {
+                        cb(true, e);
+                    }
+                });
+            },
+
+
+            write: function(path, buffer, cb) {
+                async(function() {
+                    try {
+                        checkSupport();
+
+                        localStorage.setItem(path, Buffer.get(buffer));
+                        cb(false);
+                    } catch (e) {
+                        cb(true, e);
+                    }
+                });
+            },
+
+            delete: function(path, cb) {
+                async(function() {
+                    try {
+                        checkSupport();
+
+                        localStorage.setItem(path, null);
+                        cb(false);
+                    } catch (e) {
+                        cb(true, e);
+                    }
+                });
+            },
+
+            exists: function(path, cb) {
+                async(function() {
+                    try {
+                        checkSupport();
+
+                        var exists = localStorage.getItem(path) != null;
+                        cb(false, exists);
+                    } catch (e) {
+                        cb(true, e);
+                    }
+                });
+            }
+        };
+
+
+    })();
+
 
     /***
      * Buffers manager
      */
 
-    exports.__buffersManager = {
+    global.__buffersManager = {
         create: function(base64, cb) {
             async(function() {
                 var bytes = Base64.encode(base64);
@@ -493,12 +577,58 @@
     };
 
     /**
+     * Device
+     */
+
+    global.device = {
+        getName: function() {
+            return "web"
+        },
+
+        getHeight: function() {
+            return window.innerHeight;
+        },
+
+        getWidth: function() {
+            return window.innerWidth
+        },
+
+        getScale: function() {
+            return 1;
+        }
+    };
+
+    /**
+     * Platform
+     */
+
+    global.platform = {
+        engine: "native",
+        device: "browser"
+    };
+
+    /**
      * AJ Web Runtime
      */
 
-    var AJWebRuntime = function() {};
-    AJWebRuntime.prototype = {
+    global.__trigger = function(store, state) {
+        //nothing, already done in js
+    };
 
+    global.__exec = function(plugin, method, data) {
+        //executes a class method with data, simply
+        var Plugin = global[plugin];
+        if (!_.isObject(Plugin)) {
+            throw new Error("Plugin " + plugin + "not registered");
+        }
+
+        var fn = Plugin[method];
+
+        if (!_.isFunction(fn)) {
+            throw new Error("Plugin method" + plugin + "." + method +  "not found");
+        }
+
+        return fn(data);
     };
 
 })(window);
