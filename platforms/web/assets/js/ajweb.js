@@ -296,6 +296,7 @@
             var moduleBase = path.removeExtension(path.normalize(path.join(currentRelativePath, _path)));
             var moduleName = path.name(moduleBase);
             var possibilities = [
+                moduleName,
                 moduleBase + "." + moduleExt,
                 path.join(moduleBase, "index.js"),
                 path.join(moduleBase, moduleName) + "." + moduleExt
