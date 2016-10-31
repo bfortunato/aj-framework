@@ -147,7 +147,7 @@ AJ.subscribe(Stores.HOME, this, new Store.Subscription() {
 ```javascript
 import { home } from "stores"
 
-store.subscribe(state => {
+home.subscribe(state => {
     document.getElementById("textView").value = state.message
 })
 ```
@@ -169,7 +169,7 @@ AJ.run("GET_MESSAGE")
 ```javascript
 import { getMessage } from './actions'
 
-getMessage() //or aj.run('GET_MESSAGE')
+getMessage()
 ```
 
 
