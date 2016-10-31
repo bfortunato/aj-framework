@@ -28,7 +28,7 @@ AJ is distributed as an npm package, so, is very simple to install.
 
 1: Type this command to install globally:
 ```
-npm install -g aj-framework
+npm install -g aj-framework-cli
 ```
 This command will install aj command line tools.
 
