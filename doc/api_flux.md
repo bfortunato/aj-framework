@@ -1,26 +1,35 @@
 # <img src="https://raw.githubusercontent.com/bfortunato/aj-framework/master/doc/images/aj.png" height="100" align="middle" /> Framework documentation
 
-- **Installation** <-
+- [Installation](https://github.com/bfortunato/aj-framework/blob/master/doc/installation.md)
 - [aj: command line interface](https://github.com/bfortunato/aj-framework/blob/master/doc/cli.md)
 - [API](https://github.com/bfortunato/aj-framework/blob/master/doc/api.md)
-    - [Native API](https://github.com/bfortunato/aj-framework/blob/master/doc/api_native.md)
+    - **Native API** <-
     - [Flux](https://github.com/bfortunato/aj-framework/blob/master/doc/api_flux.md)
     - [Assets](https://github.com/bfortunato/aj-framework/blob/master/doc/api_assets.md)
     - [Storage](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
     - [HTTP](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
 - [Plugins](https://github.com/bfortunato/aj-framework/blob/master/doc/plugins.md)
+    
+# Native API
+Native API are a sets of classes and function that allow developers to communicate with javascript shared business logic.
+Native API are identical for each platforms. The only difference is in the sintax because depends on the platform language: Java for Android, Swift 3 for iOS, Javascript for web
 
-# Installation
 
-AJ is distributed as an npm package, so, is very simple to install.
+# Classes and modules
 
-1: Type this command to install globally:
-```
-npm install -g aj-framework-cli
-```
-This command will install aj command line tools.
+- [AJ](#aj)
+- [AJObject](#ajobject)
+- [Buffer](#buffer)
+- [Plugin](#plugin)
 
-2: Check if everything was installed correctly typing:
-```
-aj --version
-```
+# <a name="aj"></a>AJ
+AJ class it's the main class to allow a device to communicate with JS side flux based business logic.
+
+
+
+
+# <a name="ajobject"></a>AJObject
+
+# <a name="buffer"></a>Buffer
+
+# <a name="plugin"></a>Plugin

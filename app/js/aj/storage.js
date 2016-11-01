@@ -171,26 +171,58 @@ class StorageManager {
 
 var instance = new StorageManager();
 
+/**
+ * Reads text of file in specified path
+ * @param path
+ * @returns A promise with text result
+ */
 exports.readText = function(path) {
     return instance.readText(path);
 };
 
+/**
+ * Reads binary file from specified path.
+ * @param path
+ * @returns A promise of result
+ */
 exports.read = function(path) {
     return instance.read(path);
 };
 
+/**
+ * Writes text contents in specified file
+ * @param path
+ * @param content
+ * @returns A promise of result
+ */
 exports.writeText = function(path, content) {
     return instance.writeText(path, content);
 };
 
+/**
+ * Writes bytes contents in speified file
+ * @param path
+ * @param bytes
+ * @returns A promise of result
+ */
 exports.write = function(path, bytes) {
     return instance.write(path, bytes);
 };
 
+/**
+ * Deletes specified file from device storage
+ * @param path
+ * @returns A promise of result
+ */
 exports.delete = function(path) {
     return instance.delete(path);
 };
 
+/**
+ * Check if specified file exists in device storage
+ * @param path
+ * @returns A promise of result
+ */
 exports.exists = function(path) {
     return instance.exists(path);
 };

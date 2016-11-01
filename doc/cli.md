@@ -3,7 +3,8 @@
 - [Installation](https://github.com/bfortunato/aj-framework/blob/master/doc/installation.md)
 - **aj: command line interface** <-
 - [API](https://github.com/bfortunato/aj-framework/blob/master/doc/api.md)
-    - [Native API](https://github.com/bfortunato/aj-framework/blob/master/doc/api_native.md))
+    - [Native API](https://github.com/bfortunato/aj-framework/blob/master/doc/api_native.md)
+    - [Flux](https://github.com/bfortunato/aj-framework/blob/master/doc/api_flux.md)
     - [Assets](https://github.com/bfortunato/aj-framework/blob/master/doc/api_assets.md)
     - [Storage](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
     - [HTTP](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
@@ -43,7 +44,7 @@ $ aj build
 # output...
 ```
 
-If you would specify platforms to build, use `--platforms` or `-p` option. If you want to specify more than one platform, use a comma `,`
+If you would specify platforms to build, use `--platforms` or `-p` option. If you want to specify more than one platform, use a comma `,`.
 Available platforms are
 - ios
 - android
@@ -55,7 +56,7 @@ $ aj build --platforms ios,android
 # output...
 ```
 
-If you would specify resource types to build, use `--types` or `-t` option. If you want to specify more than one types, use a comma `,`
+If you would specify resource types to build, use `--types` or `-t` option. If you want to specify more than one types, use a comma `,`.
 Available types are
 - scripts
 - images

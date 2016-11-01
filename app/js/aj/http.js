@@ -74,6 +74,13 @@ let request = (url, method, data, headers, accept, contentType, rawResponse) => 
 exports.HttpClient = HttpClient;
 exports.request = request;
 
+/**
+ * Makes a GET request to specified url
+ * @param url
+ * @param data, can be a string or object. If is an object will be converted in a form encoded string
+ * @param headers
+ * @returns A promise of result
+ */
 exports.get = (url, data, headers) => {
     var data = data || {};
     var headers = headers || {};
@@ -81,24 +88,52 @@ exports.get = (url, data, headers) => {
     return request(url, "GET", data, headers, null, null, false);
 };
 
+/**
+ * Makes a POST request to specified url
+ * @param url
+ * @param data, can be a string or object. If is an object will be converted in a form encoded string
+ * @param headers
+ * @returns A promise of result
+ */
 exports.post = (url, data, headers) => {
     var data = data || {};
     var headers = headers || {};
     return request(url, "POST", data, headers, null, null, false);
 };
 
+/**
+ * Makes a PUT request to specified url
+ * @param url
+ * @param data, can be a string or object. If is an object will be converted in a form encoded string
+ * @param headers
+ * @returns A promise of result
+ */
 exports.put = (url, data, headers) => {
     var data = data || {};
     var headers = headers || {};
     return request(url, "PUT", data, headers, null, null, false);
 };
 
+/**
+ * Makes a DELETE request to specified url
+ * @param url
+ * @param data, can be a string or object. If is an object will be converted in a form encoded string
+ * @param headers
+ * @returns A promise of result
+ */
 exports.delete = (url, data, headers) => {
     var data = data || {};
     var headers = headers || {};
     return request(url, "DELETE", data, headers, null, null, false);
 };
 
+/**
+ * Downloads a file from specified url
+ * @param url
+ * @param data, can be a string or object. If is an object will be converted in a form encoded string
+ * @param headers
+ * @returns A promise of result
+ */
 exports.download = (url, data, headers) => {
     var data = data || {};
     var headers = headers || {};
