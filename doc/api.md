@@ -4,7 +4,7 @@
 - [aj: command line interface](https://github.com/bfortunato/aj-framework/blob/master/doc/cli.md)
 - **API** <-
     - [Native API](https://github.com/bfortunato/aj-framework/blob/master/doc/api_native.md)
-    - [Flux](https://github.com/bfortunato/aj-framework/blob/master/doc/api_flux.md)
+    - [Implementing Flux](https://github.com/bfortunato/aj-framework/blob/master/doc/api_flux.md)
     - [Assets](https://github.com/bfortunato/aj-framework/blob/master/doc/api_assets.md)
     - [Storage](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
     - [HTTP](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)

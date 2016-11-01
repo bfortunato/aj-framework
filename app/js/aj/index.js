@@ -463,9 +463,9 @@ export var dispatch = dispatch;
 
 /**
  * @function exec
- * @description Exec a plugin action
+ * @description Exec a plugin method
  * @param {string} plugin - The plugin
- * @param {action} action - The plugin action to call
+ * @param {method} method - The plugin method to call
  * @param {data} data - Data to pass to plugin
  * @returns {Promise} - A promise of plugin call result
  */
