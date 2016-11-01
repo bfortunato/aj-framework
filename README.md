@@ -197,8 +197,12 @@ Put your app icon in `app/resources/app_icon.png`. Like images, AJ framework wil
     - [HTTP](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
 
 
-#Tutorials
+# Tutorials
 [TodoList](https://github.com/bfortunato/aj-framework-todolist)
+
+
+# License
+AJ framework is under [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0)
 
 
 # Colophon
