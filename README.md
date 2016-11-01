@@ -28,7 +28,7 @@ AJ is distributed as an npm package, so, is very simple to install.
 
 1: Type this command to install globally:
 ```
-npm install -g aj-framework
+npm install -g aj-framework-cli
 ```
 This command will install aj command line tools.
 
@@ -128,14 +128,14 @@ Now is the part of the native side that in AJ application architecture is used t
 
 ### iOS
 ```swift
-AJApp.runtime().subscribe(to: Stores.HOME, owner: self) { [weak self] (state) in
+AJ.subscribe(to: Stores.HOME, owner: self) { [weak self] (state) in
     self?._textView?.text = state.get("message")?.string
 }
 ```
 
 ### Android
 ```java
-JApp.runtime().subscribe(Stores.HOME, this, new Store.Subscription() {
+AJ.subscribe(Stores.HOME, this, new Store.Subscription() {
    @Override
    public void handle(AJObject state) {
        mTextView.setText(state.get("message").asString());
@@ -145,7 +145,9 @@ JApp.runtime().subscribe(Stores.HOME, this, new Store.Subscription() {
 
 ### Web
 ```javascript
-aj.subscribe('HOME', state => {
+import { home } from "stores"
+
+home.subscribe(state => {
     document.getElementById("textView").value = state.message
 })
 ```
@@ -155,19 +157,19 @@ aj.subscribe('HOME', state => {
 ## Calling actions
 ### iOS
 ```swift
-AJApp.runtime().run(action: "GET_MESSAGE")
+AJ.run(action: "GET_MESSAGE")
 ```
 
 ### Android
 ```java
-AJApp.runtime().run("GET_MESSAGE")
+AJ.run("GET_MESSAGE")
 ```
 
 ### Web
 ```javascript
 import { getMessage } from './actions'
 
-getMessage() //or aj.run('GET_MESSAGE')
+getMessage()
 ```
 
 
