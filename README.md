@@ -195,6 +195,7 @@ Put your app icon in `app/resources/app_icon.png`. Like images, AJ framework wil
     - [Assets](https://github.com/bfortunato/aj-framework/blob/master/doc/api_assets.md)
     - [Storage](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
     - [HTTP](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
+- [Plugins](https://github.com/bfortunato/aj-framework/blob/master/doc/plugins.md)
 
 
 # Tutorials
