@@ -20,7 +20,7 @@ In simple terms, application state and business logic is managed in Javascript s
 > As you can see, native code is pure user interface, nothing else, super productive and **best quality**. All business logic is completely reusable, also in web applications.
 
 
-Current version: **0.1**
+Current version: **1.0.2**
 
 
 # Getting Started
@@ -173,8 +173,28 @@ getMessage()
 ```
 
 
+# Resources
+AJ Framework manage image sizes, assets and app icon for you.
+
+### Images
+Put images in `app/resources/images` in x4 size. AJ framework will build they for iOS, Android and Web for multiple screen support (@1x @2x @3x for iOS, ldpi mdpi hdpi, xhdpi, xxdhpi, xxxhdpi for Android, 1x for web)
+
+### Assets
+Put assets in `app/assets`. AJ framework will copy all assets in platform specific directory. 
+
+### App Icon
+Put your app icon in `app/resources/app_icon.png`. Like images, AJ framework will generate optimized versions of all platforms. In case of web application, favicon.png will be generated.
+
+
 # Documentation 
-Available soon
+
+- [Installation](https://github.com/bfortunato/aj-framework/blob/master/doc/installation.md)
+- [aj: command line interface](https://github.com/bfortunato/aj-framework/blob/master/doc/cli.md)
+- [API](https://github.com/bfortunato/aj-framework/blob/master/doc/api.md)
+    - [Native API](https://github.com/bfortunato/aj-framework/blob/master/doc/api_native.md))
+    - [Assets](https://github.com/bfortunato/aj-framework/blob/master/doc/api_assets.md)
+    - [Storage](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
+    - [HTTP](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
 
 
 #Tutorials
