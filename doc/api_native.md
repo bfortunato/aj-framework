@@ -106,7 +106,7 @@ TodoStore.subscribe(this, (state) => {
 ```
 
 
-## Unsubscribe to Store
+## Unsubscribe from Store
 use `AJ.unsubscribe` method to stop application state change tracking
 
 #### iOS: AJ.unsubscribe(from store: String, owner: AnyObject) {
