@@ -9,7 +9,7 @@
     - [Storage](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
     - [HTTP](https://github.com/bfortunato/aj-framework/blob/master/doc/api_http.md)
 - [Plugins](https://github.com/bfortunato/aj-framework/blob/master/doc/plugins.md)
-- **Debugging**
+- **Debugging** <-
     
 # Debugging
 AJ framework application interprets JavaScript files using webkit JavaScriptCore engine. 
