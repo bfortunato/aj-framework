@@ -416,8 +416,8 @@
                 url: url,
                 method: method,
                 data: data,
-                accept: accept,
-                contentType: contentType,
+                accept: accept == null ? undefined : accept,
+                contentType: contentType == null ? undefined : contentType,
                 success: function(response) {
                     cb(false, response);
                 },
