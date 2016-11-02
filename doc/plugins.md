@@ -9,6 +9,7 @@
     - [Storage](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
     - [HTTP](https://github.com/bfortunato/aj-framework/blob/master/doc/api_http.md)
 - **Plugins** <-
+- [Debugging](https://github.com/bfortunato/aj-framework/blob/master/doc/debugging.md)
     
 # Plugins
 AJ framework provides a plugins system that allows developer to extend javascript functionalities, binding native methods to js code.

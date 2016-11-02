@@ -9,6 +9,7 @@
     - [Storage](https://github.com/bfortunato/aj-framework/blob/master/doc/api_storage.md)
     - [HTTP](https://github.com/bfortunato/aj-framework/blob/master/doc/api_http.md)
 - [Plugins](https://github.com/bfortunato/aj-framework/blob/master/doc/plugins.md)
+- [Debugging](https://github.com/bfortunato/aj-framework/blob/master/doc/debugging.md)
     
 # Native API
 Native API are a sets of classes and function that allow developers to communicate with javascript shared business logic.
