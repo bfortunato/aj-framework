@@ -105,20 +105,14 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
     }
     
     open func disableQRCodeScanner() {
-        guard let session = _captureSession else {
-            fatalError("Camera not initialized")
-        }
-        
-        if let output = _captureOutput {
-            output.metadataObjectTypes =  []
-        }
-        
+        self._captureOutput?.metadataObjectTypes = []
+
         _enabled = false
     }
-    
+
     open func enableQRCodeScanner() {
         self._captureOutput?.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
-        
+
         _enabled = true
     }
     

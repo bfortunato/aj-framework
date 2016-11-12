@@ -1,11 +1,6 @@
 package applica.aj.runtime;
 
-import android.util.Base64;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import applica.framework.android.utils.CollectionUtils;

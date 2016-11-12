@@ -12,7 +12,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import applica.aj.runtime.Buffer;
 import applica.framework.android.utils.CollectionUtils;
 
 /**

@@ -1,5 +1,6 @@
 package applica.aj.runtime.javascriptcore;
 
+import org.liquidplayer.webkit.javascriptcore.JSFunction;
 import org.liquidplayer.webkit.javascriptcore.JSValue;
 
 /**
@@ -7,7 +8,7 @@ import org.liquidplayer.webkit.javascriptcore.JSValue;
  */
 public interface AssetsManager {
 
-    void load(String path, JSValue cb);
-    void exists(String path, JSValue cb);
+    void load(String path, JSFunction cb);
+    void exists(String path, JSFunction cb);
 
 }

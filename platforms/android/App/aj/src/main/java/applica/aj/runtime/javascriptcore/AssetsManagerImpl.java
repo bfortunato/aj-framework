@@ -5,6 +5,7 @@ import android.content.Context;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.liquidplayer.webkit.javascriptcore.JSContext;
+import org.liquidplayer.webkit.javascriptcore.JSFunction;
 import org.liquidplayer.webkit.javascriptcore.JSObject;
 import org.liquidplayer.webkit.javascriptcore.JSValue;
 
@@ -29,8 +30,8 @@ public class AssetsManagerImpl extends JSObject implements AssetsManager {
     }
 
     @Override
-    public void load(final String path, final JSValue cb) {
-        Async.run(new Runnable() {
+    public void load(final String path, final JSFunction cb) {
+        Async.run("AssetsManager.load", new Runnable() {
             @Override
             public void run() {
                 try {
@@ -39,30 +40,39 @@ public class AssetsManagerImpl extends JSObject implements AssetsManager {
                     InputStream in = context.getAssets().open(finalPath);
                     byte[] bytes = IOUtils.toByteArray(in);
                     IOUtils.closeQuietly(in);
-                    cb.toFunction().call(null, new JSValue[]{new JSValue(jsContext, false), new JSValue(jsContext, Buffer.create(bytes))});
+                    callCb(cb, new JSValue(jsContext, false), new JSValue(jsContext, Buffer.create(bytes)));
                 } catch (IOException e) {
                     e.printStackTrace();
-                    cb.toFunction().call(null, new JSValue[]{new JSValue(jsContext, true), new JSValue(jsContext, "error.load.data")});
+                    callCb(cb, new JSValue(jsContext, true), new JSValue(jsContext, "error.load.data"));
                 }
             }
         });
     }
 
     @Override
-    public void exists(final String path, final JSValue cb) {
-        Async.run(new Runnable() {
+    public void exists(final String path, final JSFunction cb) {
+        Async.run("AssetsManager.exists", new Runnable() {
             @Override
             public void run() {
                 try {
                     String appDir = "hybrid/";
                     String finalPath = FilenameUtils.normalize(FilenameUtils.concat(appDir, path));
                     InputStream in = context.getAssets().open(finalPath);
-                    cb.toFunction().call(null, new JSValue[]{new JSValue(jsContext, false), new JSValue(jsContext, true)});
+                    callCb(cb, new JSValue(jsContext, false), new JSValue(jsContext, true));
                     IOUtils.closeQuietly(in);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    cb.toFunction().call(null, new JSValue[]{new JSValue(jsContext, false), new JSValue(jsContext, false)});
+                    callCb(cb, new JSValue(jsContext, false), new JSValue(jsContext, false));
                 }
+            }
+        });
+    }
+
+    private void callCb(final JSFunction cb, final JSValue error, final JSValue value) {
+        Async.run("StorageManager.callCb", new Runnable() {
+            @Override
+            public void run() {
+                cb.call(null, error, value);
             }
         });
     }

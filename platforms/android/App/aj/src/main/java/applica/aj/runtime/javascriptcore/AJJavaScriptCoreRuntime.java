@@ -43,7 +43,7 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
 
         @Override
         public void async(final JSValue action) {
-            Async.run(new Runnable() {
+            Async.run("js.async", new Runnable() {
                 @Override
                 public void run() {
                     action.toFunction().call(null, (Object[]) new JSValue[0]);
@@ -155,10 +155,8 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
             public void run() {
                 dispatchFunction.call(
                         jsRuntime,
-                        new JSValue[] {
-                                new JSValue(jsContext, action),
-                                JS2AJObject.toJS(jsContext, data)
-                        }
+                        new JSValue(jsContext, action),
+                        JS2AJObject.toJS(jsContext, data)
                 );
 
             }

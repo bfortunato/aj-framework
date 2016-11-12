@@ -1,5 +1,8 @@
 package applica.aj.runtime.javascriptcore;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import org.liquidplayer.webkit.javascriptcore.JSContext;
 import org.liquidplayer.webkit.javascriptcore.JSObject;
 import org.liquidplayer.webkit.javascriptcore.JSValue;
@@ -7,7 +10,6 @@ import org.liquidplayer.webkit.javascriptcore.JSValue;
 import java.util.ArrayList;
 import java.util.List;
 
-import applica.aj.Async;
 import applica.framework.android.utils.CollectionUtils;
 import applica.framework.android.utils.Nulls;
 
@@ -18,10 +20,6 @@ public class TimersImpl extends JSObject implements Timers {
 
     static int COUNTER = 0;
 
-    private final JSContext jsContext;
-
-    private List<TimerAction> actions = new ArrayList<>();
-
     private class TimerAction {
         long id = ++COUNTER;
         JSValue action;
@@ -30,27 +28,25 @@ public class TimersImpl extends JSObject implements Timers {
         boolean loop;
 
         void execute() {
-            Async.run(new Runnable() {
+            handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    while (true) {
+                    if (!canceled) {
                         try {
-                            Thread.sleep(delay);
-                        } catch (InterruptedException e) {}
-                        if (!canceled) {
                             action.toFunction().call(jsContext, new JSValue[0]);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
-                            if (!loop) {
-                                break;
-                            }
-                        } else {
-                            break;
+                        if (loop) {
+                            execute();
+                            return;
                         }
                     }
 
                     destroy(TimerAction.this);
                 }
-            });
+            }, delay);
         }
 
         void cancel() {
@@ -58,9 +54,27 @@ public class TimersImpl extends JSObject implements Timers {
         }
     }
 
+    private final JSContext jsContext;
+    private List<TimerAction> actions = new ArrayList<>();
+    private Handler handler;
+    private Thread thread;
+
     public TimersImpl(JSContext jsContext) {
         super(jsContext, Timers.class);
         this.jsContext = jsContext;
+
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+
+                handler = new Handler();
+
+                Looper.loop();
+            }
+        });
+
+        thread.start();
     }
 
     @Override

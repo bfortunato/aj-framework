@@ -1,8 +1,5 @@
 package applica.aj;
 
-import android.content.Context;
-import android.util.Log;
-
 import applica.aj.runtime.Plugin;
 
 /**
