@@ -1,6 +1,6 @@
 package applica.aj;
 
-import java.util.Objects;
+import android.util.Log;
 
 /**
  * Created by bimbobruno on 06/10/16.
@@ -8,8 +8,21 @@ import java.util.Objects;
 
 public class Async {
 
-    public static Thread run(Runnable runnable) {
-        Thread thread = new Thread(runnable);
+    private static long count = 0;
+    private static long activeThreads;
+
+    public static Thread run(String name, final Runnable runnable) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                activeThreads++;
+                Log.i("AJ.Async", String.format("AJ Thread started: %s, active threads: %d", Thread.currentThread().getName(), activeThreads));
+                runnable.run();
+                activeThreads--;
+                Log.i("AJ.Async", String.format("AJ Thread terminated: %s, active threads: %d", Thread.currentThread().getName(), activeThreads));
+            }
+        });
+        thread.setName(String.format("AJ.Async[%d] (%s)", ++count, name));
         thread.start();
         return thread;
     }

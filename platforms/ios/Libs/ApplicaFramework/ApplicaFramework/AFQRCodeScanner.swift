@@ -18,14 +18,16 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
     let _cameraView: UIView
     weak var _owner: UIViewController?
+    var _captureOutput: AVCaptureMetadataOutput?
    
-    fileprivate var _captureSession: AVCaptureSession?
+    private var _captureSession: AVCaptureSession?
+    private var _enabled = false
     
     public init(view: UIView, owner: UIViewController) {
         _cameraView = view
         _owner = owner
         super.init()
-        
+       
         checkCameraPermissionsAndInit()
     }
     
@@ -75,6 +77,12 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
         }
         
         self._captureSession?.addInput(deviceInput)
+
+        let dispatchQueue = DispatchQueue(label: "applica.camera.qrcodescanner", attributes: [])
+        _captureOutput = AVCaptureMetadataOutput()
+        self._captureSession?.addOutput(_captureOutput!)
+    
+        _captureOutput?.setMetadataObjectsDelegate(self, queue: dispatchQueue)
         
         self.enableQRCodeScanner()
         
@@ -96,17 +104,16 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
         self._captureSession?.stopRunning()
     }
     
+    open func disableQRCodeScanner() {
+        self._captureOutput?.metadataObjectTypes = []
+
+        _enabled = false
+    }
+
     open func enableQRCodeScanner() {
-        guard let session = _captureSession else {
-            fatalError("Camera not initialized")
-        }
-        
-        let dispatchQueue = DispatchQueue(label: "applica.camera.qrcodescanner", attributes: [])
-        let captureOutput = AVCaptureMetadataOutput()
-        session.addOutput(captureOutput)
-        
-        captureOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
-        captureOutput.setMetadataObjectsDelegate(self, queue: dispatchQueue)
+        self._captureOutput?.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+
+        _enabled = true
     }
     
     open func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {

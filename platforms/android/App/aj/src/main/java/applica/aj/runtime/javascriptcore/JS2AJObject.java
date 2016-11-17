@@ -6,7 +6,6 @@ import org.liquidplayer.webkit.javascriptcore.JSContext;
 import org.liquidplayer.webkit.javascriptcore.JSObject;
 import org.liquidplayer.webkit.javascriptcore.JSValue;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import applica.aj.AJArray;

@@ -50,7 +50,7 @@ public class HttpClientImpl extends JSObject implements HttpClient {
             final Boolean rawResponse,
             final JSFunction cb) {
 
-        Async.run(new Runnable() {
+        Async.run("HttpClient.request", new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection connection = null;
@@ -75,8 +75,8 @@ public class HttpClientImpl extends JSObject implements HttpClient {
                     if (!accept.isNull()) {
                         connection.setRequestProperty("Accept", accept.toString());
                     }
-                    connection.setConnectTimeout(5000);
-                    connection.setReadTimeout(5000);
+                    //connection.setConnectTimeout(5000);
+                    //connection.setReadTimeout(5000);
                     connection.setRequestMethod(finalMethod);
                     connection.setDoInput(true);
 
@@ -102,22 +102,37 @@ public class HttpClientImpl extends JSObject implements HttpClient {
                         try {
                             output = IOUtils.toString(connection.getInputStream());
                         } catch (Exception e) {
+                            e.printStackTrace();
                             output = "";
                         }
                     }
 
-                    cb.call(null, new JSValue[]{new JSValue(jsContext, false), new JSValue(jsContext, output)});
+                    if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                        callCb(cb, new JSValue(jsContext, true), new JSValue(jsContext, String.format("error code: %d", connection.getResponseCode())));
+                    } else {
+                        callCb(cb, new JSValue(jsContext, false), new JSValue(jsContext, output));
+                    }
+
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
-                    cb.call(null, new JSValue[]{new JSValue(jsContext, true), new JSValue(jsContext, "error.bad.url")});
+                    callCb(cb, new JSValue(jsContext, true), new JSValue(jsContext, "error.bad.url"));
                 } catch (IOException e) {
                     e.printStackTrace();
-                    cb.call(null, new JSValue[]{new JSValue(jsContext, true), new JSValue(jsContext, "error.io")});
+                    callCb(cb, new JSValue(jsContext, true), new JSValue(jsContext, "error.io"));
                 } finally {
                     if (connection != null) {
                         connection.disconnect();
                     }
                 }
+            }
+        });
+    }
+
+    private void callCb(final JSFunction cb, final JSValue error, final JSValue value) {
+        Async.run("HTTPClient.callCb", new Runnable() {
+            @Override
+            public void run() {
+                cb.call(null, error, value);
             }
         });
     }

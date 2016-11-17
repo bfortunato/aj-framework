@@ -21,7 +21,7 @@ public class BuffersManagerImpl extends JSObject implements BuffersManager {
 
     @Override
     public void create(final String base64, final JSFunction cb) {
-        Async.run(new Runnable() {
+        Async.run("BuffersManager.create", new Runnable() {
             @Override
             public void run() {
                 try {
@@ -37,7 +37,7 @@ public class BuffersManagerImpl extends JSObject implements BuffersManager {
 
     @Override
     public void read(final int id, final JSFunction cb) {
-        Async.run(new Runnable() {
+        Async.run("BuffersManager.read", new Runnable() {
             @Override
             public void run() {
                 try {
@@ -58,7 +58,7 @@ public class BuffersManagerImpl extends JSObject implements BuffersManager {
 
     @Override
     public void destroy(final int id, final JSFunction cb) {
-        Async.run(new Runnable() {
+        Async.run("BuffersManager.destroy", new Runnable() {
             @Override
             public void run() {
                 try {

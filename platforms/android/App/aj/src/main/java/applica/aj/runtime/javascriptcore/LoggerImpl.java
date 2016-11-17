@@ -2,7 +2,6 @@ package applica.aj.runtime.javascriptcore;
 
 import android.util.Log;
 
-import org.apache.commons.lang3.StringUtils;
 import org.liquidplayer.webkit.javascriptcore.JSContext;
 import org.liquidplayer.webkit.javascriptcore.JSObject;
 

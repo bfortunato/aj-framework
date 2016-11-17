@@ -27,7 +27,7 @@ public class Semaphore {
     }
 
     public void runAction(final Runnable action) {
-        thread = Async.run(new Runnable() {
+        thread = Async.run("Semaphore.runAction", new Runnable() {
             @Override
             public void run() {
                 action.run();

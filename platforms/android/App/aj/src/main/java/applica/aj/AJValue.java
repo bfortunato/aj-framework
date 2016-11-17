@@ -3,11 +3,6 @@ package applica.aj;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
 
 import applica.aj.runtime.Buffer;
 import applica.framework.android.utils.Nulls;
