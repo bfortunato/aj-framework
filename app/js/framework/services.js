@@ -1,5 +1,3 @@
-"use strict";
-
 class ServiceLocator {
     static instance() {
         if (!ServiceLocator.__instance) {
@@ -17,21 +15,23 @@ class ServiceLocator {
         this.services = {};
     }
 
-    register(type, builder) {
-        this.services[type] = builder;
+    register(type, fn) {
+        this.services[type] = fn;
     }
 
     getService(type) {
-        if (this.services[type] && typeof(this.services[type] == "function")) {
-            return this.services[type]();
+        if (this.services[type]) {
+            return this.services[type];
         }
 
         throw new Error("Service not registered: " + type);
     }
 }
 
-exports.ServiceLocator = ServiceLocator;
-
-exports.get = function(type) {
+export function get(type) {
     return ServiceLocator.instance().getService(type);
-};
+}
+
+export function register(type, fn) {
+    ServiceLocator.instance().register(type, fn);
+}

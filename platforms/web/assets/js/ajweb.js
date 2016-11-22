@@ -271,10 +271,11 @@
             if (index != -1) {
                 if (path.length > 2) {
                     path = path.substring(0, index);
+                    return path;
                 }
             }
 
-            return path;
+            return "";
         }
     };
 
@@ -631,13 +632,13 @@
         //executes a class method with data, simply
         var Plugin = global[plugin];
         if (!_.isObject(Plugin)) {
-            throw new Error("Plugin " + plugin + "not registered");
+            throw new Error("Plugin " + plugin + " not registered");
         }
 
         var fn = Plugin[method];
 
         if (!_.isFunction(fn)) {
-            throw new Error("Plugin method" + plugin + "." + method +  "not found");
+            throw new Error("Plugin method " + plugin + "." + method +  " not found");
         }
 
         return fn(data);
