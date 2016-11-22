@@ -287,7 +287,17 @@
         var currentRequireQueue = [];
 
         function define(module, builder) {
+            if (!_.isString(module)) {
+                throw new Error("Bad module name: " + module);
+            }
+
+            if (!_.isFunction(builder)) {
+                throw new Error("Builder must be a function");
+            }
+
             builders[module] = builder;
+
+            console.log("Module defined: " + module);
         }
 
         function require(_path) {
@@ -297,6 +307,7 @@
             var moduleName = path.name(moduleBase);
             var possibilities = [
                 moduleName,
+                moduleBase,
                 moduleBase + "." + moduleExt,
                 path.join(moduleBase, "index.js"),
                 path.join(moduleBase, moduleName) + "." + moduleExt
