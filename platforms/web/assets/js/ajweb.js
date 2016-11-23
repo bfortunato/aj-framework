@@ -365,7 +365,7 @@
 
         create: function(bytes) {
             var buffer = {
-                id: this.lastBufferId++,
+                id: ++this.lastBufferId,
                 data: bytes
             };
             this.buffers.push(buffer);
@@ -428,6 +428,7 @@
                 url: url,
                 method: method,
                 data: data,
+                dataType: "text",
                 accept: accept == null ? undefined : accept,
                 contentType: contentType == null ? undefined : contentType,
                 success: function(response) {
@@ -508,7 +509,7 @@
                     try {
                         checkSupport();
 
-                        localStorage.setItem(path, Buffer.create(content));
+                        localStorage.setItem(path, content);
                         cb(false);
                     } catch (e) {
                         cb(true, e);
