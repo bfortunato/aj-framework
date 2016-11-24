@@ -271,10 +271,11 @@
             if (index != -1) {
                 if (path.length > 2) {
                     path = path.substring(0, index);
+                    return path;
                 }
             }
 
-            return path;
+            return "";
         }
     };
 
@@ -364,7 +365,7 @@
 
         create: function(bytes) {
             var buffer = {
-                id: this.lastBufferId++,
+                id: ++this.lastBufferId,
                 data: bytes
             };
             this.buffers.push(buffer);
@@ -427,6 +428,7 @@
                 url: url,
                 method: method,
                 data: data,
+                dataType: "text",
                 accept: accept == null ? undefined : accept,
                 contentType: contentType == null ? undefined : contentType,
                 success: function(response) {
@@ -507,7 +509,7 @@
                     try {
                         checkSupport();
 
-                        localStorage.setItem(path, Buffer.create(content));
+                        localStorage.setItem(path, content);
                         cb(false);
                     } catch (e) {
                         cb(true, e);
@@ -631,13 +633,13 @@
         //executes a class method with data, simply
         var Plugin = global[plugin];
         if (!_.isObject(Plugin)) {
-            throw new Error("Plugin " + plugin + "not registered");
+            throw new Error("Plugin " + plugin + " not registered");
         }
 
         var fn = Plugin[method];
 
         if (!_.isFunction(fn)) {
-            throw new Error("Plugin method" + plugin + "." + method +  "not found");
+            throw new Error("Plugin method " + plugin + "." + method +  " not found");
         }
 
         return fn(data);
