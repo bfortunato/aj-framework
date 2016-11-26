@@ -10,9 +10,35 @@ import UIKit
 import ApplicaFramework
 
 @objc
-open class AJValue: NSObject {
+open class AJValueBase: NSObject {
+    open var isObject: Bool {
+        get {
+            return self is AJObject
+        }
+    }
+    
+    open var isArray: Bool {
+        get {
+            return self is AJArray
+        }
+    }
+    
+    open var isValue: Bool {
+        get {
+            return self is AJValue
+        }
+    }
+
+}
+
+open class AJValue: AJValueBase {
     open let key: String
     open var value: Any?
+    
+    public init(key: String, value: Any?) {
+        self.key = key
+        self.value = value
+    }
     
     open var string: String? {
         return value as? String
@@ -21,6 +47,7 @@ open class AJValue: NSObject {
     open var int: Int? {
         return value as? Int
     }
+    
 
     open var bool: Bool? {
         return value as? Bool
@@ -61,12 +88,6 @@ open class AJValue: NSObject {
     open var color: UIColor? {
         return AJValue.toColor(object)
     }
-
-    
-    public init(key: String, value: Any?) {
-        self.key = key
-        self.value = value
-    }
     
     static func toColor(_ object: AJObject?) -> UIColor? {
         if  let r = object?.get("r")?.cgFloat,
@@ -97,10 +118,76 @@ open class AJValue: NSObject {
         return UIImage(data: buffer)
     }
     
+    open override func isEqual(_ object: Any?) -> Bool {
+        if let other = object as? AJValue {
+            if other.key != self.key {
+                return false
+            }
+            
+            if other.isObject {
+                if !isObject {
+                    return false
+                }
+                
+                if other.object == nil && self.object == nil {
+                    return true
+                }
+                
+                if other.object == nil && self.object != nil {
+                    return false
+                }
+                
+                if other.object != nil && self.object == nil {
+                    return false
+                }
+                
+                return other.object!.isEqual(self.object!)
+            } else if other.isArray {
+                if other.isObject {
+                    if !isArray {
+                        return false
+                    }
+                    
+                    if other.array == nil && self.array == nil {
+                        return true
+                    }
+                    
+                    if other.array == nil && self.array != nil {
+                        return false
+                    }
+                    
+                    if other.array != nil && self.array == nil {
+                        return false
+                    }
+                    
+                    return other.array!.isEqual(self.array!)
+                }
+            } else {
+                if value == nil && other.value == nil {
+                    return true
+                }
+                
+                if (value != nil && other.value == nil) {
+                    return false
+                }
+                
+                if (value == nil && other.value != nil) {
+                    return false
+                }
+                
+                let a1 = value! as AnyObject
+                let a2 = other.value! as AnyObject
+                
+                return  a1.isEqual(a2)
+            }
+        }
+        
+        return false
+    }
+    
 }
 
-@objc
-open class AJObject: NSObject {
+open class AJObject: AJValueBase {
     var values = [AJValue]()
     
     var count: Int {
@@ -282,6 +369,41 @@ open class AJObject: NSObject {
         return first?.image
     }
     
+    open override func isEqual(_ object: Any?) -> Bool {
+        if let other = object as? AJObject {
+            if other.values.count != self.values.count {
+                return false
+            }
+            
+            for value in self.values {
+                let key = value.key
+                if let otherValue = other.values.filter({$0.key == key}).first {
+                    if !value.isEqual(otherValue) {
+                        return false
+                    }
+                } else {
+                    return false
+                }
+            }
+
+            for otherValue in other.values {
+                let key = otherValue.key
+                if let value = self.values.filter({$0.key == key}).first {
+                    if !value.isEqual(otherValue) {
+                        return false
+                    }
+                } else {
+                    return false
+                }
+            }
+
+        } else {
+            return false
+        }
+        
+        return true
+    }
+    
     open static func create() -> AJObject {
         return AJObject()
     }
@@ -290,14 +412,21 @@ open class AJObject: NSObject {
         return AJObject()
     }
 
+    open func at(path: String) -> AJValue? {
+        return traverse(obj: self, path: path)
+    }
+    
+    open func differs(at path: String) -> AJDiff {
+        return AJDiff(original: self).at(path: path)
+    }
+    
+    open func differs(from: AJObject?) -> Bool {
+        return AJDiff(original: from).differs(from: self)
+    }
 }
 
-open class AJArray {
+open class AJArray: AJValueBase {
     fileprivate var _internal = [Any]()
-    
-    public init() {
-        
-    }
     
     open subscript(index: Int) -> Any {
         return _internal[index]
@@ -367,5 +496,88 @@ open class AJArray {
         }
     }
     
+    open override func isEqual(_ object: Any?) -> Bool {
+        if let other = object as? AJArray {
+            if other.list.count != self.list.count {
+                return false
+            }
+            
+            var index = 0
+            for value in self.list {
+                if let otherIndex = other.list.index(where: {(value as AnyObject).isEqual($0)}) {
+                    if otherIndex != index {
+                        return false
+                    }
+                } else {
+                    return false
+                }
+            
+                
+                index += 1
+            }
+        } else {
+            return false
+        }
+        
+        return true
+    }
+}
+
+func traverse(obj: AJObject, path: String) -> AJValue? {
+    if let indexOfDot = path.range(of: ".") {
+        let property = path.substring(to: indexOfDot.lowerBound)
+        if let v = obj.get(property) {
+            if let vo = v.object {
+                let newPath = path.substring(from: indexOfDot.upperBound)
+                return traverse(obj: vo as AJObject, path: newPath)
+            } else {
+                return v
+            }
+        } else {
+            return nil
+        }
+    } else {
+        return obj.get(path)
+    }
+    
+}
+
+open class AJDiff {
+    var original: AJObject?
+    
+    public init(original: AJObject? = nil) {
+        self.original = original
+    }
+    
+    private var _path: String?
+    
+    open func at(path: String) -> AJDiff {
+        _path = path
+        return self
+    }
+    
+    open func from(_ objectToCompare: AJObject) -> Bool {
+        return differs(from: objectToCompare)
+    }
+    
+    open func differs(from objectToCompare: AJObject) -> Bool {
+        if let path = _path, let original = self.original {
+            if let v = traverse(obj: original, path: path) {
+                if let ov = traverse(obj: objectToCompare, path: path) {
+                    return !v.isEqual(ov)
+                } else {
+                    return true
+                }
+            } else {
+                if let _ = traverse(obj: objectToCompare, path: path) {
+                    return true
+                }
+            }
+        } else {
+            return !objectToCompare.isEqual(original)
+        }
+        
+        return false
+    }
 }
 
