@@ -1,6 +1,7 @@
 "use strict"
 
-var utils = require("./utils");
+const utils = require("./utils")
+const _ = require("../libs/underscore")
 
 exports.assertTrue = function(test, msg){
     if (!test) {
@@ -21,7 +22,7 @@ exports.assertNotNull = function(obj, msg){
 };
 
 exports.assertNotEmpty = function(obj, msg){
-    if (utils.isEmpty(obj)) {
+    if (_.isEmpty(obj)) {
         throw "Assertion failure: " + msg || "";
     }
 };

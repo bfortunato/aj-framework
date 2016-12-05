@@ -6,7 +6,7 @@
 "use strict";
 
 const _ = require("../libs/underscore")
-const Observable = require("../framework/events").Observable;
+const Observable = require("./events").Observable;
 
 var __runtime = null;
 var __stores = {};

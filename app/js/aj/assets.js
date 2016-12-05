@@ -5,8 +5,8 @@
 
 "use strict";
 
-import * as assert from "../framework/assert"
-import * as path from "../framework/path"
+import * as assert from "./assert"
+import * as path from "./path"
 
 class AssetsManager {
     constructor() {

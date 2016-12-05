@@ -1,12 +1,8 @@
 "use strict";
 
-
-"use strict";
-
-const assert = require("../framework/assert");
-const utils = require("../framework/utils");
-const path = require("../framework/path");
-const base64 = require("../framework/base64");
+const assert = require("./assert");
+const path = require("./path");
+const base64 = require("./base64");
 
 class StorageManager {
     constructor() {
