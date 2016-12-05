@@ -1,6 +1,5 @@
 "use strict"
 
-const utils = require("./utils")
 const _ = require("../libs/underscore")
 
 exports.assertTrue = function(test, msg){

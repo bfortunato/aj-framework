@@ -1,9 +1,9 @@
 "use strict";
 
-const utils = require("./utils");
+const _ = require("../libs/underscore");
 
 exports.ext = function(path) {
-    if (utils.isEmpty(path)) {
+    if (_.isEmpty(path)) {
         return "";
     }
 
@@ -16,7 +16,7 @@ exports.ext = function(path) {
 };
 
 exports.removeExt = function(path) {
-    if (utils.isEmpty(path)) {
+    if (_.isEmpty(path)) {
         return path;
     }
 
