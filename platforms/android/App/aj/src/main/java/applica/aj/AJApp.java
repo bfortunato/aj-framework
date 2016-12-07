@@ -8,6 +8,7 @@ import java.net.URI;
 
 import applica.aj.runtime.AJRuntime;
 import applica.aj.runtime.javascriptcore.AJJavaScriptCoreRuntime;
+import applica.aj.runtime.v8.AJV8Runtime;
 import applica.aj.runtime.websocket.AJWebSocketRuntime;
 
 /**
@@ -42,7 +43,7 @@ public class AJApp {
         if (debug) {
             runtime = new AJWebSocketRuntime(context, URI.create(socketUrl));
         } else {
-            runtime = new AJJavaScriptCoreRuntime(context);
+            runtime = new AJV8Runtime(context);
         }
     }
 

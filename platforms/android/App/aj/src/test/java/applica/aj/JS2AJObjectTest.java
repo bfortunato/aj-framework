@@ -4,14 +4,9 @@ import junit.framework.Assert;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.liquidplayer.webkit.javascriptcore.JSContext;
-import org.liquidplayer.webkit.javascriptcore.JSValue;
 
 import java.io.File;
 import java.io.IOException;
-
-import applica.aj.AJObject;
-import applica.aj.runtime.javascriptcore.JS2AJObject;
 
 /**
  * Created by bimbobruno on 11/03/16.

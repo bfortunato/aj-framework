@@ -16,3 +16,11 @@ gradle/wrapper
 /platforms/node/node_modules/
 /platforms/web/bower_components/
 /platforms/web/node_modules/
+platform/node/assets
+platform/node/resources
+platform/web/assets
+platform/web/resources
+platform/ios/App/App/assets
+platforms/ios/App/App/Assets.xcassets/
+platforms/android/App/app/src/main/assets
+platforms/android/App/aj/.externalNativeBuild

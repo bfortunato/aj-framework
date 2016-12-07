@@ -394,27 +394,15 @@
 
     global.logger = {
         i: function(msg) {
-            if (_.isArray(msg)) {
-                console.log("AJ: " + msg.join(" "));
-            } else {
-                console.log("AJ: " + msg);
-            }
+            console.log("AJ: " + Array.prototype.join.call(arguments, " "));
         },
 
         e: function(msg) {
-            if (_.isArray(msg)) {
-                console.error("AJ: " + msg.join(" "));
-            } else {
-                console.error("AJ: " + msg);
-            }
+            console.error("AJ: " + Array.prototype.join.call(arguments, " "));
         },
 
         w: function(msg) {
-            if (_.isArray(msg)) {
-                console.warn("AJ: " + msg.join(" "));
-            } else {
-                console.warn("AJ: " + msg);
-            }
+            console.warn("AJ: " + Array.prototype.join.call(arguments, " "));
         }
     };
 
