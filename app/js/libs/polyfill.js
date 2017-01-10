@@ -4550,7 +4550,7 @@ Promise = undefined;
       , TO_STRING   = 'toString'
       , $toString   = /./[TO_STRING];
 
-  var define = function(fn){
+  var polyfill_define = function(fn){
     _dereq_(87)(RegExp.prototype, TO_STRING, fn, true);
   };
 
