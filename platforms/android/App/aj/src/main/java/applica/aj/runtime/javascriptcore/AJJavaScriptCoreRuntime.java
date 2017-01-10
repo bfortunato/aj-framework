@@ -1,8 +1,16 @@
 package applica.aj.runtime.javascriptcore;
 
 import android.content.Context;
+import android.util.Log;
+
+import org.liquidplayer.webkit.javascriptcore.JSContext;
+import org.liquidplayer.webkit.javascriptcore.JSException;
+import org.liquidplayer.webkit.javascriptcore.JSFunction;
+import org.liquidplayer.webkit.javascriptcore.JSObject;
+import org.liquidplayer.webkit.javascriptcore.JSValue;
 
 import applica.aj.AJObject;
+import applica.aj.Async;
 import applica.aj.Semaphore;
 import applica.aj.runtime.AJRuntime;
 
@@ -11,16 +19,7 @@ import applica.aj.runtime.AJRuntime;
  */
 public class AJJavaScriptCoreRuntime extends AJRuntime {
 
-    public AJJavaScriptCoreRuntime(Context context) {
-        super(context);
-    }
-
-    @Override
-    public Semaphore run(String action, AJObject data) {
-        return null;
-    }
-
-   /* public interface NativeGlobals {
+    public interface NativeGlobals {
 
         JSValue __requireInternal(String path);
 
@@ -143,7 +142,7 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
         //run main script
         JSValue main = require.require("./main").toObject().property("main");
         main.toFunction().call(null);*/
-/*
+
         dispatchFunction = jsRuntime.property("run").toFunction();
     }
 
@@ -163,5 +162,4 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
             }
         });
     }
-    */
 }
