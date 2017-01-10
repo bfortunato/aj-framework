@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import applica.framework.android.utils.CollectionUtils;
@@ -258,5 +259,60 @@ public class AJObject {
 
     public static AJObject create() {
         return new AJObject();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        AJObject other = (AJObject) obj;
+        if (other == null) {
+            return false;
+        }
+
+        if (this.values.size() != other.values.size()) {
+            return false;
+        }
+
+        //check all values of this
+        for (final AJValue value : this.values) {
+            AJValue otherValue = CollectionUtils.first(other.values, new CollectionUtils.Predicate<AJValue>() {
+                @Override
+                public boolean evaluate(AJValue obj) {
+                    return obj.equals(value);
+                }
+            });
+
+            if (otherValue == null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public AJValue at(String path) {
+        return traverse(this, path);
+    }
+
+    public static AJValue traverse(AJObject obj, String path) {
+        int indexOfDot = path.indexOf(".");
+        if (indexOfDot != -1) {
+            String property = path.substring(0, indexOfDot);
+            if (obj.get(property).isObject()) {
+                String newPath = path.substring(indexOfDot + 1);
+                return traverse(obj.get(property).asObject(), newPath);
+            } else {
+                return obj.get(property);
+            }
+        } else {
+            return obj.get(path);
+        }
+    }
+
+    public AJDiff differsAt(String path) {
+        return new AJDiff(this).at(path);
+    }
+
+    public boolean differsFrom(AJObject other) {
+        return new AJDiff(this).differsFrom(other);
     }
 }
