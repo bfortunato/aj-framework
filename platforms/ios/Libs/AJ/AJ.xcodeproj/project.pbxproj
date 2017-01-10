@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A09E2E61C74871900984A5A /* AJ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A09E2DB1C74871800984A5A /* AJ.framework */; };
 		7A09E2FA1C74897600984A5A /* AJStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A09E2F91C74897600984A5A /* AJStore.swift */; };
 		7A09E2FC1C748A0C00984A5A /* AJObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A09E2FB1C748A0C00984A5A /* AJObject.swift */; };
 		7A09E2FE1C7491E200984A5A /* AJRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A09E2FD1C7491E200984A5A /* AJRuntime.swift */; };
@@ -33,13 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7A09E2E71C74871900984A5A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7A09E2D21C74871800984A5A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7A09E2DA1C74871800984A5A;
-			remoteInfo = AJ;
-		};
 		7A3AF7F71D9906BE00F8C559 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A3AF7F31D9906BE00F8C559 /* ApplicaFramework.xcodeproj */;
@@ -94,7 +86,6 @@
 /* Begin PBXFileReference section */
 		7A09E2DB1C74871800984A5A /* AJ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AJ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A09E2E01C74871800984A5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7A09E2E51C74871900984A5A /* AJTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AJTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A09E2F91C74897600984A5A /* AJStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJStore.swift; sourceTree = "<group>"; };
 		7A09E2FB1C748A0C00984A5A /* AJObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJObject.swift; sourceTree = "<group>"; };
 		7A09E2FD1C7491E200984A5A /* AJRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJRuntime.swift; sourceTree = "<group>"; };
@@ -129,14 +120,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7A09E2E21C74871900984A5A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7A09E2E61C74871900984A5A /* AJ.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -153,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				7A09E2DB1C74871800984A5A /* AJ.framework */,
-				7A09E2E51C74871900984A5A /* AJTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,24 +253,6 @@
 			productReference = 7A09E2DB1C74871800984A5A /* AJ.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		7A09E2E41C74871900984A5A /* AJTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7A09E2F21C74871900984A5A /* Build configuration list for PBXNativeTarget "AJTests" */;
-			buildPhases = (
-				7A09E2E11C74871900984A5A /* Sources */,
-				7A09E2E21C74871900984A5A /* Frameworks */,
-				7A09E2E31C74871900984A5A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7A09E2E81C74871900984A5A /* PBXTargetDependency */,
-			);
-			name = AJTests;
-			productName = AJTests;
-			productReference = 7A09E2E51C74871900984A5A /* AJTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -302,9 +266,6 @@
 					7A09E2DA1C74871800984A5A = {
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0800;
-					};
-					7A09E2E41C74871900984A5A = {
-						CreatedOnToolsVersion = 7.2.1;
 					};
 				};
 			};
@@ -331,7 +292,6 @@
 			projectRoot = "";
 			targets = (
 				7A09E2DA1C74871800984A5A /* AJ */,
-				7A09E2E41C74871900984A5A /* AJTests */,
 			);
 		};
 /* End PBXProject section */
@@ -396,13 +356,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7A09E2E31C74871900984A5A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -433,22 +386,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7A09E2E11C74871900984A5A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7A09E2E81C74871900984A5A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7A09E2DA1C74871800984A5A /* AJ */;
-			targetProxy = 7A09E2E71C74871900984A5A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7A09E2ED1C74871900984A5A /* Debug */ = {
@@ -584,26 +522,6 @@
 			};
 			name = Release;
 		};
-		7A09E2F31C74871900984A5A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = AJTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Applica.AJTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		7A09E2F41C74871900984A5A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = AJTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Applica.AJTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -621,15 +539,6 @@
 			buildConfigurations = (
 				7A09E2F01C74871900984A5A /* Debug */,
 				7A09E2F11C74871900984A5A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7A09E2F21C74871900984A5A /* Build configuration list for PBXNativeTarget "AJTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7A09E2F31C74871900984A5A /* Debug */,
-				7A09E2F41C74871900984A5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
