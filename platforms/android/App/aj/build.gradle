@@ -10,16 +10,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        externalNativeBuild {
-//            cmake {
-//                cppFlags "-std=c++11 -Wall -Wno-unused-function -Wno-unused-variable -funroll-loops -ftree-vectorize -ffast-math -fpermissive -fpic"
-//                arguments "-DANDROID_STL=gnustl_static"
-//            }
-
-            ndk {
-                abiFilters 'x86_64', 'armeabi-v7a'
-            }
-        }
     }
     buildTypes {
         release {
@@ -39,22 +29,6 @@ android {
         exclude 'META-INF/dependencies.txt'
         exclude 'META-INF/LGPL2.1'
     }
-    externalNativeBuild {
-//        cmake {
-//            path "CMakeLists.txt"
-//        }
-        ndkBuild {
-            path "src/main/jni/Android.mk"
-        }
-    }
-/*
-    sourceSets {
-        main {
-            jni.srcDirs = [] //disable automatic ndk-build
-            jniLibs.srcDirs = ['src/main/libs']
-        }
-    }
-*/
 }
 
 dependencies {
@@ -64,12 +38,12 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
     compile project(':applica-framework')
+    compile 'com.github.ericwlange:AndroidJSCore:3.0.1'
 
     testCompile 'junit:junit:4.12'
 
     androidTestCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support:support-annotations:24.0.0'
     androidTestCompile 'com.android.support.test:runner:0.5'
-    compile group: 'org.webkit', name: 'android-jsc', version: 'r174650'
 
 }
