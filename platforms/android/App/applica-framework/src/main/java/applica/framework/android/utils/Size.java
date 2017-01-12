@@ -8,7 +8,7 @@ package applica.framework.android.utils;
  */
 public final class Size {
     /**
-     * Create a new immutable Size instance.
+     * Create a new immutable Size m_instance.
      *
      * @param width The width of the size, in pixels
      * @param height The height of the size, in pixels

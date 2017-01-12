@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 LOCAL_MULTILIB := "both"
 
-V8_ROOT = /home/bimbobruno/git/v8/v8
+V8_ROOT = /v8/v8
 V8_INCLUDE = $(V8_ROOT)/include
 V8_ARCH = arm
 V8_OUT_DIR = $(V8_ROOT)/out/android_arm.release/obj.target/src
@@ -36,7 +36,7 @@ ifeq ($(TARGET_ARCH_ABI),mips64)
 	V8_ARCH = mipsel
 endif
 
-V8_OUT_DIR = $(V8_ROOT)/out/android_$(V8_ARCH).$(TARGET)/obj.target/tools/gyp
+V8_OUT_DIR = $(V8_ROOT)/out/android_$(V8_ARCH).$(TARGET)/obj.target/src
 
 ifeq ($(V8_LIBRARY),static)
     include $(CLEAR_VARS)
@@ -62,6 +62,12 @@ ifeq ($(V8_LIBRARY),static)
     LOCAL_EXPORT_C_INCLUDES := $(V8_ROOT) $(V8_INCLUDE)
     LOCAL_SRC_FILES := $(V8_OUT_DIR)/libv8_libplatform.a
     include $(PREBUILT_STATIC_LIBRARY)
+
+    include $(CLEAR_VARS)
+        LOCAL_MODULE := libv8_libsampler
+        LOCAL_EXPORT_C_INCLUDES := $(V8_ROOT) $(V8_INCLUDE)
+        LOCAL_SRC_FILES := $(V8_OUT_DIR)/libv8_libsampler.a
+        include $(PREBUILT_STATIC_LIBRARY)
 endif
 
 ifeq ($(V8_LIBRARY),shared)
@@ -81,7 +87,9 @@ endif
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := aj
-LOCAL_SRC_FILES :=      runtime/AJV8Runtime.cpp \
+LOCAL_SRC_FILES :=      runtime/MappedFunction.cpp \
+                        runtime/JavaFunction.cpp \
+                        runtime/AJV8Runtime.cpp \
                         aj.cpp
 LOCAL_CFLAGS += -std=c++11 -Wall -Wno-unused-function -Wno-unused-variable -funroll-loops -ftree-vectorize -ffast-math -fpermissive -fexceptions -g
 
@@ -92,7 +100,7 @@ endif
 
 ifeq ($(V8_LIBRARY),static)
     LOCAL_SHARED_LIBRARIES :=
-    LOCAL_STATIC_LIBRARIES := libv8_libplatform libv8_base libv8_libbase libv8_nosnapshot
+    LOCAL_STATIC_LIBRARIES := libv8_libplatform libv8_base libv8_libbase libv8_nosnapshot libv8_libsampler
 endif
 
 LOCAL_LDLIBS += -L$(SYSROOT)/usr/lib -llog -latomic

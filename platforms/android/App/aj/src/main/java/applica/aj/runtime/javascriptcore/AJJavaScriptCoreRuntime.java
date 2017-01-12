@@ -117,7 +117,7 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
         jsContext.property("__buffersManager", new BuffersManagerImpl(context, jsContext));
         jsContext.property("device", new DeviceImpl(context, jsContext));
 
-        //create runtime instance
+        //create runtime m_instance
         StringBuilder init = new StringBuilder()
                 .append("var aj = require('./aj');\n")
                 .append("function __ajinit() {\n")
@@ -128,7 +128,7 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
         jsContext.evaluateScript(init.toString());
         jsRuntime = jsContext.property("__ajinit").toFunction().call(null).toObject();
 
-        //create runtime instance
+        //create runtime m_instance
         StringBuilder main = new StringBuilder()
                 .append("var main = require('./main');\n")
                 .append("(function __ajmain() {\n")

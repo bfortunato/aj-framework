@@ -20,12 +20,24 @@ public class AJV8Runtime extends AJRuntime {
         super(context);
 
         init();
-        executeScript("var name = 'bruno'; name + ' fortunato';");
-        executeScript("var name = 'bruno'; name + ' fortunato';");
-        executeScript("var name = 'bruno'; name + ' fortunato';");
-        executeScript("var name = 'bruno'; name + ' fortunato';");
-        executeScript("var name = 'bruno'; name + ' fortunato';");
-        destroy();
+        mapFunction("doIt", new Function() {
+            @Override
+            public void run() {
+                executeScript("print(name);");
+            }
+        });
+
+        executeScript("var name = 'bruno fortunato'; doIt();");
+        //destroy();
+    }
+
+    private void executeScript2(final String s) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                executeScript(s);
+            }
+        }).start();
     }
 
     @Override
@@ -39,6 +51,7 @@ public class AJV8Runtime extends AJRuntime {
     }
 
     public native void init();
+    public native void mapFunction(String name, Function fn);
     public native void executeScript(String source);
     public native void destroy();
 }

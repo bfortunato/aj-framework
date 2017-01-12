@@ -32,7 +32,7 @@ public class AJApp {
     private String socketUrl = "http://localhost:3000";
 
     public AJApp(Context context) {
-        Assert.assertNull("AJApp already instantiated. It's possible to have only one instance of AJApp", _current);
+        Assert.assertNull("AJApp already instantiated. It's possible to have only one m_instance of AJApp", _current);
 
         _current = this;
 

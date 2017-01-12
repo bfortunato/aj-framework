@@ -43,14 +43,14 @@ public class ServiceLocator {
                     try {
                         return s.builder.build();
                     } catch (Exception e) {
-                        throw new RuntimeException(String.format("Cannot create prototype instance of %s", type.getName()), e);
+                        throw new RuntimeException(String.format("Cannot create prototype m_instance of %s", type.getName()), e);
                     }
                 } else {
                     if (s.singletonInstance == null) {
                         try {
                             s.singletonInstance = s.builder.build(params);
                         } catch (Exception e) {
-                            throw new RuntimeException(String.format("Cannot create singleton instance of %s", type.getName()), e);
+                            throw new RuntimeException(String.format("Cannot create singleton m_instance of %s", type.getName()), e);
                         }
                     }
 

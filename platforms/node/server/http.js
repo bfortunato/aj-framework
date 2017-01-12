@@ -1,5 +1,4 @@
-const requestify = require("requestify");
-const base64 = require("../assets/js/framework/base64");
+const base64 = require("../assets/js/aj/base64");
 const http = require("http");
 const https = require("https");
 const url = require("url");
@@ -8,15 +7,16 @@ const request = require("request");
 module.exports = {
     request: function(uri, method, data, headers, accept, contentType, rawResponse, cb) {
         var method = method || "GET";
-        var data = data || {};
         var headers = headers || {};
         var rawResponse = rawResponse || false;
 
-        logger.i("Calling", uri);
+        logger.i("Calling", method, uri, "with data", JSON.stringify(data));
 
         headers = headers || {};
-        headers["Accept"] = accept;
-        headers["Content-Type"] = contentType;
+        if (accept) { headers["Accept"] = accept; }
+        headers["Content-Type"] = contentType || "application/x-www-form-urlencoded";
+
+        logger.i("headers:", JSON.stringify(headers));
 
         if (rawResponse) {
             request({uri: uri, encoding: null}, function(error, response, body) {
@@ -31,24 +31,20 @@ module.exports = {
                 }
             });
         } else {
-            requestify.request(uri, {
-                    method: method,
-                    body: data,
-                    headers: headers,
-                    cookies: {}
-                })
-                .then(function(response) {
-                    logger.i("Response", response.getCode());
-
-                    var body = response.body;
-
-                    cb(false, body);
-                })
-                .catch((e) => {
-                    logger.e(e);
+            request({
+                method: method,
+                url: uri,
+                headers: headers,
+                body: data
+            }, function(error, response, body) {
+                if (error) {
+                    logger.i(response)
                     cb(true);
-                });
-
+                } else {
+                    logger.i("Response", body);
+                    cb(false, body);
+                }
+            });
         }
 
 
