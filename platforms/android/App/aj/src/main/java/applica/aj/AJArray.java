@@ -97,4 +97,27 @@ public class AJArray {
     public List getList() {
         return internal;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        AJArray other = (AJArray) obj;
+        if (other == null) {
+            return false;
+        }
+
+        if (this.internal.size() != other.internal.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < this.internal.size(); i++) {
+            Object thisValue = this.internal.get(i);
+            Object otherValue = other.internal.get(i);
+
+            if (!thisValue.equals(otherValue)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

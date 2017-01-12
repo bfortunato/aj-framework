@@ -1,8 +1,12 @@
-package applica.app;
 
-/**
- * Created by bimbobruno on 23/09/16.
- */
+//
+//  Actions.java
+//
+//  Auto generated from aj build
+//
+
+package applica.app;
+        
 public class Actions {
-    public static final String GET_MESSAGE = "GET_MESSAGE";
+	public static final String GET_MESSAGE = "GET_MESSAGE";
 }

@@ -114,4 +114,77 @@ public class AJValue {
     public static Bitmap toBitmap(byte[] buffer) {
         return BitmapFactory.decodeByteArray(buffer, 0, buffer.length);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        AJValue other = ((AJValue) obj);
+
+        if (other == null) {
+            return false;
+        }
+
+        if (!this.key.equals(other.key)) {
+            return false;
+        }
+
+        if (this.isObject()) {
+            if (!other.isObject()) {
+                return false;
+            }
+
+            if (this.asObject() == null && other.asObject() == null) {
+                return true;
+            }
+
+            if (this.asObject() == null && other.asObject() != null) {
+                return false;
+            }
+
+            if (this.asObject() != null && other.asObject() == null) {
+                return false;
+            }
+
+            return this.asObject().equals(other.asObject());
+        } else if (this.isArray()) {
+            if (!other.isArray()) {
+                return false;
+            }
+
+            if (this.asArray() == null && other.asArray() == null) {
+                return true;
+            }
+
+            if (this.asArray() == null && other.asArray() != null) {
+                return false;
+            }
+
+            if (this.asArray() != null && other.asArray() == null) {
+                return false;
+            }
+
+            return this.asArray().equals(other.asArray());
+        } else {
+            if (this.value == null && other.value == null) {
+                return true;
+            }
+
+            if (this.value != null && other.value == null) {
+                return false;
+            }
+
+            if (this.value == null && other.value != null) {
+                return false;
+            }
+
+            return this.value.equals(other.value);
+        }
+    }
+
+    public boolean isObject() {
+        return value instanceof AJObject;
+    }
+
+    public boolean isArray() {
+        return value instanceof AJArray;
+    }
 }
