@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "aj-framework-cli": "^1.0.14"
+    "aj-framework-cli": "^1.0.15"
   }
 }

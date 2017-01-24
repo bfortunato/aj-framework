@@ -1,0 +1,6 @@
+v1.0.15
+- Added diff API to improve performances
+- Added traverse API to improve productivity
+- Added "update" command line tool to update framework project files
+
+

@@ -20,7 +20,7 @@ In simple terms, application state and business logic is managed in Javascript s
 > As you can see, native code is pure user interface, nothing else, super productive and **best quality**. All business logic is completely reusable, also in web applications.
 
 
-Current version: **1.0.2**
+Current version: **1.0.16**
 
 
 # Getting Started
@@ -152,6 +152,34 @@ home.subscribe(state => {
 })
 ```
 > Pure javascript is used in this example, but AJ is perfect with ReactJS components. The web project bootstrapper has ReactJS included.
+
+
+## Diff API
+In order to prevent useless UI updates and improve performances, starting from version v1.0.15, is possible to use diff API and update UI only when state is effectively changed.
+This API is available on iOS and Android. There is no implementation in web, because, if you use React, it's virtual dom model do the diff work for you.
+
+### iOS
+```swift
+AJ.subscribe(to: Stores.HOME, owner: self) { [weak self] (state) in
+    if state.differs(at: "message").from(lastState) {
+        self?._textView?.text = state.get("message")?.string
+    }
+}
+```
+
+### Android
+```java
+AJ.subscribe(Stores.HOME, this, new Store.Subscription() {
+   @Override
+   public void handle(AJObject state) {
+       if (state.differsAt("message").from(mLastState)) {
+           mTextView.setText(state.get("message").asString());
+       }
+       
+       mLastState = state;
+   }
+});
+```
 
 
 ## Calling actions

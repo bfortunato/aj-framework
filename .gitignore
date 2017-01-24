@@ -24,3 +24,4 @@ platform/ios/App/App/assets
 platforms/ios/App/App/Assets.xcassets/
 platforms/android/App/app/src/main/assets
 platforms/android/App/aj/.externalNativeBuild
+/.ajapp
