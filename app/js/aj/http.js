@@ -8,7 +8,7 @@ function buildQueryString(obj) {
     var first = true;
     for (var k in obj) {
         var sep = first ? "" : "&";
-        q += sep + k + "=" + obj[k];
+        q += sep + k + "=" + encodeURIComponent(obj[k]);
         first = false;
     }
 

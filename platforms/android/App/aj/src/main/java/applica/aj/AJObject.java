@@ -1,3 +1,4 @@
+
 package applica.aj;
 
 import android.graphics.Bitmap;
@@ -10,7 +11,6 @@ import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import applica.framework.android.utils.CollectionUtils;

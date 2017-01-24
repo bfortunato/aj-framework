@@ -47,10 +47,6 @@ main()
 aj.run("INIT");
 
 setTimeout(function() {
-    aj.run("LOGIN", {server: "http://localhost:8080", username: "rosaf", password: "rosaf"})
+    aj.run("LOGIN", {server: "http://localhost:8080", mail: "mail", password: "password"})
 }, 1000);
-
-setTimeout(function() {
-    aj.run("JOIN_PHASE", {code: "115.8.1"});
-}, 2000)
 

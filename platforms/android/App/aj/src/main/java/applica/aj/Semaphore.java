@@ -27,7 +27,8 @@ public class Semaphore {
     }
 
     public void runAction(final Runnable action) {
-        thread = Async.run("Semaphore.runAction", new Runnable() {
+        //thread = Async.run("Semaphore.runAction", new Runnable() {
+        Async.run("Semaphore.runAction", new Runnable() {
             @Override
             public void run() {
                 action.run();
@@ -62,9 +63,9 @@ public class Semaphore {
     public void await(Double timeout) {
         try {
             if (timeout != null) {
-                Async.wait(thread, (int) (timeout * 1000));
+                //Async.wait(thread, (int) (timeout * 1000));
             } else {
-                Async.wait(thread);
+                //Async.wait(thread);
             }
         } catch (Exception e) {
             e.printStackTrace();

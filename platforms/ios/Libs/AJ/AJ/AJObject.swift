@@ -143,7 +143,7 @@ open class AJValue: AJValueBase {
                 
                 return other.object!.isEqual(self.object!)
             } else if other.isArray {
-                if other.isArray {
+                if other.isObject {
                     if !isArray {
                         return false
                     }
@@ -420,8 +420,8 @@ open class AJObject: AJValueBase {
         return AJDiff(original: self).at(path: path)
     }
     
-    open func differs(from other: AJObject?) -> Bool {
-        return AJDiff(original: other).differs(from: self)
+    open func differs(from: AJObject?) -> Bool {
+        return AJDiff(original: from).differs(from: self)
     }
 }
 
@@ -504,13 +504,14 @@ open class AJArray: AJValueBase {
             
             var index = 0
             for value in self.list {
-                let otherValue = other.list[index]
-                let anyValue = value as AnyObject
-                let anyOtherValue = otherValue as AnyObject
-                
-                if !anyValue.isEqual(anyOtherValue) {
+                if let otherIndex = other.list.index(where: {(value as AnyObject).isEqual($0)}) {
+                    if otherIndex != index {
+                        return false
+                    }
+                } else {
                     return false
-                }            
+                }
+            
                 
                 index += 1
             }

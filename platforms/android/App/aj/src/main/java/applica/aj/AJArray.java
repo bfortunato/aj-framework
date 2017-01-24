@@ -12,6 +12,10 @@ import applica.aj.runtime.Buffer;
  */
 public class AJArray {
 
+    public interface Iterator {
+        void iterate(Object value);
+    }
+
     private List<Object> internal = new ArrayList<>();
 
     public Object at(int index) {
@@ -119,5 +123,11 @@ public class AJArray {
         }
 
         return true;
+    }
+
+    public void iterate(Iterator iterator) {
+        for (Object v : internal) {
+            iterator.iterate(v);
+        }
     }
 }

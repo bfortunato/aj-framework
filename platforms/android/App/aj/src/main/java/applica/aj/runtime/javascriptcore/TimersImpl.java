@@ -10,6 +10,7 @@ import org.liquidplayer.webkit.javascriptcore.JSValue;
 import java.util.ArrayList;
 import java.util.List;
 
+import applica.aj.Async;
 import applica.framework.android.utils.CollectionUtils;
 import applica.framework.android.utils.Nulls;
 
@@ -28,7 +29,7 @@ public class TimersImpl extends JSObject implements Timers {
         boolean loop;
 
         void execute() {
-            handler.postDelayed(new Runnable() {
+            Async.runDelayed(new Runnable() {
                 @Override
                 public void run() {
                     if (!canceled) {
@@ -67,9 +68,7 @@ public class TimersImpl extends JSObject implements Timers {
             @Override
             public void run() {
                 Looper.prepare();
-
                 handler = new Handler();
-
                 Looper.loop();
             }
         });

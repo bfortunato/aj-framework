@@ -37,7 +37,7 @@ public class Loader {
 
     public void hide() {
         if (progressDialog != null) {
-            progressDialog.hide();
+            progressDialog.dismiss();
             progressDialog = null;
         }
     }
