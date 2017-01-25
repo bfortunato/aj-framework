@@ -62,7 +62,7 @@ if (platform.test) {
             }
 
             init(options) {
-                
+
             }
 
             exec(plugin, fn, data) {
@@ -158,13 +158,13 @@ else if (platform.engine == "node") {
                 logger.i("Executing plugin ", plugin + "." + fn);
 
                 return new Promise((resolve, reject) => {
-                    try {
-                        this.socket.emit("exec", plugin, fn, data, (result) => {
+                    this.socket.emit("exec", plugin, fn, data, (error, result) => {
+                        if (!error) {
                             resolve(result);
-                        });
-                    } catch (e) {
-                        reject(e);
-                    }
+                        } else {
+                            reject(result);
+                        }
+                    });
                 })
             }
 
@@ -266,35 +266,31 @@ else if (platform.engine == "node") {
                 logger.i("Triggering", store, "with state", JSON.stringify(state));
 
                 return new Promise((resolve, reject) => {
-                    async(() => {
-                        try {
-                            __trigger(store, state);
-                            resolve();
-                        } catch (e) {
-                            reject(e);
-                        }
-                    });
+                    try {
+                        __trigger(store, state);
+                        resolve();
+                    } catch (e) {
+                        reject(e);
+                    }
                 });
             }
 
             exec(plugin, fn, data) {
                 if (__exec == undefined) {
-                    throw "__exec function not defined";
+                    throw "__exec function not defined"
                 }
 
-                logger.i("Executing plugin", plugin + "." + fn);
+                logger.i("Executing plugin", plugin + "." + fn)
 
                 return new Promise((resolve, reject) => {
-                    async(() => {
-                        try {
-                            var result = __exec(plugin, fn, data);
-                            logger.i("Plugin called with res:", result);
-                            resolve(result);
-                        } catch (e) {
-                            reject(e);
+                    __exec(plugin, fn, data, function(error, value) {
+                        if (error) {
+                            reject(value)
+                        } else {
+                            resolve(value)
                         }
-                    });
-                });
+                    })
+                })
             }
 
             createBuffer(data) {

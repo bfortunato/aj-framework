@@ -38,9 +38,9 @@
             let dict = data[2] as? [String: AnyObject]
             let argument: AJObject = dict != nil ? AJObject(dict: dict!) : AJObject.empty()
             
-            _ = self.exec(plugin: plugin, fn: fn, data: argument)
-            
-            ack.with()
+            _ = self.exec(plugin: plugin, fn: fn, data: argument) { (error, result) in
+                ack.with(error, result?.toJson() ?? "{}")
+            }
         }
         
         io.on("device") { (data, ack) -> Void in

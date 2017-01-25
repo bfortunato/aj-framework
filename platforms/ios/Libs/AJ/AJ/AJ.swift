@@ -34,8 +34,8 @@ open class AJ {
         return AJApp.runtime().get(plugin: plugin)
     }
     
-    open func exec(plugin: String, fn: String, data: AJObject) -> AJObject {
-        return AJApp.runtime().exec(plugin: plugin, fn: fn, data: data)
+    open func exec(plugin: String, fn: String, data: AJObject, callback: AJPluginCallback? = nil) {
+        return AJApp.runtime().exec(plugin: plugin, fn: fn, data: data, callback: callback ?? { (s, r) in })
     }
     
 }

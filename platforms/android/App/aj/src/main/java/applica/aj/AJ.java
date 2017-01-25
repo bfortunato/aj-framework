@@ -28,8 +28,8 @@ public class AJ {
         return AJApp.runtime().getPlugin(plugin);
     }
 
-    public static AJObject exec(final String plugin, final String fn, final AJObject data) {
-        return AJApp.runtime().exec(plugin, fn, data);
+    public static void exec(final String plugin, final String fn, final AJObject data, final Plugin.Callback callback) {
+        AJApp.runtime().exec(plugin, fn, data, callback);
     }
 
     public static Semaphore run(final String action) {

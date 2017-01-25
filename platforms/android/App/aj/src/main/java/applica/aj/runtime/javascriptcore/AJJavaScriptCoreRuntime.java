@@ -13,6 +13,7 @@ import applica.aj.AJObject;
 import applica.aj.Async;
 import applica.aj.Semaphore;
 import applica.aj.runtime.AJRuntime;
+import applica.aj.runtime.Plugin;
 
 /**
  * Created by bimbobruno on 10/03/16.
@@ -27,7 +28,7 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
 
         void trigger(String type, JSValue data);
 
-        JSValue exec(String plugin, String fn, JSValue data);
+        void exec(String plugin, String fn, JSValue data, JSFunction callback);
     }
 
     public class NativeGlobalsImpl extends JSObject implements NativeGlobals {
@@ -58,10 +59,19 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
         }
 
         @Override
-        public JSValue exec(final String plugin, final String fn, final JSValue data) {
+        public void exec(final String plugin, final String fn, final JSValue data, final JSFunction callback) {
             AJObject argument = JS2AJObject.toAJ(data.toObject());
-            AJObject ret = AJJavaScriptCoreRuntime.this.exec(plugin, fn, argument);
-            return JS2AJObject.toJS(jsContext, ret);
+            AJJavaScriptCoreRuntime.this.exec(plugin, fn, argument, new Plugin.Callback() {
+                @Override
+                public void onSuccess(AJObject data) {
+                    callback.call(null, false, data);
+                }
+
+                @Override
+                public void onError(AJObject data) {
+                    callback.call(null, true, data);
+                }
+            });
         }
     }
 

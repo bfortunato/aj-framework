@@ -14,6 +14,9 @@
 		7A0FB7391C7498450001A8FE /* AJWebSocketRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0FB7381C7498450001A8FE /* AJWebSocketRuntime.swift */; };
 		7A28E6161C8B7E9C00C33CCB /* AJSemaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A28E6151C8B7E9C00C33CCB /* AJSemaphore.swift */; };
 		7A2F9BD41C75E2E90088F1FB /* AJJavaScriptCoreRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2F9BD31C75E2E90088F1FB /* AJJavaScriptCoreRuntime.swift */; };
+		7A31F49E1E390A49000A299E /* AJTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A31F49D1E390A49000A299E /* AJTests.swift */; };
+		7A31F4A01E390A49000A299E /* AJ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A09E2DB1C74871800984A5A /* AJ.framework */; };
+		7A31F4AD1E390B68000A299E /* ApplicaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF7F81D9906BE00F8C559 /* ApplicaFramework.framework */; };
 		7A3AF7F21D99069F00F8C559 /* AJApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AF7F11D99069F00F8C559 /* AJApp.swift */; };
 		7A3AF80E1D9906FC00F8C559 /* ApplicaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF7F81D9906BE00F8C559 /* ApplicaFramework.framework */; };
 		7A3AF80F1D9906FC00F8C559 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8031D9906DA00F8C559 /* SocketIO.framework */; };
@@ -32,6 +35,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7A31F4A11E390A49000A299E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A09E2D21C74871800984A5A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A09E2DA1C74871800984A5A;
+			remoteInfo = AJ;
+		};
 		7A3AF7F71D9906BE00F8C559 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A3AF7F31D9906BE00F8C559 /* ApplicaFramework.xcodeproj */;
@@ -93,6 +103,9 @@
 		7A0FB7381C7498450001A8FE /* AJWebSocketRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJWebSocketRuntime.swift; sourceTree = "<group>"; };
 		7A28E6151C8B7E9C00C33CCB /* AJSemaphore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJSemaphore.swift; sourceTree = "<group>"; };
 		7A2F9BD31C75E2E90088F1FB /* AJJavaScriptCoreRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJJavaScriptCoreRuntime.swift; sourceTree = "<group>"; };
+		7A31F49B1E390A49000A299E /* AJTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AJTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A31F49D1E390A49000A299E /* AJTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJTests.swift; sourceTree = "<group>"; };
+		7A31F49F1E390A49000A299E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A3AF7F11D99069F00F8C559 /* AJApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJApp.swift; sourceTree = "<group>"; };
 		7A3AF7F31D9906BE00F8C559 /* ApplicaFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApplicaFramework.xcodeproj; path = ../ApplicaFramework/ApplicaFramework.xcodeproj; sourceTree = "<group>"; };
 		7A3AF7F91D9906D900F8C559 /* Socket.IO-Client-Swift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Socket.IO-Client-Swift.xcodeproj"; path = "../socket.io-client-swift/Socket.IO-Client-Swift.xcodeproj"; sourceTree = "<group>"; };
@@ -120,6 +133,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A31F4981E390A49000A299E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A31F4AD1E390B68000A299E /* ApplicaFramework.framework in Frameworks */,
+				7A31F4A01E390A49000A299E /* AJ.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -127,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				7A09E2DD1C74871800984A5A /* AJ */,
+				7A31F49C1E390A49000A299E /* AJTests */,
 				7A09E2DC1C74871800984A5A /* Products */,
 				7AE11B601D91FC1E00C035FC /* Frameworks */,
 			);
@@ -136,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				7A09E2DB1C74871800984A5A /* AJ.framework */,
+				7A31F49B1E390A49000A299E /* AJTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,6 +189,15 @@
 				7AB33B271C8A1932002868C6 /* WebSocket */,
 			);
 			name = Runtime;
+			sourceTree = "<group>";
+		};
+		7A31F49C1E390A49000A299E /* AJTests */ = {
+			isa = PBXGroup;
+			children = (
+				7A31F49D1E390A49000A299E /* AJTests.swift */,
+				7A31F49F1E390A49000A299E /* Info.plist */,
+			);
+			path = AJTests;
 			sourceTree = "<group>";
 		};
 		7A3AF7F41D9906BE00F8C559 /* Products */ = {
@@ -253,19 +286,42 @@
 			productReference = 7A09E2DB1C74871800984A5A /* AJ.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		7A31F49A1E390A49000A299E /* AJTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A31F4AC1E390A49000A299E /* Build configuration list for PBXNativeTarget "AJTests" */;
+			buildPhases = (
+				7A31F4971E390A49000A299E /* Sources */,
+				7A31F4981E390A49000A299E /* Frameworks */,
+				7A31F4991E390A49000A299E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A31F4A21E390A49000A299E /* PBXTargetDependency */,
+			);
+			name = AJTests;
+			productName = AJTests;
+			productReference = 7A31F49B1E390A49000A299E /* AJTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		7A09E2D21C74871800984A5A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Bruno Fortunato";
 				TargetAttributes = {
 					7A09E2DA1C74871800984A5A = {
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0800;
+					};
+					7A31F49A1E390A49000A299E = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 772PG8X796;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -292,6 +348,7 @@
 			projectRoot = "";
 			targets = (
 				7A09E2DA1C74871800984A5A /* AJ */,
+				7A31F49A1E390A49000A299E /* AJTests */,
 			);
 		};
 /* End PBXProject section */
@@ -356,6 +413,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A31F4991E390A49000A299E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -386,7 +450,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A31F4971E390A49000A299E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A31F49E1E390A49000A299E /* AJTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7A31F4A21E390A49000A299E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A09E2DA1C74871800984A5A /* AJ */;
+			targetProxy = 7A31F4A11E390A49000A299E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7A09E2ED1C74871900984A5A /* Debug */ = {
@@ -522,6 +602,37 @@
 			};
 			name = Release;
 		};
+		7A31F4A31E390A49000A299E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 772PG8X796;
+				INFOPLIST_FILE = AJTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Applica.AJTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		7A31F4A41E390A49000A299E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 772PG8X796;
+				INFOPLIST_FILE = AJTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Applica.AJTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -542,6 +653,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		7A31F4AC1E390A49000A299E /* Build configuration list for PBXNativeTarget "AJTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A31F4A31E390A49000A299E /* Debug */,
+				7A31F4A41E390A49000A299E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

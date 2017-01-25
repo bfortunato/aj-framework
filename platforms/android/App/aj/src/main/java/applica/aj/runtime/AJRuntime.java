@@ -63,10 +63,10 @@ public abstract class AJRuntime {
         throw new RuntimeException("Plugin not registered: " + plugin);
     }
 
-    public AJObject exec(final String plugin, final String fn, final AJObject data) {
+    public void exec(final String plugin, final String fn, final AJObject data, Plugin.Callback callback) {
         Log.i("AJ", String.format("Executing plugin function %s.%s", plugin, fn));
 
-        return getPlugin(plugin).exec(fn, data);
+        getPlugin(plugin).exec(fn, data, callback);
     }
 
     public void destroy() {

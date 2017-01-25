@@ -61,13 +61,13 @@ open class AJJavaScriptCoreRuntime: AJRuntime {
             self.tigger(store: store, data: state)
         }
         
-        let aj_exec: @convention(block) (String, String, JSValue) -> [String: Any] = { (plugin, fn, data) in
+        let aj_exec: @convention(block) (String, String, JSValue, JSValue) -> Void = { (plugin, fn, data, callback) in
             let dict = data.toDictionary() as? [String: Any]
             let arguments: AJObject = dict != nil ? AJObject(dict: dict!) : AJObject.empty()
             
-            let result = self.exec(plugin: plugin, fn: fn, data: arguments)
-            let ret = result.toDict()
-            return ret
+            self.exec(plugin: plugin, fn: fn, data: arguments) { (error, result) in
+                callback.call(withArguments: [error, result?.toDict() ?? [String: AnyObject]()])
+            }
         }
         
         jsContext.globalObject.setObject(jsContext.globalObject, forKeyedSubscript: "global" as (NSCopying & NSObjectProtocol)!)

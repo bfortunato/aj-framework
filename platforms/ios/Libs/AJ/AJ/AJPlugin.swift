@@ -7,6 +7,14 @@
 //
 
 import Foundation
+import ApplicaFramework
+
+public typealias AJPluginCallback = (_ error: Bool, _ result: AJObject?) -> Void
+
+public struct AJPluginCallData {
+    let argument: AJObject
+    let callback: AJPluginCallback
+}
 
 @objc
 open class AJPlugin : NSObject {
@@ -18,11 +26,9 @@ open class AJPlugin : NSObject {
         super.init()
     }
     
-    open func exec(_ fn: String, data: AJObject) -> AJObject {
+    open func exec(_ fn: String, data: AJObject, callback: @escaping AJPluginCallback) {
         if self.responds(to: Selector(fn + ":")) {
-            let result = self.perform(Selector(fn + ":"), with: data)
-            let ret = result?.takeUnretainedValue() as? AJObject
-            return ret ?? AJObject.empty()
+            _ = self.perform(Selector(fn + ":"), with: AJPluginCallData(argument: data, callback: callback))
         } else {
             fatalError("Cannot execute plugin method " + name + "." + fn)
         }

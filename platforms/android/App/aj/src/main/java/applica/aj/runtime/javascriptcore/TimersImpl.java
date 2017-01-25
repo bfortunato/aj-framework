@@ -34,7 +34,7 @@ public class TimersImpl extends JSObject implements Timers {
                 public void run() {
                     if (!canceled) {
                         try {
-                            action.toFunction().call(jsContext, new JSValue[0]);
+                            action.toFunction().call(jsContext);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
