@@ -61,13 +61,13 @@ open class AJJavaScriptCoreRuntime: AJRuntime {
             self.tigger(store: store, data: state)
         }
         
-        let aj_exec: @convention(block) (String, String, JSValue) -> [String: Any] = { (plugin, fn, data) in
+        let aj_exec: @convention(block) (String, String, JSValue, JSValue) -> Void = { (plugin, fn, data, callback) in
             let dict = data.toDictionary() as? [String: Any]
             let arguments: AJObject = dict != nil ? AJObject(dict: dict!) : AJObject.empty()
             
-            let result = self.exec(plugin: plugin, fn: fn, data: arguments)
-            let ret = result.toDict()
-            return ret
+            self.exec(plugin: plugin, fn: fn, data: arguments) { (error, result) in
+                callback.call(withArguments: [error, result?.toDict() ?? [String: AnyObject]()])
+            }
         }
         
         jsContext.globalObject.setObject(jsContext.globalObject, forKeyedSubscript: "global" as (NSCopying & NSObjectProtocol)!)
@@ -95,6 +95,13 @@ open class AJJavaScriptCoreRuntime: AJRuntime {
         jsContext.globalObject.setObject(AJStorageManager(runtime: self), forKeyedSubscript: "__storageManager" as (NSCopying & NSObjectProtocol)!)
         jsContext.globalObject.setObject(AJBuffersManager(), forKeyedSubscript: "__buffersManager" as (NSCopying & NSObjectProtocol)!)
         jsContext.globalObject.setObject(AJDevice(), forKeyedSubscript: "device" as (NSCopying & NSObjectProtocol)!)
+        
+        jsContext.evaluateScript("var DEBUG = true;")
+        jsContext.evaluateScript("var LOG_LEVEL_INFO = 3;")
+        jsContext.evaluateScript("var LOG_LEVEL_WARNING = 2;")
+        jsContext.evaluateScript("var LOG_LEVEL_ERROR = 1;")
+        jsContext.evaluateScript("var LOG_LEVEL_DISABLED = 0;")
+        jsContext.evaluateScript("var LOG_LEVEL = LOG_LEVEL_INFO;")
         
         let aj_createRuntime = require.require("./aj").objectForKeyedSubscript("createRuntime")
         let main = require.require("./main").objectForKeyedSubscript("main")

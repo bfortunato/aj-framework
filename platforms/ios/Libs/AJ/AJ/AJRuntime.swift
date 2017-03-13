@@ -69,8 +69,8 @@ open class AJRuntime {
         return instance
     }
     
-    open func exec(plugin: String, fn: String, data: AJObject) -> AJObject {
-        return get(plugin: plugin).exec(fn, data: data)
+    open func exec(plugin: String, fn: String, data: AJObject, callback: @escaping AJPluginCallback) {
+        get(plugin: plugin).exec(fn, data: data, callback: callback)
     }
     
 }
