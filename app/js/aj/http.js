@@ -35,6 +35,11 @@ class HttpClient {
                 let data = _.isObject(this.data) ? buildQueryString(this.data) : this.data;
                 let headers = this.headers || {};
 
+                logger.i(this.method.toUpperCase() + " " + this.url)
+                if (data) {
+                    logger.i(data)
+                }
+
                 __httpClient.request(this.url, this.method, data, headers, this.accept, this.contentType, this.rawResponse, (error, value) => {
                     if (error) {
                         logger.e("error");

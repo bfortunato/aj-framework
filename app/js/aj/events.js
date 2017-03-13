@@ -3,7 +3,7 @@
 export const EventEmitter = {}
 
 EventEmitter.addListener = function(obj, evt, handler) {
-    var listeners = obj.$$events_listeners;
+    let listeners = obj.$$events_listeners;
     if(!listeners) {
         listeners = {};
         obj.$$events_listeners = listeners;
@@ -16,8 +16,22 @@ EventEmitter.addListener = function(obj, evt, handler) {
     listeners[evt].push(handler);
 };
 
+EventEmitter.addCallback = function(obj, evt, handler) {
+    let callbacks = obj.$$events_callbacks;
+    if(!callbacks) {
+        callbacks = {};
+        obj.$$events_callbacks = callbacks;
+    }
+
+    if(!callbacks[evt]) {
+        callbacks[evt] = [];
+    }
+
+    callbacks[evt].push(handler);
+}
+
 EventEmitter.addListeners = function(obj, listeners) {
-    for(var key in listeners) {
+    for(let key in listeners) {
         EventEmitter.addListener(obj, key, listeners[key]);
     }
 };
@@ -63,25 +77,46 @@ EventEmitter.invoke = function(obj, evt) {
     if(obj.$$events_off) return;
     if(obj.$$events_offs[evt]) return;
 
-    var listeners = obj.$$events_listeners;
+    let listeners = obj.$$events_listeners;
     if(!listeners) {
         listeners = {};
         obj.$$events_listeners = listeners;
     }
 
-    var handlers = listeners[evt];
+    let handlers = listeners[evt];
     if(handlers) {
-        var size = handlers.length;
-        for (var i = 0; i < size; i++) {
-            var h = handlers[i];
+        let size = handlers.length;
+        for (let i = 0; i < size; i++) {
+            let h = handlers[i];
             h.apply(obj, Array.prototype.slice.call(arguments, 2));
         }
     }
+
+    let callbacks = obj.$$events_callbacks;
+    if(!callbacks) {
+        callbacks = {};
+        obj.$$events_callbacks = callbacks;
+    }
+
+    let callbackHandlers = callbacks[evt];
+    if(callbackHandlers) {
+        let size = callbackHandlers.length;
+        for (let i = 0; i < size; i++) {
+            let h = callbackHandlers[i];
+            h.apply(obj, Array.prototype.slice.call(arguments, 2));
+        }
+    }
+
+    callbacks[evt] = []
 };
 
 export class Observable {
     on(evt, handler) {
         EventEmitter.on(this, evt, handler);
+    }
+
+    once(evt, handler) {
+        EventEmitter.addCallback(this, evt, handler)
     }
 
     off(evt, handler) {

@@ -1,5 +1,14 @@
 "use strict";
 
+var DEBUG = true;
+
+var LOG_LEVEL_INFO = 3;
+var LOG_LEVEL_WARNING = 2;
+var LOG_LEVEL_ERROR = 1;
+var LOG_LEVEL_DISABLED = 0;
+
+var LOG_LEVEL = LOG_LEVEL_INFO;
+
 (function(global) {
     /**
      *

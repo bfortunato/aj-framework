@@ -126,6 +126,13 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
         jsContext.property("__buffersManager", new BuffersManagerImpl(context, jsContext));
         jsContext.property("device", new DeviceImpl(context, jsContext));
 
+        jsContext.evaluateScript("var DEBUG = true;");
+        jsContext.evaluateScript("var LOG_LEVEL_INFO = 3;");
+        jsContext.evaluateScript("var LOG_LEVEL_WARNING = 2;");
+        jsContext.evaluateScript("var LOG_LEVEL_ERROR = 1;");
+        jsContext.evaluateScript("var LOG_LEVEL_DISABLED = 0;");
+        jsContext.evaluateScript("var LOG_LEVEL = LOG_LEVEL_INFO;");
+
         //create runtime instance
         StringBuilder init = new StringBuilder()
                 .append("var aj = require('./aj');\n")

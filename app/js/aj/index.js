@@ -133,7 +133,7 @@ else if (platform.engine == "node") {
 
                             ack();
                         } catch (e) {
-                            if (e && e.stack) { logger.i(e.stack); }
+                            if (e && e.stack) { logger.e(e.stack); }
                             logger.e(e);
                         }
                     });
@@ -143,13 +143,13 @@ else if (platform.engine == "node") {
                     try {
                         this.freeSemaphore(id, data);
                     } catch(e) {
-                        if (e && e.stack) { logger.i(e.stack); }
+                        if (e && e.stack) { logger.e(e.stack); }
                         logger.e(e);
                     }
                 });
 
                 this.socket.on("error", (e) => {
-                    if (e && e.stack) { logger.i(e.stack); }
+                    if (e && e.stack) { logger.e(e.stack); }
                     logger.e(e);
                 });
             }
@@ -169,7 +169,9 @@ else if (platform.engine == "node") {
             }
 
             __trigger(store, state) {
-                logger.i("Triggering", store, "with state", JSON.stringify(state));
+                if (DEBUG) {
+                    logger.i("Triggering", store, "with state", JSON.stringify(state));
+                }
 
                 return new Promise((resolve, reject) => {
                     this.socket.emit("trigger", store, state, function() {
@@ -263,7 +265,9 @@ else if (platform.engine == "node") {
                     throw "__trigger function not defined";
                 }
 
-                logger.i("Triggering", store, "with state", JSON.stringify(state));
+                if (DEBUG) {
+                    logger.i("Triggering", store, "with state", JSON.stringify(state));
+                }
 
                 return new Promise((resolve, reject) => {
                     try {
@@ -458,20 +462,24 @@ function createAction(type, fn) {
 }
 
 function dispatch(action) {
-    logger.i("Dispatching action", JSON.stringify(action));
+    if (DEBUG) {
+        logger.i("Dispatching action", JSON.stringify(action));
+    }
 
     _.each(__stores, (store) => {
         try {
             store.dispatch(action);
         } catch (e) {
-            if (e && e.stack) { logger.i(e.stack); }
+            if (e && e.stack) { logger.e(e.stack); }
             logger.e(e);
         }
     });
 }
 
 function run(action, data) {
-    logger.i("Running action", action, "with data", JSON.stringify(data));
+    if (DEBUG) {
+        logger.i("Running action", action, "with data", JSON.stringify(data));
+    }
 
     if (_.has(__actions, action)) {
         __actions[action](data);
