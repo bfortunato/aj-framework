@@ -19,6 +19,7 @@ import applica.aj.ManualSemaphore;
 import applica.aj.Semaphore;
 import applica.aj.runtime.AJRuntime;
 import applica.aj.runtime.Buffer;
+import applica.aj.runtime.Plugin;
 import applica.framework.android.utils.CollectionUtils;
 import io.socket.client.Ack;
 import io.socket.client.IO;
@@ -70,11 +71,20 @@ public class AJWebSocketRuntime extends AJRuntime {
                 String fn = (String) args[1];
                 JSONObject json = (JSONObject) args[2];
                 AJObject data = json != null ? AJObject.fromJson(json.toString()) : new AJObject();
-                Ack ack = (Ack) args[3];
+                final Ack ack = (Ack) args[3];
 
                 try {
-                    AJObject result = exec(plugin, fn, data);
-                    ack.call(result);
+                    exec(plugin, fn, data, new Plugin.Callback() {
+                        @Override
+                        public void onSuccess(AJObject data) {
+                            ack.call(false, data);
+                        }
+
+                        @Override
+                        public void onError(AJObject data) {
+                            ack.call(true, data);
+                        }
+                    });
                 } catch (Throwable t) {
                     t.printStackTrace();
                 }

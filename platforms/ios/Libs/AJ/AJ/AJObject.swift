@@ -504,11 +504,7 @@ open class AJArray: AJValueBase {
             
             var index = 0
             for value in self.list {
-                if let otherIndex = other.list.index(where: {(value as AnyObject).isEqual($0)}) {
-                    if otherIndex != index {
-                        return false
-                    }
-                } else {
+                if !(value as AnyObject).isEqual(other.list[index]) {
                     return false
                 }
             

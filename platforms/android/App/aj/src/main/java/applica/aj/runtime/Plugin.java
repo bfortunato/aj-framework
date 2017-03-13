@@ -12,6 +12,11 @@ import applica.aj.AJObject;
  */
 public abstract class Plugin {
 
+    public interface Callback {
+        void onSuccess(AJObject data);
+        void onError(AJObject data);
+    }
+
     private String name;
 
     public Plugin(String name) {
@@ -22,12 +27,10 @@ public abstract class Plugin {
         return name;
     }
 
-    public AJObject exec(String fn, AJObject data) {
+    public void exec(String fn, AJObject data, Callback callback) {
         try {
-            Method method = this.getClass().getDeclaredMethod(fn, AJObject.class);
-            AJObject result = (AJObject) method.invoke(this, data);
-
-            return result;
+            Method method = this.getClass().getDeclaredMethod(fn, AJObject.class, Callback.class);
+            method.invoke(this, data, callback);
         } catch (NoSuchMethodException e) {
             Log.e("AJ", String.format("Plugin method not implemented: %s.%s", getName(), fn));
 

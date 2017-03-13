@@ -622,7 +622,7 @@
         //nothing, already done in js
     };
 
-    global.__exec = function(plugin, method, data) {
+    global.__exec = function(plugin, method, data, callback) {
         //executes a class method with data, simply
         var Plugin = global[plugin];
         if (!_.isObject(Plugin)) {
@@ -635,7 +635,7 @@
             throw new Error("Plugin method " + plugin + "." + method +  " not found");
         }
 
-        return fn(data);
+        fn(data, callback);
     };
 
 })(window);
