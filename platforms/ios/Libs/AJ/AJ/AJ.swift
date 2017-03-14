@@ -26,11 +26,11 @@ open class AJ {
         return AJApp.runtime().run(action: action, data: data)
     }
     
-    open func register(plugin: AJPlugin) {
+    open class func register(plugin: AJPlugin) {
         AJApp.runtime().register(plugin: plugin)
     }
     
-    open func get(plugin: String) -> AJPlugin {
+    open class func get(plugin: String) -> AJPlugin {
         return AJApp.runtime().get(plugin: plugin)
     }
     

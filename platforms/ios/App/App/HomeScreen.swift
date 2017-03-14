@@ -11,37 +11,32 @@ import UIKit
 import AJ
 import ApplicaFramework
 
-class HomeViewController: UIViewController {
+class HomeViewController : AJViewController {
 
     private var _textView: UITextView?
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        
-        AJApp.runtime().subscribe(to: Stores.HOME, owner: self) { [weak self] (state) in
-            self?._textView?.text = state.get("message")?.string
-            self?._textView?.sizeToFit()
-        }
+
+    override func defineStores(_ stores: AJStoreDefinitions) {
+        _ = stores.add(store: Stores.HOME)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        AJApp.runtime().unsubscribe(from: Stores.HOME, owner: self)
-    }
-    
-    override func loadView() {
-        super.loadView()
-        
+    override func onSetupView(_ view: UIView) {
         view.backgroundColor = Colors.white
         
         _textView = UITextView(frame: CGRect.zero)
         _textView?.frame.origin.y = 20
         
         view.addSubview(_textView!)
-        
-        _ = AJApp.runtime().run(action: Actions.GET_MESSAGE)
     }
+    
+    override func onUpdateView(_ view: UIView, store: String, state: AJObject, lastState: AJObject) {
+        if state.differs(at: "message").from(lastState) {
+            self._textView?.text = state.get("message")?.string
+            self._textView?.sizeToFit()
+        }
+    }
+    
+    override func onViewLoaded() {
+        _ = AJ.run(action: Actions.GET_MESSAGE)
+    }
+    
 }
