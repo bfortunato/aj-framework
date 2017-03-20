@@ -21,6 +21,7 @@
 		7A3AF8481D99238E00F8C559 /* SocketIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8461D99238E00F8C559 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A3AF84A1D99238E00F8C559 /* ApplicaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8491D99238E00F8C559 /* ApplicaFramework.framework */; };
 		7A3AF84B1D99238E00F8C559 /* ApplicaFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8491D99238E00F8C559 /* ApplicaFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A8A04AC1E7FE44F00FE1F9A /* HomeScreenWithSubscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A04AB1E7FE44F00FE1F9A /* HomeScreenWithSubscribe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		7A3AF82F1D990DD200F8C559 /* Stores.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stores.swift; sourceTree = "<group>"; };
 		7A3AF8461D99238E00F8C559 /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A3AF8491D99238E00F8C559 /* ApplicaFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ApplicaFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A8A04AB1E7FE44F00FE1F9A /* HomeScreenWithSubscribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenWithSubscribe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				7A3AF82E1D990DD200F8C559 /* HomeScreen.swift */,
+				7A8A04AB1E7FE44F00FE1F9A /* HomeScreenWithSubscribe.swift */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				7A3AF8301D990DD200F8C559 /* Actions.swift in Sources */,
 				7A3AF8321D990DD200F8C559 /* HomeScreen.swift in Sources */,
 				7A3AF7DF1D99060D00F8C559 /* AppDelegate.swift in Sources */,
+				7A8A04AC1E7FE44F00FE1F9A /* HomeScreenWithSubscribe.swift in Sources */,
 				7A3AF8311D990DD200F8C559 /* Constants.swift in Sources */,
 				7A3AF8331D990DD200F8C559 /* Stores.swift in Sources */,
 			);
