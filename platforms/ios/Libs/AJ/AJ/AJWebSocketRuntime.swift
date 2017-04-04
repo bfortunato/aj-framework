@@ -108,8 +108,8 @@
         
         let semaphore = AJManualSemaphore()
         semaphores.append(semaphore)
-        
-        self.io.emitWithAck("run", action, json)(0) { (data) in
+
+        self.io.emitWithAck("run", action, json).timingOut(after: 0) { (data) in
             self.freeSemaphore(semaphore.id)
         }
         

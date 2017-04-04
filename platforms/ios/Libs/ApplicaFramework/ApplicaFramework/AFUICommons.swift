@@ -242,8 +242,8 @@ open class RB {
     }
     
     open func quad(_ value:CGFloat, percentual:Bool = false) -> RB {
-        self.width(value, percentual: percentual)
-        self.height(value, percentual: percentual)
+        _ = self.width(value, percentual: percentual)
+        _ = self.height(value, percentual: percentual)
         return self
     }
     

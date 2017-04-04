@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreBluetooth
-import ApplicaFramework
 
 open class AFBluetoothPeripheralCharacteristic {
     var id: String
