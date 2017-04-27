@@ -16,10 +16,21 @@ module.exports = {
         if (accept) { headers["Accept"] = accept; }
         headers["Content-Type"] = contentType || "application/x-www-form-urlencoded";
 
+        var finalUrl = uri
+
+        if (method.toLowerCase() === "get" && data) {
+            if (finalUrl.indexOf("?") != -1) {
+                finalUrl += "&" + data    
+            } else {
+                finalUrl += "?" + data
+            }
+            
+        }
+
         logger.i("headers:", JSON.stringify(headers));
 
         if (rawResponse) {
-            request({uri: uri, encoding: null}, function(error, response, body) {
+            request({uri: finalUrl, encoding: null}, function(error, response, body) {
                 if (error) {
                     cb(true, null);
                 } else {
@@ -33,7 +44,7 @@ module.exports = {
         } else {
             request({
                 method: method,
-                url: uri,
+                url: finalUrl,
                 headers: headers,
                 body: data
             }, function(error, response, body) {
