@@ -1,3 +1,6 @@
+v1.0.26
+- Added react-native platform
+
 v1.0.15
 - Added diff API to improve performances
 - Added traverse API to improve productivity
