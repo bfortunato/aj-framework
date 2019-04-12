@@ -20,7 +20,7 @@ In simple terms, application state and business logic is managed in Javascript s
 > As you can see, native code is pure user interface, nothing else, super productive and **best quality**. All business logic is completely reusable, also in web applications.
 
 
-Current version: **1.0.20**
+Current version: **1.0.26**
 
 
 # Getting Started
@@ -70,6 +70,8 @@ Here the project structure of AJ bootstrapper
         |- android
         |- ios
         |- web
+        |- node
+        |- react
 ```
 
 `app/assets`

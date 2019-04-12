@@ -47,8 +47,9 @@ class AJRuntime {
 
 if (platform.test) {
     (function() {
-        var vm = require("vm");
-        var fs = require("fs");
+        var r = require;
+        var vm = r("vm");
+        var fs = read("fs");
         var buffers = {}
         var bufferId = 0
 
@@ -107,8 +108,9 @@ if (platform.test) {
 }
 else if (platform.engine == "node") {
     (function() {
-        var vm = require("vm");
-        var fs = require("fs");
+        var r = require;
+        var vm = r("vm");
+        var fs = read("fs");
 
         class AJWebSocketServerRuntime extends AJRuntime {
             constructor() {
@@ -261,22 +263,24 @@ else if (platform.engine == "node") {
             }
 
             __trigger(store, state) {
-                if (__trigger == undefined) {
-                    throw "__trigger function not defined";
-                }
-
                 if (DEBUG) {
                     logger.i("Triggering", store, "with state", JSON.stringify(state));
                 }
 
-                return new Promise((resolve, reject) => {
-                    try {
-                        __trigger(store, state);
-                        resolve();
-                    } catch (e) {
-                        reject(e);
+                if (platform.engine !== "react") {
+                    if (__trigger == undefined) {
+                        throw "__trigger function not defined";
                     }
-                });
+                    
+                    return new Promise((resolve, reject) => {
+                        try {
+                            __trigger(store, state);
+                            resolve();
+                        } catch (e) {
+                            reject(e);
+                        }
+                    });
+                }
             }
 
             exec(plugin, fn, data) {
