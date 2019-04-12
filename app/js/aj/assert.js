@@ -1,6 +1,6 @@
 "use strict"
 
-const _ = require("../libs/underscore")
+const _ = require("underscore")
 
 exports.assertTrue = function(test, msg){
     if (!test) {

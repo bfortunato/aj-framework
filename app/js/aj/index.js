@@ -5,12 +5,20 @@
 
 "use strict";
 
-const _ = require("../libs/underscore")
+const _ = require("underscore")
 const Observable = require("./events").Observable;
 
 var __runtime = null;
 var __stores = {};
 var __actions = {};
+
+function stringifyIfNotBrowser(obj) {
+    if (platform.device === "browser") {
+        return obj
+    } else {
+        JSON.stringify(obj)
+    }
+}
 
 class AJRuntime {
     constructor() {
@@ -47,9 +55,8 @@ class AJRuntime {
 
 if (platform.test) {
     (function() {
-        var r = require;
-        var vm = r("vm");
-        var fs = read("fs");
+        var vm = require("vm");
+        var fs = require("fs");
         var buffers = {}
         var bufferId = 0
 
@@ -75,7 +82,8 @@ if (platform.test) {
             }
 
             __trigger(store, state) {
-                logger.i("Triggering", store, "with state", JSON.stringify(state));
+                logger.i("Triggering", store);
+                logger.i(stringifyIfNotBrowser(state));
             }
 
             createBuffer(data) {
@@ -108,9 +116,8 @@ if (platform.test) {
 }
 else if (platform.engine == "node") {
     (function() {
-        var r = require;
-        var vm = r("vm");
-        var fs = read("fs");
+        var vm = require("vm");
+        var fs = require("fs");
 
         class AJWebSocketServerRuntime extends AJRuntime {
             constructor() {
@@ -172,7 +179,8 @@ else if (platform.engine == "node") {
 
             __trigger(store, state) {
                 if (DEBUG) {
-                    logger.i("Triggering", store, "with state", JSON.stringify(state));
+                    logger.i("Triggering", store);
+                    logger.i(stringifyIfNotBrowser(state))
                 }
 
                 return new Promise((resolve, reject) => {
@@ -263,24 +271,23 @@ else if (platform.engine == "node") {
             }
 
             __trigger(store, state) {
-                if (DEBUG) {
-                    logger.i("Triggering", store, "with state", JSON.stringify(state));
+                if (__trigger == undefined) {
+                    throw "__trigger function not defined";
                 }
 
-                if (platform.engine !== "react") {
-                    if (__trigger == undefined) {
-                        throw "__trigger function not defined";
-                    }
-                    
-                    return new Promise((resolve, reject) => {
-                        try {
-                            __trigger(store, state);
-                            resolve();
-                        } catch (e) {
-                            reject(e);
-                        }
-                    });
+                if (DEBUG) {
+                    logger.i("Triggering", store);
+                    logger.i(stringifyIfNotBrowser(state));
                 }
+
+                return new Promise((resolve, reject) => {
+                    try {
+                        __trigger(store, state);
+                        resolve();
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
             }
 
             exec(plugin, fn, data) {
@@ -431,14 +438,26 @@ class Semaphore {
 
 Semaphore.counter = 1;
 
-function createRuntime(options) {
+/**
+ * @function createRuntime
+ * @description Creates a new instance of runtime. Usually used internally by devices runtimes
+ * @returns singleton instance of runtime
+ */
+export function createRuntime(options) {
     __runtime = AJRuntime.create();
     __runtime.init(options);
 
     return __runtime;
 };
 
-function createStore(type, reducer) {
+/**
+ * @function createStore
+ * @description Creates a new singleton instance of store
+ * @param {string} type - Name of store to create
+ * @param {function} reducer - Store reducer
+ * @returns {store} - The newly created store
+ */
+export function createStore(type, reducer) {
     if (_.has(__stores, type)) {
         throw "Cannot create store " + type + ". Only one instance of store is allowed";
     }
@@ -451,12 +470,27 @@ function createStore(type, reducer) {
     return store;
 }
 
-function createAction(type, fn) {
+/**
+ * @function createAction
+ * @Description Creates a new action for the application
+ * @param {string} type - Type of action to create
+ * @param {function} action - Action to execute
+ * @returns {function} The newly created action
+ */
+export function createAction(type, fn) {
+    if (type == undefined) {
+        throw new Error("Action type is undefined")
+    }
+
     if (_.has(__actions, type)) {
         throw "Cannot create action " + type + ". Already created";
     }
 
     var act = __actions[type] = (data) => {
+        if (DEBUG) {
+            logger.i("Running action", type);
+            logger.i(stringifyIfNotBrowser(data));
+        }
         fn(data);
     };
 
@@ -465,9 +499,15 @@ function createAction(type, fn) {
     return act;
 }
 
-function dispatch(action) {
+/**
+ * @function dispatch
+ * @description Dispatch action to stores, usually called by actions
+ * @param {object} data - Data to pass to stores
+ */
+export function dispatch(action) {
     if (DEBUG) {
-        logger.i("Dispatching action", JSON.stringify(action));
+        logger.i("Dispatching action", action.type);
+        logger.i(stringifyIfNotBrowser(action));
     }
 
     _.each(__stores, (store) => {
@@ -480,53 +520,20 @@ function dispatch(action) {
     });
 }
 
-function run(action, data) {
-    if (DEBUG) {
-        logger.i("Running action", action, "with data", JSON.stringify(data));
-    }
-
+/**
+ * @function run
+ * @description Run specified action. This is not the common method to call actions, but it's necessary for managing actions from
+ * devices. On JS side, call actions directly
+ * @param {type} type - Type of action to call
+ * @param {data} type - Data to pass to action
+ */
+export function run(action, data) {
     if (_.has(__actions, action)) {
         __actions[action](data);
     } else {
         logger.w("Cannot find action: " + action);
     }
 }
-
-function exec(plugin, fn, data) {
-    return __runtime.exec(plugin, fn, data);
-}
-
-/**
- * @function createRuntime
- * @description Creates a new instance of runtime. Usually used internally by devices runtimes
- * @returns singleton instance of runtime
- */
-export var createRuntime = createRuntime;
-
-/**
- * @function createStore
- * @description Creates a new singleton instance of store
- * @param {string} type - Name of store to create
- * @param {function} reducer - Store reducer
- * @returns {store} - The newly created store
- */
-export var createStore = createStore;
-
-/**
- * @function createAction
- * @Description Creates a new action for the application
- * @param {string} type - Type of action to create
- * @param {function} action - Action to execute
- * @returns {function} The newly created action
- */
-export var createAction = createAction;
-
-/**
- * @function dispatch
- * @description Dispatch action to stores, usually called by actions
- * @param {object} data - Data to pass to stores
- */
-export var dispatch = dispatch;
 
 /**
  * @function exec
@@ -536,16 +543,9 @@ export var dispatch = dispatch;
  * @param {data} data - Data to pass to plugin
  * @returns {Promise} - A promise of plugin call result
  */
-export var exec = exec;
-
-/**
- * @function run
- * @description Run specified action. This is not the common method to call actions, but it's necessary for managing actions from
- * devices. On JS side, call actions directly
- * @param {type} type - Type of action to call
- * @param {data} type - Data to pass to action
- */
-export var run = run;
+export function exec(plugin, fn, data) {
+    return __runtime.exec(plugin, fn, data);
+}
 
 
 export function createBuffer(data) {

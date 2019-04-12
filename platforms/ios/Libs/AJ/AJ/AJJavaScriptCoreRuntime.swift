@@ -13,23 +13,28 @@ import ApplicaFramework
 open class AJJavaScriptCoreRuntime: AJRuntime {
 
     let jsContext: JSContext
-    let require: AJRequire
     let timers: AJTimers
     
     var jsRuntime: JSValue?
     
     public override init() {
         jsContext = JSContext()
-        require = AJRequire(context: jsContext)
         timers = AJTimers()
         super.init()
         
         jsContext.exceptionHandler = { context, exception in
-            print("JS Error: \(exception)")
-        }
-        
-        let aj_require: @convention(block) (String) -> JSValue = { path in
-            return self.require.require(path)
+            // type of String
+            if let exception = exception {
+                let stacktrace: String = (exception.objectForKeyedSubscript("stack").toString()) ?? "NA"
+                // type of Number
+                let lineNumber: JSValue = exception.objectForKeyedSubscript("line") ?? JSValue(object: "", in: context)
+                // type of Number
+                let column: JSValue = exception.objectForKeyedSubscript("column") ?? JSValue(object: "", in: context)
+                let moreInfo = "\n   - in method \(stacktrace)\n   - line number in file: \(lineNumber)\n   - column: \(column)"
+                NSLog("JS ERROR \n\(exception) \(moreInfo)")
+            } else {
+                NSLog("JS ERROR")
+            }
         }
         
         let aj_async: @convention(block) (JSValue) -> Void = { action in
@@ -78,7 +83,6 @@ open class AJJavaScriptCoreRuntime: AJRuntime {
         //used by js components to notify the native parts
         jsContext.globalObject.setObject(unsafeBitCast(aj_trigger, to: AnyObject.self), forKeyedSubscript: "__trigger" as (NSCopying & NSObjectProtocol)!)
         jsContext.globalObject.setObject(unsafeBitCast(aj_exec, to: AnyObject.self), forKeyedSubscript: "__exec" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(unsafeBitCast(aj_require, to: AnyObject.self), forKeyedSubscript: "require" as (NSCopying & NSObjectProtocol)!)
         jsContext.globalObject.setObject(unsafeBitCast(aj_async, to: AnyObject.self), forKeyedSubscript: "async" as (NSCopying & NSObjectProtocol)!)
         jsContext.globalObject.setObject(unsafeBitCast(aj_setTimeout, to: AnyObject.self), forKeyedSubscript: "setTimeout" as (NSCopying & NSObjectProtocol)!)
         jsContext.globalObject.setObject(unsafeBitCast(aj_setInterval, to: AnyObject.self), forKeyedSubscript: "setInterval" as (NSCopying & NSObjectProtocol)!)
@@ -95,7 +99,7 @@ open class AJJavaScriptCoreRuntime: AJRuntime {
         jsContext.globalObject.setObject(AJStorageManager(runtime: self), forKeyedSubscript: "__storageManager" as (NSCopying & NSObjectProtocol)!)
         jsContext.globalObject.setObject(AJBuffersManager(), forKeyedSubscript: "__buffersManager" as (NSCopying & NSObjectProtocol)!)
         jsContext.globalObject.setObject(AJDevice(), forKeyedSubscript: "device" as (NSCopying & NSObjectProtocol)!)
-        
+
         jsContext.evaluateScript("var DEBUG = true;")
         jsContext.evaluateScript("var LOG_LEVEL_INFO = 3;")
         jsContext.evaluateScript("var LOG_LEVEL_WARNING = 2;")
@@ -103,10 +107,28 @@ open class AJJavaScriptCoreRuntime: AJRuntime {
         jsContext.evaluateScript("var LOG_LEVEL_DISABLED = 0;")
         jsContext.evaluateScript("var LOG_LEVEL = LOG_LEVEL_INFO;")
         
-        let aj_createRuntime = require.require("./aj").objectForKeyedSubscript("createRuntime")
-        let main = require.require("./main").objectForKeyedSubscript("main")
-        self.jsRuntime = aj_createRuntime?.call(withArguments: [])
-        _ = main?.call(withArguments: [])
+        let appDir = "/assets/js/"
+        if let url = Bundle.main.path(forResource: "app", ofType: "js", inDirectory: appDir) {
+            let source = try? String(contentsOfFile: url)
+            
+            if let source = source {
+                jsContext.evaluateScript(source)
+                let main = jsContext.globalObject.objectForKeyedSubscript("main")
+                if let main = main {
+                    self.jsRuntime = main.call(withArguments: [])
+                } else {
+                    fatalError("Main function not found in app.js")
+                }
+                
+                if self.jsRuntime == nil {
+                    fatalError("Cannot initialize aj runtime")
+                }
+                
+                NSLog("Runtime initialized: \(String(describing: jsRuntime?.toDictionary()))")
+            }
+        } else {
+            fatalError("app.js not found")
+        }
     }
     
     open override func run(action: String, data: AJObject = AJObject.empty()) -> AJSemaphore {

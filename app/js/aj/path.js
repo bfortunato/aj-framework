@@ -1,6 +1,6 @@
 "use strict";
 
-const _ = require("../libs/underscore");
+const _ = require("underscore");
 
 exports.ext = function(path) {
     if (_.isEmpty(path)) {

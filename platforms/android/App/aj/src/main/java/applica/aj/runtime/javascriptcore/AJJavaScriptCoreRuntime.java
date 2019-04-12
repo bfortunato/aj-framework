@@ -3,11 +3,14 @@ package applica.aj.runtime.javascriptcore;
 import android.content.Context;
 import android.util.Log;
 
+import org.apache.commons.io.IOUtils;
 import org.liquidplayer.webkit.javascriptcore.JSContext;
 import org.liquidplayer.webkit.javascriptcore.JSException;
 import org.liquidplayer.webkit.javascriptcore.JSFunction;
 import org.liquidplayer.webkit.javascriptcore.JSObject;
 import org.liquidplayer.webkit.javascriptcore.JSValue;
+
+import java.io.InputStream;
 
 import applica.aj.AJObject;
 import applica.aj.Async;
@@ -133,34 +136,20 @@ public class AJJavaScriptCoreRuntime extends AJRuntime {
         jsContext.evaluateScript("var LOG_LEVEL_DISABLED = 0;");
         jsContext.evaluateScript("var LOG_LEVEL = LOG_LEVEL_INFO;");
 
-        //create runtime instance
-        StringBuilder init = new StringBuilder()
-                .append("var aj = require('./aj');\n")
-                .append("function __ajinit() {\n")
-                .append("   logger.i('Creating runtime...');\n")
-                .append("   return aj.createRuntime();\n")
-                .append("}\n");
+        try {
+            InputStream inputStream = getContext().getAssets().open("js/app.js");
+            String source = IOUtils.toString(inputStream);
+            IOUtils.closeQuietly(inputStream);
 
-        jsContext.evaluateScript(init.toString());
-        jsRuntime = jsContext.property("__ajinit").toFunction().call(null).toObject();
+            jsContext.evaluateScript(source);
 
-        //create runtime instance
-        StringBuilder main = new StringBuilder()
-                .append("var main = require('./main');\n")
-                .append("(function __ajmain() {\n")
-                .append("   main.main();\n")
-                .append("})();\n");
+            JSFunction main = jsContext.property("main").toFunction();
+            jsRuntime = main.call().toObject();
 
-        jsContext.evaluateScript(main.toString());
-
-        /*JSFunction createRuntimeFunction = require.require("./aj").toObject().property("createRuntime").toFunction();
-        jsRuntime = createRuntimeFunction.call(null).toObject();
-
-        //run main script
-        JSValue main = require.require("./main").toObject().property("main");
-        main.toFunction().call(null);*/
-
-        dispatchFunction = jsRuntime.property("run").toFunction();
+            dispatchFunction = jsRuntime.property("run").toFunction();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

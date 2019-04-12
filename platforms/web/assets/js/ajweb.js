@@ -1,14 +1,5 @@
 "use strict";
 
-var DEBUG = true;
-
-var LOG_LEVEL_INFO = 3;
-var LOG_LEVEL_WARNING = 2;
-var LOG_LEVEL_ERROR = 1;
-var LOG_LEVEL_DISABLED = 0;
-
-var LOG_LEVEL = LOG_LEVEL_INFO;
-
 (function(global) {
     /**
      *
@@ -287,83 +278,6 @@ var LOG_LEVEL = LOG_LEVEL_INFO;
             return "";
         }
     };
-
-    /**
-     * Require
-     */
-    (function() {
-        var builders = {};
-        var cache = {};
-        var currentRequireQueue = [];
-
-        function define(module, builder) {
-            if (!_.isString(module)) {
-                throw new Error("Bad module name: " + module);
-            }
-
-            if (!_.isFunction(builder)) {
-                throw new Error("Builder must be a function");
-            }
-
-            builders[module] = builder;
-
-            console.log("Module defined: " + module);
-        }
-
-        function require(_path) {
-            var currentRelativePath = _.last(currentRequireQueue) || "";
-            var moduleExt = "js";
-            var moduleBase = path.removeExtension(path.normalize(path.join(currentRelativePath, _path)));
-            var moduleName = path.name(moduleBase);
-            var possibilities = [
-                moduleName,
-                moduleBase,
-                moduleBase + "." + moduleExt,
-                path.join(moduleBase, "index.js"),
-                path.join(moduleBase, moduleName) + "." + moduleExt
-            ];
-
-            var module = null;
-
-            for (var i = 0; i < possibilities.length; i++) {
-                var possibility = possibilities[i];
-                if (_.has(cache, possibility)) {
-                    console.log("Loading cached module " + possibility);
-
-                    module = cache[possibility];
-                    break;
-                } else {
-                    if (_.has(builders, possibility)) {
-                        var builder = builders[possibility];
-                        if (!_.isFunction(builder)) {
-                            throw new Error("Builder for module " + possibility + " is not a function");
-                        }
-
-                        module = {};
-                        module.exports = {};
-
-                        console.log("Loading module " + possibility);
-
-                        currentRequireQueue.push(path.base(possibility));
-                        builder(module, module.exports);
-                        currentRequireQueue = _.initial(currentRequireQueue);
-
-                        cache[possibility] = module;
-                    }
-                }
-            }
-
-            if (module == null) {
-                throw new Error("Module not found: " + _path);
-            }
-
-            return module.exports;
-        }
-
-        global.define = define;
-        global.require = require;
-    })();
-
     /**
      * Buffers
      */
@@ -403,15 +317,33 @@ var LOG_LEVEL = LOG_LEVEL_INFO;
 
     global.logger = {
         i: function(msg) {
-            console.log("AJ: " + Array.prototype.join.call(arguments, " "));
+            if (LOG_LEVEL >= LOG_LEVEL_INFO) {
+                if (arguments.length == 1) {
+                    console.log(msg);
+                } else {
+                    console.log(Array.prototype.join.call(arguments, " "));
+                }
+            }
         },
 
         e: function(msg) {
-            console.error("AJ: " + Array.prototype.join.call(arguments, " "));
+            if (LOG_LEVEL >= LOG_LEVEL_ERROR) {
+                if (arguments.length == 1) {
+                    console.error(msg);
+                } else {
+                    console.error(Array.prototype.join.call(arguments, " "));
+                }
+            }
         },
 
         w: function(msg) {
-            console.warn("AJ: " + Array.prototype.join.call(arguments, " "));
+            if (LOG_LEVEL >= LOG_LEVEL_WARNING) {
+                if (arguments.length == 1) {
+                    console.warn(msg);
+                } else {
+                    console.warn(Array.prototype.join.call(arguments, " "));
+                }
+            }
         }
     };
 

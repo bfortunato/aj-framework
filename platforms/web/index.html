@@ -8,10 +8,20 @@
 <body>
     <h1 class="message"></h1>
 
-    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
+    <script type="text/javascript">
+    	let DEBUG = true;
+
+		const LOG_LEVEL_INFO = 3;
+		const LOG_LEVEL_WARNING = 2;
+		const LOG_LEVEL_ERROR = 1;
+		const LOG_LEVEL_DISABLED = 0;
+
+		let LOG_LEVEL = LOG_LEVEL_INFO;
+    </script>
     <script type="text/javascript" src="assets/js/ajweb.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript">
+    	main();
+    </script>
 </body>
 </html>

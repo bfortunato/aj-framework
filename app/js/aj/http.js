@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("./assert");
-const _ = require("../libs/underscore");
+const _ = require("underscore");
 
 function buildQueryString(obj) {
     var q = "";

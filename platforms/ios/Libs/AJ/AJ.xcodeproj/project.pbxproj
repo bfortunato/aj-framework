@@ -29,7 +29,6 @@
 		7AA852351D7966E5002E51CB /* AJBuffersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA852341D7966E5002E51CB /* AJBuffersManager.swift */; };
 		7AB23B0A1C78CE1000A80387 /* AJHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB23B091C78CE1000A80387 /* AJHttpClient.swift */; };
 		7AB33B261C8A0210002868C6 /* AJLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB33B251C8A0210002868C6 /* AJLogger.swift */; };
-		7AB86D041C91A87D002AFD27 /* AJRequire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB86D031C91A87D002AFD27 /* AJRequire.swift */; };
 		7AE52BF91D70A907008F805D /* AJDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE52BF81D70A907008F805D /* AJDevice.swift */; };
 		7AE52BFF1D7579E2008F805D /* AJPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE52BFE1D7579E2008F805D /* AJPlugin.swift */; };
 		7AF27C191C90DA770067BAAE /* AJWeakReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF27C181C90DA770067BAAE /* AJWeakReference.swift */; };
@@ -119,7 +118,6 @@
 		7AA852341D7966E5002E51CB /* AJBuffersManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJBuffersManager.swift; sourceTree = "<group>"; };
 		7AB23B091C78CE1000A80387 /* AJHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJHttpClient.swift; sourceTree = "<group>"; };
 		7AB33B251C8A0210002868C6 /* AJLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJLogger.swift; sourceTree = "<group>"; };
-		7AB86D031C91A87D002AFD27 /* AJRequire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJRequire.swift; sourceTree = "<group>"; };
 		7AE52BF81D70A907008F805D /* AJDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJDevice.swift; sourceTree = "<group>"; };
 		7AE52BFE1D7579E2008F805D /* AJPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJPlugin.swift; sourceTree = "<group>"; };
 		7AF27C181C90DA770067BAAE /* AJWeakReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJWeakReference.swift; sourceTree = "<group>"; };
@@ -248,7 +246,6 @@
 				7AB23B091C78CE1000A80387 /* AJHttpClient.swift */,
 				7A2F9BD31C75E2E90088F1FB /* AJJavaScriptCoreRuntime.swift */,
 				7AB33B251C8A0210002868C6 /* AJLogger.swift */,
-				7AB86D031C91A87D002AFD27 /* AJRequire.swift */,
 				7A7208EE1C9A1D1300C0CF3A /* AJTimers.swift */,
 				7A475F861CD7A9C4000CF8F0 /* AJStorageManager.swift */,
 				7AE52BF81D70A907008F805D /* AJDevice.swift */,
@@ -450,7 +447,6 @@
 				7A0FB7391C7498450001A8FE /* AJWebSocketRuntime.swift in Sources */,
 				7A2F9BD41C75E2E90088F1FB /* AJJavaScriptCoreRuntime.swift in Sources */,
 				7AA852331D796342002E51CB /* AJJSUtils.swift in Sources */,
-				7AB86D041C91A87D002AFD27 /* AJRequire.swift in Sources */,
 				7A8C06CF1C902893009327E9 /* AJAssetsManager.swift in Sources */,
 				7A0B10781C9D6E3900C39B7F /* AJBuffer.swift in Sources */,
 				7AE52BF91D70A907008F805D /* AJDevice.swift in Sources */,
