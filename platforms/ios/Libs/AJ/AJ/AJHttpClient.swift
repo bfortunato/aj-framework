@@ -28,7 +28,6 @@ public protocol AJHttpClientProtocol: JSExport {
 open class AJHttpClient: NSObject, AJHttpClientProtocol {
     
     let runtime: AJRuntime
-    let handleQueue = DispatchQueue(label: "AJ.AJHttpClient.handleQueue", attributes: DispatchQueue.Attributes.concurrent)
     
     init(runtime: AJRuntime) {
         self.runtime = runtime
@@ -51,49 +50,49 @@ open class AJHttpClient: NSObject, AJHttpClientProtocol {
         _ rawResponse: Bool,
         _ cb: JSValue) {
         
-        handleQueue.async {
-            var finalUrl = url
-            
-            NSLog("HTTP url: \(finalUrl), data: \(data)")
-            
+        var finalUrl = url
+        
+        NSLog("HTTP url: \(finalUrl), data: \(data)")
+        
+        if !data.isNull {
+            if Method.POST != method && Method.PUT != method {
+                let separator = finalUrl.range(of: "?") != nil ? "&" : "?"
+                finalUrl = "\(url)\(separator)\(data)"
+            }
+        }
+        
+        var request = URLRequest(url: URL(string: finalUrl)!)
+        request.timeoutInterval = 5
+        request.httpMethod = method
+        
+        if !contentType.isNull {
+            request.addValue(contentType.toString(), forHTTPHeaderField: "Content-Type")
+        }
+        
+        if !accept.isNull {
+            request.addValue(accept.toString(), forHTTPHeaderField: "Accept")
+        }
+        
+        if Method.POST == method || Method.PUT == method {
             if !data.isNull {
-                if Method.POST != method && Method.PUT != method {
-                    let separator = finalUrl.range(of: "?") != nil ? "&" : "?"
-                    finalUrl = "\(url)\(separator)\(data)"
+                request.httpBody = data.toString().data(using: String.Encoding.utf8, allowLossyConversion: true)
+            }
+        }
+        
+        if !headers.isNull {
+            if let dict = headers.toDictionary() {
+                for (key, value) in dict {
+                    request.addValue("\(value)", forHTTPHeaderField: "\(key)")
                 }
             }
+        }
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
+            runui { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
             
-            var request = URLRequest(url: URL(string: finalUrl)!)
-            request.timeoutInterval = 5
-            request.httpMethod = method
-            
-            if !contentType.isNull {
-                request.addValue(contentType.toString(), forHTTPHeaderField: "Content-Type")
-            }
-            
-            if !accept.isNull {
-                request.addValue(accept.toString(), forHTTPHeaderField: "Accept")
-            }
-            
-            if Method.POST == method || Method.PUT == method {
-                if !data.isNull {
-                    request.httpBody = data.toString().data(using: String.Encoding.utf8, allowLossyConversion: true)
-                }
-            }
-            
-            if !headers.isNull {
-                if let dict = headers.toDictionary() {
-                    for (key, value) in dict {
-                        request.addValue("\(value)", forHTTPHeaderField: "\(key)")
-                    }
-                }
-            }
-            
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            
-            let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
-                runui { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
-                
+            AJThread.async {
                 if data != nil && error == nil {
                     if !rawResponse {
                         let response = String(data: data!, encoding: String.Encoding.utf8)!
@@ -105,9 +104,10 @@ open class AJHttpClient: NSObject, AJHttpClientProtocol {
                     NSLog("Error loading resource from \(url): \(String(describing: error))")
                     cb.call(withArguments: [true])
                 }
-            })
-            
-            task.resume()
-        }
+            }
+        })
+        
+        task.resume()
+        
     }
 }
