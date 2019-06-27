@@ -38,9 +38,9 @@ open class AJJavaScriptCoreRuntime: AJRuntime {
         }
         
         let aj_async: @convention(block) (JSValue) -> Void = { action in
-            async({
+            AJThread.async {
                 action.call(withArguments: [])
-            })
+            }
         }
         
         let aj_setTimeout: @convention(block) (JSValue, Int) -> Int = { action, time in

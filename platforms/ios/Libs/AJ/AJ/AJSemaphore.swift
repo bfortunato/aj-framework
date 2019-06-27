@@ -31,7 +31,7 @@ open class AJSemaphore {
     }
     
     open func run(action: @escaping AJSemaphoreAction) {
-        _dispatchGroup = async_group {
+        _dispatchGroup = ___async_group {
             action()
             self.free()
         }
@@ -97,4 +97,11 @@ open class AJManualSemaphore: AJSemaphore {
         self.isGreen = true;
     }
     
+}
+
+open class AJFakeSemaphore: AJSemaphore {
+    override open func run(action: @escaping AJSemaphoreAction) {
+        action()
+        self.free()
+    }
 }

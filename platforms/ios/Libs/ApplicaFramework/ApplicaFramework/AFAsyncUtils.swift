@@ -16,13 +16,13 @@ public func runui(_ action:@escaping (() -> Void)) {
     })
 }
 
-public func async(_ action:@escaping (() -> Void)) {
+public func ___async(_ action:@escaping (() -> Void)) {
     asyncQueue.async { () -> Void in
         action()
     }
 }
 
-public func async_group(_ action:@escaping (() -> Void)) -> DispatchGroup {
+public func ___async_group(_ action:@escaping (() -> Void)) -> DispatchGroup {
     let group = DispatchGroup()
     asyncQueue.async(group: group) { () -> Void in
         action()
@@ -30,7 +30,7 @@ public func async_group(_ action:@escaping (() -> Void)) -> DispatchGroup {
     return group
 }
 
-public func delay(_ delay: Double, closure:@escaping () -> Void) {
+public func ___delay(_ delay: Double, closure:@escaping () -> Void) {
     DispatchQueue.main.asyncAfter(
         deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }

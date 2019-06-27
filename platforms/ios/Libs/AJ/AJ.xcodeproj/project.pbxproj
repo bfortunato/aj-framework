@@ -17,6 +17,7 @@
 		7A31F49E1E390A49000A299E /* AJTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A31F49D1E390A49000A299E /* AJTests.swift */; };
 		7A31F4A01E390A49000A299E /* AJ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A09E2DB1C74871800984A5A /* AJ.framework */; };
 		7A31F4AD1E390B68000A299E /* ApplicaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF7F81D9906BE00F8C559 /* ApplicaFramework.framework */; };
+		7A35927822C4FE1300ECE18D /* AJThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A35927722C4FE1300ECE18D /* AJThread.swift */; };
 		7A3AF7F21D99069F00F8C559 /* AJApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3AF7F11D99069F00F8C559 /* AJApp.swift */; };
 		7A3AF80E1D9906FC00F8C559 /* ApplicaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF7F81D9906BE00F8C559 /* ApplicaFramework.framework */; };
 		7A3AF80F1D9906FC00F8C559 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3AF8031D9906DA00F8C559 /* SocketIO.framework */; };
@@ -106,6 +107,7 @@
 		7A31F49B1E390A49000A299E /* AJTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AJTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A31F49D1E390A49000A299E /* AJTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJTests.swift; sourceTree = "<group>"; };
 		7A31F49F1E390A49000A299E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A35927722C4FE1300ECE18D /* AJThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJThread.swift; sourceTree = "<group>"; };
 		7A3AF7F11D99069F00F8C559 /* AJApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJApp.swift; sourceTree = "<group>"; };
 		7A3AF7F31D9906BE00F8C559 /* ApplicaFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApplicaFramework.xcodeproj; path = ../ApplicaFramework/ApplicaFramework.xcodeproj; sourceTree = "<group>"; };
 		7A3AF7F91D9906D900F8C559 /* Socket.IO-Client-Swift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Socket.IO-Client-Swift.xcodeproj"; path = "../socket.io-client-swift/Socket.IO-Client-Swift.xcodeproj"; sourceTree = "<group>"; };
@@ -167,7 +169,6 @@
 		7A09E2DD1C74871800984A5A /* AJ */ = {
 			isa = PBXGroup;
 			children = (
-				7A5DC82C1E783F2D00CC7127 /* UI */,
 				7A824FA61DAB8A9C00D684C4 /* AJ.swift */,
 				7A3AF7F11D99069F00F8C559 /* AJApp.swift */,
 				7A0B10771C9D6E3900C39B7F /* AJBuffer.swift */,
@@ -175,8 +176,10 @@
 				7AE52BFE1D7579E2008F805D /* AJPlugin.swift */,
 				7A28E6151C8B7E9C00C33CCB /* AJSemaphore.swift */,
 				7A09E2F91C74897600984A5A /* AJStore.swift */,
+				7A35927722C4FE1300ECE18D /* AJThread.swift */,
 				7A09E2E01C74871800984A5A /* Info.plist */,
 				7A0FB7371C7498290001A8FE /* Runtime */,
+				7A5DC82C1E783F2D00CC7127 /* UI */,
 			);
 			path = AJ;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				7A09E2FA1C74897600984A5A /* AJStore.swift in Sources */,
 				7AA852351D7966E5002E51CB /* AJBuffersManager.swift in Sources */,
 				7A28E6161C8B7E9C00C33CCB /* AJSemaphore.swift in Sources */,
+				7A35927822C4FE1300ECE18D /* AJThread.swift in Sources */,
 				7AE52BFF1D7579E2008F805D /* AJPlugin.swift in Sources */,
 				7A09E2FE1C7491E200984A5A /* AJRuntime.swift in Sources */,
 				7A7208EF1C9A1D1300C0CF3A /* AJTimers.swift in Sources */,
