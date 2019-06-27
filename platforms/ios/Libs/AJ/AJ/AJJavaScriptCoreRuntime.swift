@@ -75,30 +75,30 @@ open class AJJavaScriptCoreRuntime: AJRuntime {
             }
         }
         
-        jsContext.globalObject.setObject(jsContext.globalObject, forKeyedSubscript: "global" as (NSCopying & NSObjectProtocol)!)
+        jsContext.globalObject.setObject(jsContext.globalObject, forKeyedSubscript: "global" as (NSCopying & NSObjectProtocol)?)
         
         let platform = ["engine": "native", "device": "iOS"]
-        jsContext.globalObject.setObject(platform, forKeyedSubscript: "platform" as (NSCopying & NSObjectProtocol)!)
+        jsContext.globalObject.setObject(platform, forKeyedSubscript: "platform" as (NSCopying & NSObjectProtocol)?)
         
         //used by js components to notify the native parts
-        jsContext.globalObject.setObject(unsafeBitCast(aj_trigger, to: AnyObject.self), forKeyedSubscript: "__trigger" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(unsafeBitCast(aj_exec, to: AnyObject.self), forKeyedSubscript: "__exec" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(unsafeBitCast(aj_async, to: AnyObject.self), forKeyedSubscript: "async" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(unsafeBitCast(aj_setTimeout, to: AnyObject.self), forKeyedSubscript: "setTimeout" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(unsafeBitCast(aj_setInterval, to: AnyObject.self), forKeyedSubscript: "setInterval" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(unsafeBitCast(aj_clearTimeout, to: AnyObject.self), forKeyedSubscript: "clearTimeout" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(unsafeBitCast(aj_clearInterval, to: AnyObject.self), forKeyedSubscript: "clearInterval" as (NSCopying & NSObjectProtocol)!)
+        jsContext.globalObject.setObject(unsafeBitCast(aj_trigger, to: AnyObject.self), forKeyedSubscript: "__trigger" as (NSCopying & NSObjectProtocol))
+        jsContext.globalObject.setObject(unsafeBitCast(aj_exec, to: AnyObject.self), forKeyedSubscript: "__exec" as (NSCopying & NSObjectProtocol))
+        jsContext.globalObject.setObject(unsafeBitCast(aj_async, to: AnyObject.self), forKeyedSubscript: "async" as (NSCopying & NSObjectProtocol))
+        jsContext.globalObject.setObject(unsafeBitCast(aj_setTimeout, to: AnyObject.self), forKeyedSubscript: "setTimeout" as (NSCopying & NSObjectProtocol))
+        jsContext.globalObject.setObject(unsafeBitCast(aj_setInterval, to: AnyObject.self), forKeyedSubscript: "setInterval" as (NSCopying & NSObjectProtocol))
+        jsContext.globalObject.setObject(unsafeBitCast(aj_clearTimeout, to: AnyObject.self), forKeyedSubscript: "clearTimeout" as (NSCopying & NSObjectProtocol))
+        jsContext.globalObject.setObject(unsafeBitCast(aj_clearInterval, to: AnyObject.self), forKeyedSubscript: "clearInterval" as (NSCopying & NSObjectProtocol))
 
-        jsContext.globalObject.setObject(AJLogger(), forKeyedSubscript: "logger" as (NSCopying & NSObjectProtocol)!)
+        jsContext.globalObject.setObject(AJLogger(), forKeyedSubscript: "logger" as (NSCopying & NSObjectProtocol))
         jsContext.evaluateScript("logger.i = function() { logger.__i(Array.prototype.join.call(arguments, ' ')); }")
         jsContext.evaluateScript("logger.w = function() { logger.__w(Array.prototype.join.call(arguments, ' ')); }")
         jsContext.evaluateScript("logger.e = function() { logger.__e(Array.prototype.join.call(arguments, ' ')); }")
         
-        jsContext.globalObject.setObject(AJHttpClient(runtime: self), forKeyedSubscript: "__httpClient" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(AJAssetsManager(runtime: self), forKeyedSubscript: "__assetsManager" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(AJStorageManager(runtime: self), forKeyedSubscript: "__storageManager" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(AJBuffersManager(), forKeyedSubscript: "__buffersManager" as (NSCopying & NSObjectProtocol)!)
-        jsContext.globalObject.setObject(AJDevice(), forKeyedSubscript: "device" as (NSCopying & NSObjectProtocol)!)
+        jsContext.globalObject.setObject(AJHttpClient(runtime: self), forKeyedSubscript: "__httpClient" as (NSCopying & NSObjectProtocol))
+        jsContext.globalObject.setObject(AJAssetsManager(runtime: self), forKeyedSubscript: "__assetsManager" as (NSCopying & NSObjectProtocol))
+        jsContext.globalObject.setObject(AJStorageManager(runtime: self), forKeyedSubscript: "__storageManager" as (NSCopying & NSObjectProtocol))
+        jsContext.globalObject.setObject(AJBuffersManager(), forKeyedSubscript: "__buffersManager" as (NSCopying & NSObjectProtocol))
+        jsContext.globalObject.setObject(AJDevice(), forKeyedSubscript: "device" as (NSCopying & NSObjectProtocol))
 
         jsContext.evaluateScript("var DEBUG = true;")
         jsContext.evaluateScript("var LOG_LEVEL_INFO = 3;")

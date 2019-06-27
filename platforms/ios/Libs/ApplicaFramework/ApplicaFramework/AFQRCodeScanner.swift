@@ -32,11 +32,11 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
     }
     
     func checkCameraPermissionsAndInit() {
-        if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.notDetermined {
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (b) in
+        if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.notDetermined {
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (b) in
                 self.checkCameraPermissionsAndInit()
             })
-        } else if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.denied {
+        } else if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.denied {
             if let owner = _owner {
                 alert(title:"Authorization request",
                       message: "Camera access is required to use this application. Please give camera access to this application using Settings",
@@ -44,7 +44,7 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
                 )
             }
             return
-        } else if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
+        } else if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
             initCamera()
         }
         
@@ -54,10 +54,10 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
         self._captureSession = AVCaptureSession()
         
         var captureDevice: AVCaptureDevice?
-        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
-        for d in devices! {
-            if (d as AnyObject).position == AVCaptureDevicePosition.back {
-                captureDevice = d as? AVCaptureDevice
+        let devices = AVCaptureDevice.devices(for: AVMediaType.video)
+        for d in devices {
+            if (d as AnyObject).position == AVCaptureDevice.Position.back {
+                captureDevice = d as AVCaptureDevice
                 break
             }
         }
@@ -88,9 +88,9 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
         
         runui {
             let layer = AVCaptureVideoPreviewLayer(session: self._captureSession!)
-            layer?.frame = self._cameraView.bounds
-            layer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-            self._cameraView.layer.addSublayer(layer!)
+            layer.frame = self._cameraView.bounds
+            layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+            self._cameraView.layer.addSublayer(layer)
             
             self.open()
         }
@@ -111,7 +111,7 @@ open class AFQRCodeScanner : NSObject, AVCaptureMetadataOutputObjectsDelegate {
     }
 
     open func enableQRCodeScanner() {
-        self._captureOutput?.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+        self._captureOutput?.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
 
         _enabled = true
     }

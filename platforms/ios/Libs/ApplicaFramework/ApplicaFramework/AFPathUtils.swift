@@ -10,12 +10,12 @@ import UIKit
 
 open class AFPathUtils {
     
-    open static let separator: String = "/"
+    public static let separator: String = "/"
     
     open class func normalizePath(_ path: String, withEndingSeparator:Bool = false) -> String {
         var path = path.replacingOccurrences(of: "\\", with: separator)
         
-        let paths = path.characters.split{$0 == Character(separator)}.map(String.init)
+        let paths = path.split{$0 == Character(separator)}.map(String.init)
         var normalized = [String]()
         for p in paths {
             if p == ".." {
@@ -25,7 +25,12 @@ open class AFPathUtils {
             }
         }
         
-        path = normalized.joined(separator: separator)
+        if path.starts(with: separator) {
+            path = "/"
+        } else {
+            path = ""
+        }
+        path = path + normalized.joined(separator: separator)
         
         if withEndingSeparator {
             if !path.endsWith(separator) {
@@ -37,14 +42,14 @@ open class AFPathUtils {
     }
     
     open class func getName(_ path: String, includingExtension:Bool = true) -> String {
-        let path = normalizePath(path, withEndingSeparator: false)
+        let path: String = normalizePath(path, withEndingSeparator: false)
         let r = path.range(of: separator, options: .backwards)
         if let r = r {
-            let name: String = path.substring(from: r.upperBound)
+            let name: String = String(path[r.upperBound...])
             if !includingExtension {
                 let xr = name.range(of: ".", options: .backwards)
                 if let xr = xr {
-                    return name.substring(to: xr.lowerBound)
+                    return String(name[..<xr.lowerBound])
                 }
             }
             
@@ -54,7 +59,7 @@ open class AFPathUtils {
         if !includingExtension {
             let xr = path.range(of: ".", options: .backwards)
             if let xr = xr {
-                return path.substring(to: xr.lowerBound)
+                return String(path[..<xr.lowerBound])
             }
         }
         
@@ -66,7 +71,7 @@ open class AFPathUtils {
         let path = getName(path)
         let xr = path.range(of: ".", options: .backwards)
         if let xr = xr {
-            return path.substring(from: xr.upperBound)
+            return String(path[xr.upperBound...])
         }
         
         return ""
@@ -75,7 +80,7 @@ open class AFPathUtils {
     open class func removeExtension(_ path: String) -> String {
         let xr = path.range(of: ".", options: .backwards)
         if let xr = xr {
-            return path.substring(to: xr.lowerBound)
+            return String(path[..<xr.lowerBound])
         }
         
         return path
@@ -86,7 +91,7 @@ open class AFPathUtils {
         if !path.endsWith(separator) {
             let sr = path.range(of: separator, options: .backwards)
             if let sr = sr {
-                path = path.substring(to: sr.lowerBound)
+                path = String(path[..<sr.lowerBound])
             }
         }
         
@@ -101,7 +106,7 @@ open class AFPathUtils {
             return ""
         }
         
-        return path.substring(to: sr!.lowerBound)
+        return String(path[..<sr!.lowerBound])
         
     }
     

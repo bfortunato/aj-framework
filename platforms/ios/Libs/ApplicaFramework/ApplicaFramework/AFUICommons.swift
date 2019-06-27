@@ -278,7 +278,7 @@ open class RB {
         if (percentual) {
             co = offset * self.parent.size.width / 100.0
         }
-        self.right(co + (self.parent.size.width - relativeToRect.origin.x), percentual: false)
+        _ = self.right(co + (self.parent.size.width - relativeToRect.origin.x), percentual: false)
         return self
     }
     
@@ -287,7 +287,7 @@ open class RB {
         if (percentual) {
             co = offset * self.parent.size.width / 100.0
         }
-        self.left(co + relativeToRect.origin.x + relativeToRect.size.width, percentual: false)
+        _ = self.left(co + relativeToRect.origin.x + relativeToRect.size.width, percentual: false)
         return self
     }
     
@@ -296,7 +296,7 @@ open class RB {
         if (percentual) {
             co = offset * self.parent.size.height / 100.0
         }
-        self.bottom(co + (self.parent.size.height - relativeToRect.origin.y), percentual: false)
+        _ = self.bottom(co + (self.parent.size.height - relativeToRect.origin.y), percentual: false)
         return self
     }
     
@@ -305,67 +305,67 @@ open class RB {
         if (percentual) {
             co = offset * self.parent.size.height / 100.0
         }
-        self.top(co + relativeToRect.origin.y + relativeToRect.size.height, percentual: false)
+        _ = self.top(co + relativeToRect.origin.y + relativeToRect.size.height, percentual: false)
         return self
     }
     
     open func marginLeft(_ value:CGFloat, percentual:Bool = false) -> RB {
-        decreaseWidth(value, percentual: percentual)
-        left(value, percentual: percentual)
+        _ = decreaseWidth(value, percentual: percentual)
+        _ = left(value, percentual: percentual)
         return self
     }
     
     open func marginRight(_ value:CGFloat, percentual:Bool = false) -> RB {
-        decreaseWidth(value, percentual: percentual)
+        _ = decreaseWidth(value, percentual: percentual)
         return self
     }
     
     open func marginTop(_ value:CGFloat, percentual:Bool = false) -> RB {
-        decreaseHeight(value, percentual: percentual)
-        top(value, percentual: percentual)
+        _ = decreaseHeight(value, percentual: percentual)
+        _ = top(value, percentual: percentual)
         return self
     }
     
     open func marginBottom(_ value:CGFloat, percentual:Bool = false) -> RB {
-        decreaseHeight(value, percentual: percentual)
+        _ = decreaseHeight(value, percentual: percentual)
         return self
     }
     
     open func padding(_ value:CGFloat, percentual:Bool = false) -> RB {
-        paddingLeft(value, percentual: percentual)
-        paddingTop(value, percentual: percentual)
-        paddingRight(value, percentual: percentual)
-        paddingBottom(value, percentual: percentual)
+        _ = paddingLeft(value, percentual: percentual)
+        _ = paddingTop(value, percentual: percentual)
+        _ = paddingRight(value, percentual: percentual)
+        _ = paddingBottom(value, percentual: percentual)
         return self
     }
 
     open func paddingLeft(_ value:CGFloat, percentual:Bool = false) -> RB {
-        increaseWidth(value, percentual: percentual)
-        translate(x: value, percentual: percentual)
+        _ = increaseWidth(value, percentual: percentual)
+        _ = translate(x: value, percentual: percentual)
         return self
     }
 
     open func paddingRight(_ value:CGFloat, percentual:Bool = false) -> RB {
-        increaseWidth(value, percentual: percentual)
+        _ = increaseWidth(value, percentual: percentual)
         return self
     }
 
     open func paddingTop(_ value:CGFloat, percentual:Bool = false) -> RB {
-        increaseHeight(value, percentual: percentual)
-        translate(y: value, percentual: percentual)
+        _ = increaseHeight(value, percentual: percentual)
+        _ = translate(y: value, percentual: percentual)
         return self
     }
 
     open func paddingBottom(_ value:CGFloat, percentual:Bool = false) -> RB {
-        decreaseHeight(value, percentual: percentual)
+        _ = decreaseHeight(value, percentual: percentual)
         return self
     }
 
     open func margin(_ value:CGFloat, percentual:Bool = false) -> RB {
-        marginLeft(value, percentual: percentual)
-        marginTop(value, percentual: percentual)
-        marginRight(value, percentual: percentual)
-        marginBottom(value, percentual: percentual)
+        _ = marginLeft(value, percentual: percentual)
+        _ = marginTop(value, percentual: percentual)
+        _ = marginRight(value, percentual: percentual)
+        _ = marginBottom(value, percentual: percentual)
         return self
     }
     
@@ -377,7 +377,7 @@ open class RB {
         }
         
         let toFill = parent.width - x - co
-        width(toFill)
+        _ = width(toFill)
         return self
     }
     
@@ -389,7 +389,7 @@ open class RB {
         }
         
         let toFill = parent.height - y - co
-        height(toFill)
+        _ = height(toFill)
         return self
     }
     

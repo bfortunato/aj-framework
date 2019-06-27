@@ -109,7 +109,7 @@ extension SocketParsable {
         
         
         
-        var dataArray = message[message.characters.index(reader.currentIndex, offsetBy: 1)..<message.endIndex]
+        var dataArray = String(message[message.index(reader.currentIndex, offsetBy: 1)..<message.endIndex])
         
         if type == .error && !dataArray.hasPrefix("[") && !dataArray.hasSuffix("]") {
             dataArray = "[" + dataArray + "]"

@@ -32,8 +32,8 @@ open class AJValueBase: NSObject {
 }
 
 open class AJValue: AJValueBase {
-    open let key: String
-    open var value: Any?
+    public let key: String
+    public var value: Any?
     
     public init(key: String, value: Any?) {
         self.key = key
@@ -404,11 +404,11 @@ open class AJObject: AJValueBase {
         return true
     }
     
-    open static func create() -> AJObject {
+    public static func create() -> AJObject {
         return AJObject()
     }
     
-    open static func empty() -> AJObject {
+    public static func empty() -> AJObject {
         return AJObject()
     }
 
@@ -521,10 +521,10 @@ open class AJArray: AJValueBase {
 
 func traverse(obj: AJObject, path: String) -> AJValue? {
     if let indexOfDot = path.range(of: ".") {
-        let property = path.substring(to: indexOfDot.lowerBound)
+        let property = String(path[..<indexOfDot.lowerBound])
         if let v = obj.get(property) {
             if let vo = v.object {
-                let newPath = path.substring(from: indexOfDot.upperBound)
+                let newPath = String(path[indexOfDot.upperBound...])
                 return traverse(obj: vo as AJObject, path: newPath)
             } else {
                 return v

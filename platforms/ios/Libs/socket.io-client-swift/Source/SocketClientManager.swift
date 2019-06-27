@@ -44,7 +44,7 @@ import Foundation
  ```
  */
 open class SocketClientManager : NSObject {
-    open static let sharedManager = SocketClientManager()
+    public static let sharedManager = SocketClientManager()
     
     private var sockets = [String: SocketIOClient]()
     

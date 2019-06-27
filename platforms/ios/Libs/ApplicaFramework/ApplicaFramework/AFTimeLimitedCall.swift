@@ -25,7 +25,7 @@ open class AFTimeLimitedCall: NSObject {
         self.timer = Timer.scheduledTimer(timeInterval: delay, target: self, selector: #selector(AFTimeLimitedCall._run), userInfo: nil, repeats: false)
     }
 
-    func _run() {
+    @objc func _run() {
         action()
     }
     

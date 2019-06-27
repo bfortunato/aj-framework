@@ -13,7 +13,7 @@ var __buffers = [AJBuffer]()
 
 open class AJBuffer {
     
-    open let data: Data
+    public let data: Data
     fileprivate let id: Int
     
     fileprivate var index: Int = 0
@@ -42,7 +42,7 @@ open class AJBuffer {
     }
     
     open class func destroy(_ id: Int) {
-        if let index = __buffers.index(where: { $0.id == id }) {
+        if let index = __buffers.firstIndex(where: { $0.id == id }) {
             __buffers.remove(at: index)
         }        
     }

@@ -25,7 +25,7 @@ public class AJPluginCallData : NSObject {
 @objc
 open class AJPlugin : NSObject {
     
-    open let name: String
+    public let name: String
     
     public init(name: String) {
         self.name = name

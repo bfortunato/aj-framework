@@ -110,14 +110,14 @@ open class AFBluetoothPeripheral: NSObject, CBPeripheralManagerDelegate {
     
     open func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         if peripheral.state == .poweredOn {
-            var services = [CBMutableService]()
+            _ = [CBMutableService]()
             for s in _services {
                 let service = CBMutableService(type: CBUUID(string: s.id), primary: true)
                 
                 var characteristics = [CBMutableCharacteristic]()
                 for c in s.characteristics {
-                    var properties = [CBCharacteristicProperties]()
-                    var permissions = [CBAttributePermissions]()
+                    _ = [CBCharacteristicProperties]()
+                    _ = [CBAttributePermissions]()
                     
                     let characteristic = CBMutableCharacteristic(
                         type: CBUUID(string: c.id),
@@ -183,7 +183,7 @@ open class AFBluetoothPeripheral: NSObject, CBPeripheralManagerDelegate {
     open func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
         for request in requests {
             if let service = _services.filter({$0.id == request.characteristic.service.uuid.uuidString}).first {
-                if var characteristic = service.characteristics.filter({$0.id == request.characteristic.uuid.uuidString}).first {
+                if let characteristic = service.characteristics.filter({$0.id == request.characteristic.uuid.uuidString}).first {
                     if let v = request.value {
                         characteristic.value = String(data: v, encoding: String.Encoding.utf8)
                     } else {

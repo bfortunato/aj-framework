@@ -68,7 +68,7 @@ extension SocketEnginePollable {
         var postStr = ""
         
         for packet in postWait {
-            let len = packet.characters.count
+            let len = packet.count
             
             postStr += "\(len):\(packet)"
         }
@@ -183,7 +183,7 @@ extension SocketEnginePollable {
     }
     
     func parsePollingMessage(_ str: String) {
-        guard str.characters.count != 1 else { return }
+        guard str.count != 1 else { return }
         
         var reader = SocketStringReader(message: str)
         

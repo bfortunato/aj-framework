@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "1020"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7A09E2E41C74871900984A5A"
+               BlueprintIdentifier = "7A31F49A1E390A49000A299E"
                BuildableName = "AJTests.xctest"
                BlueprintName = "AJTests"
                ReferencedContainer = "container:AJ.xcodeproj">

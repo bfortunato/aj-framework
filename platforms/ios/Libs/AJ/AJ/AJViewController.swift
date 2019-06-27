@@ -18,7 +18,7 @@ open class AJStoreDefinitions {
     }
     
     open func remove(store: String) -> AJStoreDefinitions {
-        if let index = stores.index(of: store) {
+        if let index = stores.firstIndex(of: store) {
             stores.remove(at: index)
         }
         return self

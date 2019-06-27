@@ -102,7 +102,7 @@ open class AJHttpClient: NSObject, AJHttpClientProtocol {
                         cb.call(withArguments: [false, AJBuffer.create(with: data!)])
                     }
                 } else {
-                    NSLog("Error loading resource from \(url): \(error)")
+                    NSLog("Error loading resource from \(url): \(String(describing: error))")
                     cb.call(withArguments: [true])
                 }
             })

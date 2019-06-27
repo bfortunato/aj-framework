@@ -28,7 +28,7 @@ open class AFLoader {
         if (hud == nil) {
             hud = MBProgressHUD.showAdded(to: window, animated: true)
         }
-        hud?.dimBackground = true
+        //hud?.dimBackground = true
         hud?.label.text = message ?? ""
     }
     

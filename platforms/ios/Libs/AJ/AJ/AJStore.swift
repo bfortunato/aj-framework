@@ -21,8 +21,8 @@ struct SubscriptionInfo {
 @objc
 open class AJStore: NSObject {
 
-    open let runtime: AJRuntime
-    open let type: String
+    public let runtime: AJRuntime
+    public let type: String
     
     open var state: AJObject?
     
